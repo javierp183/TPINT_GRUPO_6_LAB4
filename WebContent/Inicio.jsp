@@ -4,9 +4,15 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Cliente Banco - Pago de Prestamos - Banco Tecnologico</title>
+<title>Login/Ingreso - Banco de la Republica -</title>
 </head>
-<body>
+
+<form>
+
+<h1>Ingrese Usuario</h1><input>
+<h1>Ingrese Clave</h1><input>
+
+</form>
 
 </body>
 </html>

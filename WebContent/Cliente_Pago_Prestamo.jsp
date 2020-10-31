@@ -2,7 +2,6 @@
     pageEncoding="UTF-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
-<head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <meta name="viewport" content="width=device-width,
 					  initial-scale=1, shrink-to-fit=no">
@@ -10,11 +9,11 @@
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
  integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
  crossorigin="anonymous">
-<title>Cliente Banco - Transferencias - Banco Tecnologico</title>
+<title>Cliente Banco - Pago de Prestamo - Banco Tecnologico</title>
 </head>
 <body>
 
-<h1>Transferencia a propia cuenta o hacia otras cuentas</h1>
+<h1>Pago de prestamo</h1>
 
 <div class="container">
  <div class="row">
@@ -22,28 +21,16 @@
   <div>
  	<label for="cars">Elegir Cuenta</label>
 		<select name="cars" id="cars">
-  			<option value="volvo">Caja de ahorro</option>
-  			<option value="saab">Cuenta Corriente</option>
+  			<option value="volvo">Caja de ahorro: 0000001</option>
+  			<option value="saab">Cuenta Corriente: 0000001</option>
 		</select> 
   </div>
    <div>
- 	<label for="cars">Elegir Cliente</label>
+ 	<label for="cars">Pago Cuota</label>
 		<select name="cars" id="cars">
-  			<option value="volvo">Usuario A</option>
-  			<option value="saab">Usuario B</option>
+  			<option value="volvo">12</option>
+  			<option value="saab">18</option>
 		</select> 
-  </div>
-     <div>
- 	<label for="cars">Elegir Cuenta de Cliente</label>
-		<select name="cars" id="cars">
-  			<option value="volvo">Cuenta A</option>
-  			<option value="saab">Cuenta B</option>
-		</select> 
-  </div>
-   <div class="form-group">
-    <label for="exampleInputEmail1">Monto a Transferir</label>
-    <input type="input" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
-    <small id="emailHelp" class="form-text text-muted">Monto Disponible de transferencia: 10.000</small>
   </div>
   <button type="submit" class="btn btn-primary">Aceptar</button>
 </form>

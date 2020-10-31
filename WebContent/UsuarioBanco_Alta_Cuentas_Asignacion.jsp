@@ -23,15 +23,25 @@
  <div class="row">
  <form>
   <div class="form-group">
-    <label for="exampleInputEmail1">Usuario</label>
+    <label for="exampleInputEmail1">Nombre de Cuenta</label>
     <input type="input" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
     <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
   </div>
-  <div class="form-group">
-    <label for="exampleInputPassword1">Password</label>
-    <input type="password" class="form-control" id="exampleInputPassword1">
+  <div>
+ 	<label for="cars">Elegir Tipo de Cuenta:</label>
+		<select name="cars" id="cars">
+  			<option value="volvo">Caja de ahorro</option>
+  			<option value="saab">Cuenta Corriente</option>
+		</select> 
   </div>
-  <button type="submit" class="btn btn-primary">Submit</button>
+   <div>
+ 	<label for="cars">Elegir Usuario:</label>
+		<select name="cars" id="cars">
+  			<option value="volvo">Usuario A</option>
+  			<option value="saab">Usuario B</option>
+		</select> 
+  </div>
+  <button type="submit" class="btn btn-primary">Aceptar</button>
 </form>
  </div>
 </div>
