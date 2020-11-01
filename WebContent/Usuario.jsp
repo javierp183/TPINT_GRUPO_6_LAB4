@@ -3,6 +3,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
+
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <meta name="viewport" content="width=device-width,
 					  initial-scale=1, shrink-to-fit=no">
@@ -10,8 +11,8 @@
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
  integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
  crossorigin="anonymous">
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Cliente Banco - Historial de Movimientos - Banco Tecnologico</title>
+
+<title>Usuario - Menu de Opciones</title>
 </head>
 <body>
 
@@ -19,7 +20,7 @@
   <thead>
     <tr>
       <th>
-        Nombre y Apellido del Cliente
+        Nombre y Apellido del Usuario
       </th>
       <th>
         Usuario 
@@ -35,7 +36,7 @@
            Javier Pereyra
         </td>
         <td>
-           Admin123
+           jpereyra
         </td>
         <td>
             <img src="/static/img/{{ context.6.operator.userid }}.jpg"  height="60" width="60">
@@ -44,48 +45,33 @@
     </tbody>
 </table>
 
-
- 	<label for="cars">Seleccionar cuenta: </label>
-		<select name="cars" id="cars">
-  			<option value="volvo">Caja de ahorro</option>
-  			<option value="saab">Cuenta Corriente</option>
-		</select> <button type="submit" class="btn btn-primary">Aceptar</button>
+<h1> Menu de Opciones </h1>
 
 <table class="table">
   <thead class="thead-dark">
     <tr>
-      <th scope="col">#</th>
-      <th scope="col">Fecha</th>
-      <th scope="col">Concepto</th>
-      <th scope="col">Debitos</th>
-      <th scope="col">Creditos</th>
-      <th scope="col">Saldo</th>
+      <th scope="col">Asignar cuenta</th>
+      <th scope="col">Alta Cliente</th>
+      <th scope="col">Baja Cliente</th>
+      <th scope="col">Modificacion Cliente</th>
+      <th scope="col">Alta Cuenta</th>
+      <th scope="col">Modificar Cuenta</th>
+      <th scope="col">Baja Cuenta</th>
     </tr>
   </thead>
   <tbody>
     <tr>
-      <th scope="row">1</th>
-      <td>1</td>
-      <td>1/17/2020</td>
-      <td>TRANSF ACC B</td>
-      <td>200</td>
-      <td>0</td>
-      <td>1000000</td>
+      <td><button type="submit" class="btn btn-primary">Asignar</button></td>
+      <td><button type="submit" class="btn btn-primary">Alta</button></td>
+      <td><button type="submit" class="btn btn-primary">Baja</button></td>
+      <td><button type="submit" class="btn btn-primary">Modificacion</button></td>
+      <td><button type="submit" class="btn btn-primary">Alta Cuenta</button></td>
+      <td><button type="submit" class="btn btn-primary">Modificar Cuenta</button></td>
+      <td><button type="submit" class="btn btn-primary">Baja Cuenta</button></td>
     </tr>
-    <tr>
-      <th scope="row">1</th>
-      <td>2</td>
-      <td>1/8/2020</td>
-      <td>TRANSF ACC A</td>
-      <td>200</td>
-      <td>0</td>
-      <td>1000000</td>
     </tr>
   </tbody>
 </table>
-
- <button type="submit" class="btn btn-primary">Volver a Pagina Principal</button>
-
 
 </body>
 </html>

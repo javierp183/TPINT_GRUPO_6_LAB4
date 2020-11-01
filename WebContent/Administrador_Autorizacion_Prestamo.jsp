@@ -17,6 +17,37 @@
 </head>
 <body>
 
+<table class="table table-dark">
+  <thead>
+    <tr>
+      <th>
+        Nombre y Apellido del Administrador
+      </th>
+      <th>
+        Usuario 
+      </th>
+      <th>
+        Operador
+      </th>
+    </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>
+           Javier Pereyra
+        </td>
+        <td>
+           Admin123
+        </td>
+        <td>
+            <img src="/static/img/{{ context.6.operator.userid }}.jpg"  height="60" width="60">
+        </td>
+      </tr>
+    </tbody>
+</table>
+
+<form>
+
 <table class="table">
   <thead class="thead-dark">
     <tr>
@@ -53,6 +84,11 @@
     </tr>
   </tbody>
 </table>
+
+  <button type="submit" class="btn btn-primary">Autorizar</button>
+</form>
+
+<button type="submit" class="btn btn-primary">Volver a Pagina Principal</button>
 
 </body>
 </html>

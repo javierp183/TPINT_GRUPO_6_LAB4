@@ -13,6 +13,35 @@
 </head>
 <body>
 
+<table class="table table-dark">
+  <thead>
+    <tr>
+      <th>
+        Nombre y Apellido del Cliente
+      </th>
+      <th>
+        Usuario 
+      </th>
+      <th>
+        Operador
+      </th>
+    </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>
+           Javier Pereyra
+        </td>
+        <td>
+           Admin123
+        </td>
+        <td>
+            <img src="/static/img/{{ context.6.operator.userid }}.jpg"  height="60" width="60">
+        </td>
+      </tr>
+    </tbody>
+</table>
+
 <h1>Pago de prestamo</h1>
 
 <div class="container">
@@ -37,9 +66,11 @@
  </div>
 </div>
 
+<button type="submit" class="btn btn-primary">Volver a Pagina Principal</button>
 
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+
 </body>
 </html>

@@ -17,6 +17,35 @@
 </head>
 <body>
 
+<table class="table table-dark">
+  <thead>
+    <tr>
+      <th>
+        Nombre y Apellido del Usuario
+      </th>
+      <th>
+        Usuario 
+      </th>
+      <th>
+        Operador
+      </th>
+    </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>
+           Javier Pereyra
+        </td>
+        <td>
+           Admin123
+        </td>
+        <td>
+            <img src="/static/img/{{ context.6.operator.userid }}.jpg"  height="60" width="60">
+        </td>
+      </tr>
+    </tbody>
+</table>
+
 <h1>Alta de Cliente</h1>
 
 <div class="container">
@@ -54,6 +83,8 @@
 </form>
  </div>
 </div>
+
+<button type="submit" class="btn btn-primary">Volver a Pagina Principal</button>
 
 
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
