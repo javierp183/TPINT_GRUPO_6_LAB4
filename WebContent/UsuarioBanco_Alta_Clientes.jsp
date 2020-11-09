@@ -50,79 +50,80 @@
 
 <div class="container">
  <div class="row">
- <form>
+ <form action="servletCliente" method="post">
+ 
   <div class="form-group">
     <label for="exampleInputEmail1">DNI</label>
-    <input type="input" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
-    <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+    <input type="input" class="form-control" name="inputDNI" aria-describedby="emailHelp">
+    <small id="emailHelp" class="form-text text-muted">Por favor ingresar DNI.</small>
   </div>
     <div class="form-group">
     <label for="exampleInputEmail1">Usuario</label>
-    <input type="input" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
-    <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+    <input type="input" class="form-control" name="inputUsuario" aria-describedby="emailHelp">
+    <small id="emailHelp" class="form-text text-muted">Ingrese nombre de Usuario para el nuevo Cliente</small>
   </div>
    <div class="form-group">
     <label for="exampleInputEmail1">Cuil</label>
-    <input type="input" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
-    <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+    <input type="input" class="form-control" name="inputCuil" aria-describedby="emailHelp">
+    <small id="emailHelp" class="form-text text-muted">Ingrese numero de CUIL</small>
   </div>
     <div class="form-group">
     <label for="exampleInputEmail1">Nombre</label>
-    <input type="input" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
-    <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+    <input type="input" class="form-control" name="inputNombre" aria-describedby="emailHelp">
+    <small id="emailHelp" class="form-text text-muted">Ingrese Nombre de Cliente</small>
   </div>
     <div class="form-group">
     <label for="exampleInputEmail1">Apellido</label>
-    <input type="input" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
-    <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+    <input type="input" class="form-control" name="inputApellido" aria-describedby="emailHelp">
+    <small id="emailHelp" class="form-text text-muted">Ingrese Apellido de Cliente</small>
   </div>
      <div class="form-group">
     <label for="exampleInputEmail1">Sexo</label>
-    <input type="input" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
-    <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+    <input type="input" class="form-control" name="inputSexo" aria-describedby="emailHelp">
+    <small id="emailHelp" class="form-text text-muted">Ingrese el Sexo(M|F)</small>
   </div>
       <div class="form-group">
     <label for="exampleInputEmail1">Nacionalidad</label>
-    <input type="input" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
-    <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+    <input type="input" class="form-control" name="inputNacionalidad" aria-describedby="emailHelp">
+    <small id="emailHelp" class="form-text text-muted">Ingrese la Nacionalidad</small>
   </div>
      <div class="form-group">
     <label for="exampleInputEmail1">Fecha de nacimiento</label>
-    <input type="input" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
-    <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+    <input type="input" class="form-control" name="inputFechaNac" aria-describedby="emailHelp">
+    <small id="emailHelp" class="form-text text-muted">Fecha de Nacimiento.-</small>
   </div>
      <div class="form-group">
     <label for="exampleInputEmail1">Direccion</label>
-    <input type="input" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
-    <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+    <input type="input" class="form-control" name="inputDireccion" aria-describedby="emailHelp">
+    <small id="emailHelp" class="form-text text-muted">Ingrese Direccion del cliente</small>
   </div>
       <div class="form-group">
     <label for="exampleInputEmail1">Localidad</label>
-    <input type="input" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
-    <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+    <input type="input" class="form-control" name="inputLocalidad" aria-describedby="emailHelp">
+    <small id="emailHelp" class="form-text text-muted">Ingrese Localidad</small>
   </div>
        <div class="form-group">
     <label for="exampleInputEmail1">Provincia</label>
-    <input type="input" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
-    <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+    <input type="input" class="form-control" name="inputProvincia" aria-describedby="emailHelp">
+    <small id="emailHelp" class="form-text text-muted">Ingrese Nombre de la Provincia</small>
   </div>
-        <div class="form-group">
+  <div class="form-group">
     <label for="exampleInputEmail1">Correo Electronico</label>
-    <input type="input" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
-    <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+    <input type="input" class="form-control" name="inputEmail" aria-describedby="emailHelp">
+    <small id="emailHelp" class="form-text text-muted">Ingrese Correo Electronico</small>
   </div>
        <div class="form-group">
     <label for="exampleInputEmail1">Telefono</label>
-    <input type="input" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
-    <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+    <input type="input" class="form-control" name="inputTelefono" aria-describedby="emailHelp">
+    <small id="emailHelp" class="form-text text-muted">Ingrese Telefono</small>
   </div>
   <div class="form-group">
     <label for="exampleInputPassword1">Clave de acceso</label>
-    <input type="password" class="form-control" id="exampleInputPassword1">
+    <input type="password" class="form-control" name="inputPassword">
   </div>
     <div class="form-group">
     <label for="exampleInputPassword1">Confirmar clave de acceso</label>
-    <input type="password" class="form-control" id="exampleInputPassword1">
+    <input type="password" class="form-control" name="inputPassword2">
   </div>
   <button type="submit" class="btn btn-primary">Aceptar</button>
 </form>

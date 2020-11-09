@@ -10,10 +10,10 @@ import dao.ClienteDao;
 
 public class ClienteDaoImpl implements ClienteDao
 {
-	private static final String insert = "INSERT INTO Clientes(dni, usuario, cuil, nombre, apellido, sexo, nacionalidad, fechanac, direccion, localidad, provincia, correo, telefono, password) VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
-	private static final String delete = "DELETE FROM Clientes WHERE dni = ?";
-	private static final String readall = "SELECT * FROM Clientes";
-	private static final String update = "UPDATE Clientes SET dni = ?, usuario = ?, cuil = ?, nombre = ?, apellido = ?, sexo = ?, nacionalidad = ?, fechanac = ?, direccion = ?, localidad = ?, provincia = ?, correo = ?, telefono = ?, password = ?, where Dni = ?";
+	private static final String insert = "INSERT INTO clientes(dni, usuario, cuil, nombre, apellido, sexo, nacionalidad, fechanac, direccion, localidad, provincia, correo, telefono, password) VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+	private static final String delete = "DELETE FROM clientes WHERE dni = ?";
+	private static final String readall = "SELECT * FROM clientes";
+	private static final String update = "UPDATE clientes SET dni = ?, usuario = ?, cuil = ?, nombre = ?, apellido = ?, sexo = ?, nacionalidad = ?, fechanac = ?, direccion = ?, localidad = ?, provincia = ?, correo = ?, telefono = ?, password = ?, where Dni = ?";
 	private static final String Provincia = null;
 
 	
@@ -33,11 +33,10 @@ public class ClienteDaoImpl implements ClienteDao
 			statement.setString(6, cliente.getSexo());
 			statement.setString(7, cliente.getNacionalidad());
 			statement.setString(8, cliente.getFechaNac());
-			statement.setString(9, cliente.getFechaNac());
-			statement.setString(10, cliente.getDireccion());
-			statement.setString(11, cliente.getLocalidad());
-			statement.setString(12, cliente.getProvincia());
-			statement.setString(13, cliente.getCorreoElectronico());
+			statement.setString(9, cliente.getDireccion());
+			statement.setString(10, cliente.getLocalidad());
+			statement.setString(11, cliente.getProvincia());
+			statement.setString(12, cliente.getCorreoElectronico());
 			statement.setString(13, cliente.getTelefono());
 			statement.setString(14, cliente.getPassword());
 			if(statement.executeUpdate() > 0)

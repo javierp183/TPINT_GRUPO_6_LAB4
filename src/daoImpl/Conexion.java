@@ -11,6 +11,12 @@ public class Conexion
 	
 	private Conexion()
 	{
+		try {
+			Class.forName("com.mysql.jdbc.Driver");
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		}
+		
 		try
 		{
 			//Class.forName("com.mysql.jdbc.Driver"); // quitar si no es necesario
