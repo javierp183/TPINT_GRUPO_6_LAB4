@@ -52,7 +52,17 @@
  <div class="row">
  <form>
   <div class="form-group">
+    <label for="exampleInputEmail1">DNI</label>
+    <input type="input" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+    <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+  </div>
+    <div class="form-group">
     <label for="exampleInputEmail1">Usuario</label>
+    <input type="input" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+    <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+  </div>
+   <div class="form-group">
+    <label for="exampleInputEmail1">Cuil</label>
     <input type="input" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
     <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
   </div>
@@ -61,13 +71,48 @@
     <input type="input" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
     <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
   </div>
-   <div class="form-group">
+    <div class="form-group">
     <label for="exampleInputEmail1">Apellido</label>
     <input type="input" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
     <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
   </div>
-    <div class="form-group">
-    <label for="exampleInputEmail1">DNI</label>
+     <div class="form-group">
+    <label for="exampleInputEmail1">Sexo</label>
+    <input type="input" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+    <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+  </div>
+      <div class="form-group">
+    <label for="exampleInputEmail1">Nacionalidad</label>
+    <input type="input" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+    <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+  </div>
+     <div class="form-group">
+    <label for="exampleInputEmail1">Fecha de nacimiento</label>
+    <input type="input" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+    <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+  </div>
+     <div class="form-group">
+    <label for="exampleInputEmail1">Direccion</label>
+    <input type="input" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+    <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+  </div>
+      <div class="form-group">
+    <label for="exampleInputEmail1">Localidad</label>
+    <input type="input" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+    <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+  </div>
+       <div class="form-group">
+    <label for="exampleInputEmail1">Provincia</label>
+    <input type="input" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+    <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+  </div>
+        <div class="form-group">
+    <label for="exampleInputEmail1">Correo Electronico</label>
+    <input type="input" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+    <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+  </div>
+       <div class="form-group">
+    <label for="exampleInputEmail1">Telefono</label>
     <input type="input" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
     <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
   </div>

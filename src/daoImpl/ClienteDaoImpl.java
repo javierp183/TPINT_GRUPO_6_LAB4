@@ -10,10 +10,12 @@ import dao.ClienteDao;
 
 public class ClienteDaoImpl implements ClienteDao
 {
-	private static final String insert = "INSERT INTO Clientes(dni, nombre, apellido) VALUES(?, ?, ?)";
+	private static final String insert = "INSERT INTO Clientes(dni, usuario, cuil, nombre, apellido, sexo, nacionalidad, fechanac, direccion, localidad, provincia, correo, telefono, password) VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 	private static final String delete = "DELETE FROM Clientes WHERE dni = ?";
 	private static final String readall = "SELECT * FROM Clientes";
-	private static final String update = "UPDATE Clientes SET dni = ?, nombre = ?, apellido = ? where Dni = ?";
+	private static final String update = "UPDATE Clientes SET dni = ?, usuario = ?, cuil = ?, nombre = ?, apellido = ?, sexo = ?, nacionalidad = ?, fechanac = ?, direccion = ?, localidad = ?, provincia = ?, correo = ?, telefono = ?, password = ?, where Dni = ?";
+	private static final String Provincia = null;
+
 	
 	public boolean insert(Cliente cliente)
 	{
@@ -23,9 +25,21 @@ public class ClienteDaoImpl implements ClienteDao
 		try
 		{
 			statement = conexion.prepareStatement(insert);
-			statement.setString(1, cliente.getDni());
-			statement.setString(2, cliente.getNombre());
-			statement.setString(3, cliente.getApellido());
+			statement.setInt(1, cliente.getDni());
+			statement.setString(2, cliente.getUsuario());
+			statement.setString(3, cliente.getCuil());
+			statement.setString(4, cliente.getNombre());
+			statement.setString(5, cliente.getApellido());
+			statement.setString(6, cliente.getSexo());
+			statement.setString(7, cliente.getNacionalidad());
+			statement.setString(8, cliente.getFechaNac());
+			statement.setString(9, cliente.getFechaNac());
+			statement.setString(10, cliente.getDireccion());
+			statement.setString(11, cliente.getLocalidad());
+			statement.setString(12, cliente.getProvincia());
+			statement.setString(13, cliente.getCorreoElectronico());
+			statement.setString(13, cliente.getTelefono());
+			statement.setString(14, cliente.getPassword());
 			if(statement.executeUpdate() > 0)
 			{
 				conexion.commit();
@@ -53,7 +67,7 @@ public class ClienteDaoImpl implements ClienteDao
 		try 
 		{
 			statement = conexion.prepareStatement(delete);
-			statement.setString(1, cliente_a_eliminar.getDni());
+			statement.setInt(1, cliente_a_eliminar.getDni());
 			if(statement.executeUpdate() > 0)
 			{
 				conexion.commit();
@@ -67,17 +81,28 @@ public class ClienteDaoImpl implements ClienteDao
 		return isdeleteExitoso;
 	}
 	
-	public boolean modify(Cliente p) {
+	public boolean modify(Cliente cliente) {
 		PreparedStatement statement;
 		Connection conexion = Conexion.getConexion().getSQLConexion();
 		boolean isInsertExitoso = false;
 		try
 		{
 			statement = conexion.prepareStatement(update);
-			statement.setString(1, p.getDni());
-			statement.setString(2, p.getNombre());
-			statement.setString(3, p.getApellido());
-			statement.setString(4, p.getDni());
+			statement.setInt(1, cliente.getDni());
+			statement.setString(2, cliente.getUsuario());
+			statement.setString(3, cliente.getCuil());
+			statement.setString(4, cliente.getNombre());
+			statement.setString(5, cliente.getApellido());
+			statement.setString(6, cliente.getSexo());
+			statement.setString(7, cliente.getNacionalidad());
+			statement.setString(8, cliente.getFechaNac());
+			statement.setString(9, cliente.getFechaNac());
+			statement.setString(10, cliente.getDireccion());
+			statement.setString(11, cliente.getLocalidad());
+			statement.setString(12, cliente.getProvincia());
+			statement.setString(13, cliente.getCorreoElectronico());
+			statement.setString(13, cliente.getTelefono());
+			statement.setString(14, cliente.getPassword());
 			if(statement.executeUpdate() > 0)
 			{
 				conexion.commit();
@@ -121,10 +146,24 @@ public class ClienteDaoImpl implements ClienteDao
 	
 	private Cliente getCliente(ResultSet resultSet) throws SQLException
 	{
-		String dni = resultSet.getString("Dni");
-		String nombre = resultSet.getString("Nombre");
-		String apellido = resultSet.getString("Apellido");
-		return new Cliente(dni, nombre, apellido);
+		
+		String Nombre = resultSet.getString("Nombre");
+		String Apellido = resultSet.getString("Apellido");
+		String Sexo = resultSet.getString("Sexo");
+		String Nacionalidad = resultSet.getString("Nacionalidad");
+		String CorreoElectronico = resultSet.getString("CorreoElectronico");
+		String Telefono = resultSet.getString("Telefono");
+		String Usuario = resultSet.getString("Usuario");
+		String Password = resultSet.getString("Password");
+		String Cuil = resultSet.getString("Cuil");
+		int Dni = Integer.parseInt(resultSet.getString("dni"));
+		String FechaNac = resultSet.getString("FechaNac");
+		String Localidad = resultSet.getString("Localidad");
+		String Provincia = resultSet.getString("Provincia");
+		String Direccion = resultSet.getString("Direccion");
+		
+		return new Cliente(Nombre, Apellido, Sexo, Nacionalidad, CorreoElectronico, Telefono, Usuario, Password, Cuil, Dni, FechaNac, Localidad, Provincia, Direccion);
+		
 	}
 
 }
