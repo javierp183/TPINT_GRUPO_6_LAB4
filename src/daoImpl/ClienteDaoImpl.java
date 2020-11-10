@@ -12,9 +12,11 @@ public class ClienteDaoImpl implements ClienteDao
 {
 	private static final String insert = "INSERT INTO clientes(dni, usuario, cuil, nombre, apellido, sexo, nacionalidad, fechanac, direccion, localidad, provincia, correo, telefono, password) VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 	private static final String delete = "DELETE FROM clientes WHERE dni = ?";
+	private static final String readByMail = "SELECT * FROM clientes WHERE correo = ? and password = ?";
 	private static final String readall = "SELECT * FROM clientes";
 	private static final String update = "UPDATE clientes SET dni = ?, usuario = ?, cuil = ?, nombre = ?, apellido = ?, sexo = ?, nacionalidad = ?, fechanac = ?, direccion = ?, localidad = ?, provincia = ?, correo = ?, telefono = ?, password = ?, where Dni = ?";
 	private static final String Provincia = null;
+	private Cliente client;
 
 	
 	public boolean insert(Cliente cliente)
@@ -119,6 +121,32 @@ public class ClienteDaoImpl implements ClienteDao
 		}
 		
 		return isInsertExitoso;
+	}
+	
+	
+	///Busca el cliente por mail y contraseña.
+	///Si el cliente no existe, por constructor
+	///Genera un cliente con "Sin Correo" y "Sin password"
+	///Para utilizarlo en el login.
+	public Cliente getClientePorMail(String emailWeb, String passWeb) {
+		PreparedStatement statement = null;
+		Connection connection = Conexion.getConexion().getSQLConexion();
+		ResultSet resultSet; //Guarda el resultado de la query
+		try {
+			connection.prepareStatement(readByMail);
+			statement.setString(1, emailWeb);
+			statement.setString(2, passWeb);
+			resultSet = statement.executeQuery();
+			if(resultSet.next()) {
+				return getCliente(resultSet);
+			}
+			
+		} catch (Exception e) {
+			return new Cliente();
+		}
+		
+		return new Cliente();
+			
 	}
 
 	public List<Cliente> readAll()

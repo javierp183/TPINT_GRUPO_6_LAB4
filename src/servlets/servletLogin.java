@@ -7,17 +7,21 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import daoImpl.ClienteDaoImpl;
+import dominio.Cliente;
+
 /**
- * Servlet implementation class servletCliente
+ * Servlet implementation class servletLogin
  */
-@WebServlet("/servletCliente")
-public class servletCliente extends HttpServlet {
+@WebServlet("/servletLogin")
+public class servletLogin extends HttpServlet {
 	private static final long serialVersionUID = 1L;
+	private ClienteDaoImpl negocio;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public servletCliente() {
+    public servletLogin() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -35,6 +39,15 @@ public class servletCliente extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
+		if(request.getParameter("emailLogin")!=null && request.getParameter("passLogin") != null) {
+			Cliente client = negocio.getClientePorMail(request.getParameter("emailLogin"), request.getParameter("passLogin"));
+			if(client.getCorreoElectronico() == request.getParameter("emailLogin")) {
+				System.out.println("Hay correo en la db");
+				
+			}else if(client.getCorreoElectronico() == "Sin Correo") {
+				System.out.println("No hay correo en la db");
+			}
+		}
 		doGet(request, response);
 	}
 
