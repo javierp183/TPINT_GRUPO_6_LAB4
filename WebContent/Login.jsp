@@ -16,20 +16,17 @@
 </head>
 <body>
 
-<br>
-<br>
-
 <div class="container">
- <div class="row" style="margin: top 50px;" >
- <form action="servletLogin" method="post" >
+ <div class="row">
+ <form>
   <div class="form-group">
-    <label for="exampleInputEmail1">Ingrese su e-mail</label>
-    <input type="input" class="form-control" name="emailLogin" id="emailLogin" aria-describedby="emailHelp">
-    <small id="labelMail" class="form-text text-muted">Ingrese su email por favor</small>
+    <label for="exampleInputEmail1">Usuario/ID</label>
+    <input type="input" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+    <small id="emailHelp" class="form-text text-muted">Ingrese su usuario por favor</small>
   </div>
   <div class="form-group">
     <label for="exampleInputPassword1">Clave</label>
-    <input type="password" class="form-control" name="passLogin" id="passLogin">
+    <input type="password" class="form-control" id="exampleInputPassword1">
   </div>
   <button type="submit" class="btn btn-primary">Aceptar</button>
 </form>

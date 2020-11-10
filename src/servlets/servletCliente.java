@@ -43,7 +43,6 @@ public class servletCliente extends HttpServlet {
 		// TODO Auto-generated method stub
 		if(request.getParameter("inputDNI")!=null)
 		{
-			System.out.println("isisisis si lo sabe cante, cante con Galan!");
 			int inputDNI = Integer.parseInt(request.getParameter("inputDNI"));
 			String inputUsuario = request.getParameter("inputUsuario");
 			String inputCuil = request.getParameter("inputCuil");
@@ -75,12 +74,21 @@ public class servletCliente extends HttpServlet {
 			cliente.setCorreoElectronico(inputEmail);
 			cliente.setTelefono(inputTelefono);
 			cliente.setPassword(inputPassword);
-			
 			ClienteDaoImpl clientedaoimpl = new ClienteDaoImpl();
-			clientedaoimpl.insert(cliente);
 			
-			System.out.println(inputDNI);
+			if(request.getParameter("inputUpdate")!=null)
+				{
+					clientedaoimpl.modify(cliente);
+					System.out.println("modificando data");
+				}
+			else
+			{
+				
+				clientedaoimpl.insert(cliente);
+				System.out.println("guardando data");
+			}
 		}
+		
 		RequestDispatcher rd = request.getRequestDispatcher("UsuarioBanco_Alta_Clientes.jsp");
 		rd.forward(request, response);
 	}

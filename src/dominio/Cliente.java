@@ -16,15 +16,16 @@ public class Cliente {
 	private String Provincia;
 	private String Direccion;
 	
-		
-	// Constructor
-	public Cliente() {
+	
+	public Cliente()
+	{
 		super();
 		CorreoElectronico = "Sin correo";
 		Password = "Sin Password";
 	}
+
 	
-	
+	// Constructor
 	public Cliente(String nombre, String apellido, String sexo, String nacionalidad, String correoElectronico,
 			String telefono, String usuario, String password, String cuil, int dni, String fechaNac, String localidad,
 			String provincia, String direccion) {
@@ -44,7 +45,6 @@ public class Cliente {
 		Provincia = provincia;
 		Direccion = direccion;
 	}
-	
 
 	// Getters and Setters
 	public String getNombre() {

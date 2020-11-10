@@ -1,4 +1,4 @@
-/servlets/
-/dominio/
-/daoImpl/
 /dao/
+/daoImpl/
+/dominio/
+/servlets/

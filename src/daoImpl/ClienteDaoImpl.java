@@ -12,11 +12,9 @@ public class ClienteDaoImpl implements ClienteDao
 {
 	private static final String insert = "INSERT INTO clientes(dni, usuario, cuil, nombre, apellido, sexo, nacionalidad, fechanac, direccion, localidad, provincia, correo, telefono, password) VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 	private static final String delete = "DELETE FROM clientes WHERE dni = ?";
-	private static final String readByMail = "SELECT * FROM clientes WHERE correo = ? and password = ?";
 	private static final String readall = "SELECT * FROM clientes";
 	private static final String update = "UPDATE clientes SET dni = ?, usuario = ?, cuil = ?, nombre = ?, apellido = ?, sexo = ?, nacionalidad = ?, fechanac = ?, direccion = ?, localidad = ?, provincia = ?, correo = ?, telefono = ?, password = ?, where Dni = ?";
 	private static final String Provincia = null;
-	private Cliente client;
 
 	
 	public boolean insert(Cliente cliente)
@@ -97,11 +95,10 @@ public class ClienteDaoImpl implements ClienteDao
 			statement.setString(6, cliente.getSexo());
 			statement.setString(7, cliente.getNacionalidad());
 			statement.setString(8, cliente.getFechaNac());
-			statement.setString(9, cliente.getFechaNac());
-			statement.setString(10, cliente.getDireccion());
-			statement.setString(11, cliente.getLocalidad());
-			statement.setString(12, cliente.getProvincia());
-			statement.setString(13, cliente.getCorreoElectronico());
+			statement.setString(9, cliente.getDireccion());
+			statement.setString(10, cliente.getLocalidad());
+			statement.setString(11, cliente.getProvincia());
+			statement.setString(12, cliente.getCorreoElectronico());
 			statement.setString(13, cliente.getTelefono());
 			statement.setString(14, cliente.getPassword());
 			if(statement.executeUpdate() > 0)
@@ -122,9 +119,8 @@ public class ClienteDaoImpl implements ClienteDao
 		
 		return isInsertExitoso;
 	}
-	
-	
-	///Busca el cliente por mail y contraseña.
+
+	///Busca el cliente por mail y contraseï¿½a.
 	///Si el cliente no existe, por constructor
 	///Genera un cliente con "Sin Correo" y "Sin password"
 	///Para utilizarlo en el login.
@@ -133,6 +129,9 @@ public class ClienteDaoImpl implements ClienteDao
 		Connection connection = Conexion.getConexion().getSQLConexion();
 		ResultSet resultSet; //Guarda el resultado de la query
 		try {
+			// Esta variable la inicialize para que no tire error, pero hay que ver.
+			String readByMail = null;
+			
 			connection.prepareStatement(readByMail);
 			statement.setString(1, emailWeb);
 			statement.setString(2, passWeb);
