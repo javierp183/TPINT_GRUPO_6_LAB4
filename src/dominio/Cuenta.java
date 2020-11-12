@@ -9,7 +9,8 @@ public class Cuenta {
 	
 	public Cuenta()
 	{
-		
+		super();
+		Saldo = 10000;
 	}
 	
 	public Cuenta(int tipoCuenta, float saldo, int idCliente, String fecha, int numCuenta) {
