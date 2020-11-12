@@ -1,11 +1,14 @@
 package dominio;
 
 public class Cuenta {
-	private int TipoCuenta;
+	private int Idcuenta;
 	private float Saldo;
-	private int idCliente;
 	private String Fecha;
-	private int NumCuenta;
+	private String Cuentascol;
+	private String Cbu;
+	private int estado;
+	private int TipoCuenta;
+	private int Usuario;
 	
 	public Cuenta()
 	{
@@ -13,20 +16,26 @@ public class Cuenta {
 		Saldo = 10000;
 	}
 	
-	public Cuenta(int tipoCuenta, float saldo, int idCliente, String fecha, int numCuenta) {
+	public Cuenta(int idcuenta, float saldo, String fecha, String cuentascol, String cbu, int estado, int tipoCuenta,
+			int usuario) {
 		super();
-		TipoCuenta = tipoCuenta;
+		Idcuenta = idcuenta;
 		Saldo = saldo;
-		this.idCliente = idCliente;
 		Fecha = fecha;
-		NumCuenta = numCuenta;
-	}
-
-	public int getTipoCuenta() {
-		return TipoCuenta;
-	}
-	public void setTipoCuenta(int tipoCuenta) {
+		Cuentascol = cuentascol;
+		Cbu = cbu;
+		this.estado = estado;
 		TipoCuenta = tipoCuenta;
+		Usuario = usuario;
+	}
+	
+	
+	
+	public int getIdcuenta() {
+		return Idcuenta;
+	}
+	public void setIdcuenta(int idcuenta) {
+		Idcuenta = idcuenta;
 	}
 	public float getSaldo() {
 		return Saldo;
@@ -34,33 +43,49 @@ public class Cuenta {
 	public void setSaldo(float saldo) {
 		Saldo = saldo;
 	}
-	public int getIdCliente() {
-		return idCliente;
-	}
-	public void setIdCliente(int idCliente) {
-		this.idCliente = idCliente;
-	}
 	public String getFecha() {
 		return Fecha;
 	}
 	public void setFecha(String fecha) {
 		Fecha = fecha;
 	}
-	public int getNumCuenta() {
-		return NumCuenta;
+	public String getCuentascol() {
+		return Cuentascol;
 	}
-	public void setNumCuenta(int numCuenta) {
-		NumCuenta = numCuenta;
+	public void setCuentascol(String cuentascol) {
+		Cuentascol = cuentascol;
 	}
-	
+	public String getCbu() {
+		return Cbu;
+	}
+	public void setCbu(String cbu) {
+		Cbu = cbu;
+	}
+	public int getEstado() {
+		return estado;
+	}
+	public void setEstado(int estado) {
+		this.estado = estado;
+	}
+	public int getTipoCuenta() {
+		return TipoCuenta;
+	}
+	public void setTipoCuenta(int tipoCuenta) {
+		TipoCuenta = tipoCuenta;
+	}
+	public int getUsuario() {
+		return Usuario;
+	}
+	public void setUsuario(int usuario) {
+		Usuario = usuario;
+	}
+
 	@Override
 	public String toString() {
-		return "Cuenta [TipoCuenta=" + TipoCuenta + ", Saldo=" + Saldo + ", idCliente=" + idCliente + ", Fecha=" + Fecha
-				+ ", NumCuenta=" + NumCuenta + "]";
+		return "Cuenta [Idcuenta=" + Idcuenta + ", Saldo=" + Saldo + ", Fecha=" + Fecha + ", Cuentascol=" + Cuentascol
+				+ ", Cbu=" + Cbu + ", estado=" + estado + ", TipoCuenta=" + TipoCuenta + ", Usuario=" + Usuario + "]";
 	}
-	
-	
-	
+
 	
 
 }
