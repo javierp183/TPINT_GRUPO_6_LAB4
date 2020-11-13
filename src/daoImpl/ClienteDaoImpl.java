@@ -13,6 +13,7 @@ public class ClienteDaoImpl implements ClienteDao
 	private static final String insert = "INSERT INTO clientes(dni, usuario, cuil, nombre, apellido, sexo, nacionalidad, fechanac, direccion, localidad, provincia, correo, telefono, password) VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 	private static final String delete = "DELETE FROM clientes WHERE dni = ?";
 	private static final String readall = "SELECT * FROM clientes";
+	private static final String readByMail = "Select correo, password FROM clientes where correo = ? and password = ?";
 	private static final String update = "UPDATE clientes SET dni = ?, usuario = ?, cuil = ?, nombre = ?, apellido = ?, sexo = ?, nacionalidad = ?, fechanac = ?, direccion = ?, localidad = ?, provincia = ?, correo = ?, telefono = ?, password = ?, where Dni = ?";
 	private static final String Provincia = null;
 
@@ -101,6 +102,7 @@ public class ClienteDaoImpl implements ClienteDao
 			statement.setString(12, cliente.getCorreoElectronico());
 			statement.setString(13, cliente.getTelefono());
 			statement.setString(14, cliente.getPassword());
+			statement.setInt(15, cliente.getDni());
 			if(statement.executeUpdate() > 0)
 			{
 				conexion.commit();
@@ -125,19 +127,22 @@ public class ClienteDaoImpl implements ClienteDao
 	///Genera un cliente con "Sin Correo" y "Sin password"
 	///Para utilizarlo en el login.
 	public Cliente getClientePorMail(String emailWeb, String passWeb) {
-		PreparedStatement statement = null;
+		PreparedStatement statement;
 		Connection connection = Conexion.getConexion().getSQLConexion();
 		ResultSet resultSet; //Guarda el resultado de la query
 		try {
 			// Esta variable la inicialize para que no tire error, pero hay que ver.
-			String readByMail = null;
+			//String readByMail = null;
 			
-			connection.prepareStatement(readByMail);
+			statement = connection.prepareStatement(readByMail);
 			statement.setString(1, emailWeb);
 			statement.setString(2, passWeb);
 			resultSet = statement.executeQuery();
 			if(resultSet.next()) {
-				return getCliente(resultSet);
+				Cliente c = new Cliente();
+				c.setCorreoElectronico(resultSet.getString(0));
+				c.setPassword(resultSet.getString(1));
+				return c;
 			}
 			
 		} catch (Exception e) {

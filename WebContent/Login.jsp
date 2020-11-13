@@ -17,18 +17,18 @@
 <body>
 
 <div class="container">
- <div class="row">
- <form>
-  <div class="form-group">
-    <label for="exampleInputEmail1">Usuario/ID</label>
-    <input type="input" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
-    <small id="emailHelp" class="form-text text-muted">Ingrese su usuario por favor</small>
+ <div class="row" >
+ <form action="servletLogin" method="post" style="margin: 0 auto;">
+  <div class="form-group" >
+    <label for="exampleInputEmail1">E-Mail</label>
+    <input type="input" class="form-control" id="txtMail" name="emailLogin" aria-describedby="emailHelp">
+    <small id="emailHelp" class="form-text text-muted">Ingrese su e-mail con el cual se dio de alta.</small>
   </div>
   <div class="form-group">
-    <label for="exampleInputPassword1">Clave</label>
-    <input type="password" class="form-control" id="exampleInputPassword1">
+    <label for="exampleInputPassword1">Ingrese su clave</label>
+    <input type="password" class="form-control" name="passLogin" id="exampleInputPassword1">
   </div>
-  <button type="submit" class="btn btn-primary">Aceptar</button>
+  <button type="submit" class="btn btn-outline-primary">Aceptar</button>
 </form>
  </div>
 </div>

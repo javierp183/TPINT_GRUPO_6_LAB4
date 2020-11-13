@@ -1,6 +1,8 @@
 package servlets;
 
 import java.io.IOException;
+
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -39,16 +41,25 @@ public class servletLogin extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		if(request.getParameter("emailLogin")!=null && request.getParameter("passLogin") != null) {
-			Cliente client = negocio.getClientePorMail(request.getParameter("emailLogin"), request.getParameter("passLogin"));
-			if(client.getCorreoElectronico() == request.getParameter("emailLogin")) {
+		
+		String mail = request.getParameter("emailLogin").toString();
+		String pass = request.getParameter("passLogin").toString();
+		
+		System.out.println(mail);
+		System.out.println(pass);
+		
+		if(mail !=null && pass != null) {
+			Cliente client = negocio.getClientePorMail(mail, pass);
+			if(client.getCorreoElectronico() == mail && client.getPassword() == pass) {
 				System.out.println("Hay correo en la db");
 				
 			}else if(client.getCorreoElectronico() == "Sin Correo") {
 				System.out.println("No hay correo en la db");
 			}
 		}
-		doGet(request, response);
+		//doGet(request, response);
+		RequestDispatcher rd = request.getRequestDispatcher("Login.jsp");
+		rd.forward(request, response);
 	}
 
 }
