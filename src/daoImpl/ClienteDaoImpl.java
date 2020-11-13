@@ -13,7 +13,7 @@ public class ClienteDaoImpl implements ClienteDao
 	private static final String insert = "INSERT INTO clientes(dni, usuario, cuil, nombre, apellido, sexo, nacionalidad, fechanac, direccion, localidad, provincia, correo, telefono, password) VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 	private static final String delete = "DELETE FROM clientes WHERE dni = ?";
 	private static final String readall = "SELECT * FROM clientes";
-	private static final String readByMail = "Select correo, password FROM clientes where correo = ? and password = ?";
+	private static final String readByMail = "Select * from clientes where correo = ? and password = ?";
 	private static final String update = "UPDATE clientes SET dni = ?, usuario = ?, cuil = ?, nombre = ?, apellido = ?, sexo = ?, nacionalidad = ?, fechanac = ?, direccion = ?, localidad = ?, provincia = ?, correo = ?, telefono = ?, password = ?, where Dni = ?";
 	private static final String Provincia = null;
 
@@ -139,10 +139,8 @@ public class ClienteDaoImpl implements ClienteDao
 			statement.setString(2, passWeb);
 			resultSet = statement.executeQuery();
 			if(resultSet.next()) {
-				Cliente c = new Cliente();
-				c.setCorreoElectronico(resultSet.getString(0));
-				c.setPassword(resultSet.getString(1));
-				return c;
+
+				return getCliente(resultSet);
 			}
 			
 		} catch (Exception e) {

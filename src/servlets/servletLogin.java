@@ -51,10 +51,10 @@ public class servletLogin extends HttpServlet {
 		if(mail !=null && pass != null) {
 			Cliente client = negocio.getClientePorMail(mail, pass);
 			if(client.getCorreoElectronico() == mail && client.getPassword() == pass) {
-				System.out.println("Hay correo en la db");
+				System.out.println("True");
 				
 			}else if(client.getCorreoElectronico() == "Sin Correo") {
-				System.out.println("No hay correo en la db");
+				System.out.println("False");
 			}
 		}
 		//doGet(request, response);
