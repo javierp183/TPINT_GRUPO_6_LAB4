@@ -1,63 +1,62 @@
 package dominio;
 
 public class Administrador {
-	private String Nombre;
-	private String Apellido;
 	private int DNI;
 	private String Usuario;
 	private String Password;
+	private int TipoUsuario;
 	
 	public Administrador()
 	{
-		
+		super();
 	}
 	
-	public Administrador(String nombre, String apellido, int dNI, String usuario, String password) {
+
+	public Administrador(int dNI, String usuario, String password, int tipoUsuario) {
 		super();
-		Nombre = nombre;
-		Apellido = apellido;
 		DNI = dNI;
 		Usuario = usuario;
 		Password = password;
+		TipoUsuario = tipoUsuario;
 	}
-	public String getNombre() {
-		return Nombre;
-	}
-	public void setNombre(String nombre) {
-		Nombre = nombre;
-	}
-	public String getApellido() {
-		return Apellido;
-	}
-	public void setApellido(String apellido) {
-		Apellido = apellido;
-	}
+
 	public int getDNI() {
 		return DNI;
 	}
+
 	public void setDNI(int dNI) {
 		DNI = dNI;
 	}
+
 	public String getUsuario() {
 		return Usuario;
 	}
+
 	public void setUsuario(String usuario) {
 		Usuario = usuario;
 	}
+
 	public String getPassword() {
 		return Password;
 	}
+
 	public void setPassword(String password) {
 		Password = password;
 	}
-	
-	
+
+	public int getTipoUsuario() {
+		return TipoUsuario;
+	}
+
+	public void setTipoUsuario(int tipoUsuario) {
+		TipoUsuario = tipoUsuario;
+	}
+
 	@Override
 	public String toString() {
-		return "Administrador [Nombre=" + Nombre + ", Apellido=" + Apellido + ", DNI=" + DNI + ", Usuario=" + Usuario
-				+ ", Password=" + Password + "]";
+		return "Administrador [DNI=" + DNI + ", Usuario=" + Usuario + ", Password=" + Password + ", TipoUsuario="
+				+ TipoUsuario + "]";
 	}
-	
-	
+
 
 }
