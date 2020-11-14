@@ -6,9 +6,11 @@ import java.util.ArrayList;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.SessionCookieConfig;
 
 import dominio.Cliente;
 import daoImpl.ClienteDaoImpl;
@@ -19,6 +21,7 @@ import daoImpl.ClienteDaoImpl;
 @WebServlet("/servletLogin")
 public class servletLogin extends HttpServlet {
 	private static final long serialVersionUID = 1L;
+	
        
     /**
      * @see HttpServlet#HttpServlet()
@@ -44,27 +47,32 @@ public class servletLogin extends HttpServlet {
 		String mail = request.getParameter("emailLogin").toString();
         String pass = request.getParameter("passLogin").toString();
         ClienteDaoImpl negocio = new ClienteDaoImpl();
+        
 
         System.out.println(mail);
         System.out.println(pass);
-
-        if(!mail.isEmpty() && !pass.isEmpty()) {
-            Cliente client = negocio.getClientePorMail(mail, pass);
-            if(client.getCorreoElectronico() == mail && client.getPassword() == pass) {
-                System.out.println("True");
-
-            }else if(client.getCorreoElectronico() == "Sin Correo") {
-                System.out.println("False");
-            }
-        } 
+             
+        request.getSession().setAttribute("user", mail);
+        request.getSession().setAttribute("pass", pass);
         
-        ArrayList<Cliente> Lista = new ArrayList<Cliente>();
-        Lista = (ArrayList<Cliente>) negocio.readAll();
-        System.out.println(Lista.toString());
+        RequestDispatcher requestDispatcher = request
+                .getRequestDispatcher("/Usuario.jsp");
+        requestDispatcher.forward(request, response);
         
-        //doGet(request, response);
-        RequestDispatcher rd = request.getRequestDispatcher("Login.jsp");
-        rd.forward(request, response);
+//        Cliente client = negocio.getClientePorMail(mail, pass);
+//        System.out.println(client.toString());
+//        if(!mail.isEmpty() && !pass.isEmpty()) {
+//            if(client.getCorreoElectronico() == mail && client.getPassword() == pass) {
+//                System.out.println("True");
+//
+//            }else if(client.getCorreoElectronico() == "Sin Correo") {
+//                System.out.println("False");
+//            }
+//        } 
+//                
+//        //doGet(request, response);
+//        RequestDispatcher rd = request.getRequestDispatcher("Login.jsp");
+//        rd.forward(request, response);
 	}
 
 }

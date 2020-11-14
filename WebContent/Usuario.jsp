@@ -16,6 +16,15 @@
 </head>
 <body>
 
+<div>
+
+<b>Mail:</b>
+   <%= session.getAttribute("user") %>
+<b>Pass:</b>
+   <%= session.getAttribute("pass") %>
+
+</div>
+
 <table class="table table-dark">
   <thead>
     <tr>
