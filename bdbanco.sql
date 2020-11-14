@@ -4,40 +4,26 @@
 -- ------------------------------------------------------
 -- Server version	5.7.31-log
 
-create database bdbanco;
-
-use bdbanco;
-
-drop table clientes;
-
-create table `clientes` (
-	`dni` int(11) NOT NULL,
-	`usuario` varchar(45) NOT NULL,
-	`cuil` varchar(45) DEFAULT NULL,
-	`nombre` varchar(45) DEFAULT NULL,
-	`apellido` varchar(45) DEFAULT NULL,
-	`sexo` varchar(45) DEFAULT NULL,
-	`nacionalidad` varchar(45) DEFAULT NULL,
-	`fechanac` varchar(45) DEFAULT NULL,
-	`direccion` varchar(255) DEFAULT NULL,
-	`localidad` varchar(255) DEFAULT NULL,
-	`provincia` varchar(45) DEFAULT NULL,
-	`correo` varchar(45) DEFAULT NULL,
-	`telefono` varchar(45) DEFAULT NULL,
-    `password` varchar(45) DEFAULT NULL,
-    PRIMARY KEY (`dni`)
-);
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!50503 SET NAMES utf8 */;
+/*!40103 SET @OLD_TIME_ZONE=@@TIME_ZONE */;
+/*!40103 SET TIME_ZONE='+00:00' */;
+/*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
+/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
+/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
+/*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
 -- Table structure for table `clientes`
 --
 
-/*DROP TABLE IF EXISTS `clientes`;
+DROP TABLE IF EXISTS `clientes`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-/* CREATE TABLE `clientes` (
+CREATE TABLE `clientes` (
   `dni` int(11) NOT NULL,
-  `usuario` varchar(45) NOT NULL,
   `cuil` varchar(45) DEFAULT NULL,
   `nombre` varchar(45) DEFAULT NULL,
   `apellido` varchar(45) DEFAULT NULL,
@@ -49,7 +35,9 @@ create table `clientes` (
   `provincia` varchar(45) DEFAULT NULL,
   `correo` varchar(45) DEFAULT NULL,
   `telefono` varchar(45) DEFAULT NULL,
-  PRIMARY KEY (`dni`,`usuario`)
+  `usuario` varchar(45) DEFAULT NULL,
+  `password` varchar(45) DEFAULT NULL,
+  PRIMARY KEY (`dni`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -70,14 +58,20 @@ DROP TABLE IF EXISTS `cuentas`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `cuentas` (
-  `idcuenta` int(11) NOT NULL,
-  `usuario` varchar(45) NOT NULL,
-  `tipocuenta` varchar(45) DEFAULT NULL,
+  `idcuenta` int(11) NOT NULL AUTO_INCREMENT,
   `saldo` float DEFAULT NULL,
   `fecha` date DEFAULT NULL,
   `cuentascol` varchar(45) DEFAULT NULL,
   `cbu` varchar(45) DEFAULT NULL,
-  PRIMARY KEY (`idcuenta`,`usuario`)
+  `estado` tinyint(4) DEFAULT NULL,
+  `tipocuenta` int(11) DEFAULT NULL,
+  `usuarios_dni` int(11) NOT NULL,
+  `usuarios_usuario` varchar(45) NOT NULL,
+  PRIMARY KEY (`idcuenta`,`usuarios_dni`,`usuarios_usuario`),
+  KEY `fk_cuentas_tipocuentas_idx` (`tipocuenta`),
+  KEY `fk_cuentas_usuarios1_idx` (`usuarios_dni`,`usuarios_usuario`),
+  CONSTRAINT `fk_cuentas_tipocuentas` FOREIGN KEY (`tipocuenta`) REFERENCES `tipocuentas` (`tipocuenta`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  CONSTRAINT `fk_cuentas_usuarios1` FOREIGN KEY (`usuarios_dni`, `usuarios_usuario`) REFERENCES `usuarios` (`dni`, `usuario`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -91,26 +85,31 @@ LOCK TABLES `cuentas` WRITE;
 UNLOCK TABLES;
 
 --
--- Table structure for table `cuentasxclientes`
+-- Table structure for table `cuotas`
 --
 
-DROP TABLE IF EXISTS `cuentasxclientes`;
+DROP TABLE IF EXISTS `cuotas`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `cuentasxclientes` (
-  `usuario` varchar(45) NOT NULL,
-  `idcuenta` int(11) NOT NULL,
-  PRIMARY KEY (`usuario`,`idcuenta`)
+CREATE TABLE `cuotas` (
+  `idcuotas` int(11) NOT NULL,
+  `monto` float DEFAULT NULL,
+  `fechapago` date DEFAULT NULL,
+  `idprestamo` int(11) DEFAULT NULL,
+  `estado` tinyint(4) DEFAULT NULL,
+  PRIMARY KEY (`idcuotas`),
+  KEY `fk_cuotas_prestamos1_idx` (`idprestamo`),
+  CONSTRAINT `fk_cuotas_prestamos1` FOREIGN KEY (`idprestamo`) REFERENCES `prestamos` (`idprestamo`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `cuentasxclientes`
+-- Dumping data for table `cuotas`
 --
 
-LOCK TABLES `cuentasxclientes` WRITE;
-/*!40000 ALTER TABLE `cuentasxclientes` DISABLE KEYS */;
-/*!40000 ALTER TABLE `cuentasxclientes` ENABLE KEYS */;
+LOCK TABLES `cuotas` WRITE;
+/*!40000 ALTER TABLE `cuotas` DISABLE KEYS */;
+/*!40000 ALTER TABLE `cuotas` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -124,9 +123,14 @@ CREATE TABLE `movimientos` (
   `fecha` date DEFAULT NULL,
   `detalle` varchar(45) DEFAULT NULL,
   `importe` float DEFAULT NULL,
-  `tipomovimiento` varchar(45) DEFAULT NULL,
-  `idtransacion` varchar(45) NOT NULL,
-  PRIMARY KEY (`idtransacion`)
+  `idtransacion` int(11) NOT NULL,
+  `idtipomovimiento` int(11) DEFAULT NULL,
+  `idcuenta` int(11) DEFAULT NULL,
+  PRIMARY KEY (`idtransacion`),
+  KEY `fk_movimientos_tipomovimiento1_idx` (`idtipomovimiento`),
+  KEY `fk_movimientos_cuentas1_idx` (`idcuenta`),
+  CONSTRAINT `fk_movimientos_cuentas1` FOREIGN KEY (`idcuenta`) REFERENCES `cuentas` (`idcuenta`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  CONSTRAINT `fk_movimientos_tipomovimiento1` FOREIGN KEY (`idtipomovimiento`) REFERENCES `tipomovimiento` (`idtipomovimiento`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -137,29 +141,6 @@ CREATE TABLE `movimientos` (
 LOCK TABLES `movimientos` WRITE;
 /*!40000 ALTER TABLE `movimientos` DISABLE KEYS */;
 /*!40000 ALTER TABLE `movimientos` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Table structure for table `movimientosxcuenta`
---
-
-DROP TABLE IF EXISTS `movimientosxcuenta`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `movimientosxcuenta` (
-  `idmovimiento` int(11) NOT NULL,
-  `cuenta` varchar(45) NOT NULL,
-  PRIMARY KEY (`idmovimiento`,`cuenta`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `movimientosxcuenta`
---
-
-LOCK TABLES `movimientosxcuenta` WRITE;
-/*!40000 ALTER TABLE `movimientosxcuenta` DISABLE KEYS */;
-/*!40000 ALTER TABLE `movimientosxcuenta` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -178,7 +159,10 @@ CREATE TABLE `prestamos` (
   `montopormes` float DEFAULT NULL,
   `numcuotas` int(11) DEFAULT NULL,
   `idprestamo` int(11) NOT NULL,
-  PRIMARY KEY (`idprestamo`)
+  `idcuenta` int(11) DEFAULT NULL,
+  PRIMARY KEY (`idprestamo`),
+  KEY `fk_prestamos_cuentas1_idx` (`idcuenta`),
+  CONSTRAINT `fk_prestamos_cuentas1` FOREIGN KEY (`idcuenta`) REFERENCES `cuentas` (`idcuenta`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -192,30 +176,6 @@ LOCK TABLES `prestamos` WRITE;
 UNLOCK TABLES;
 
 --
--- Table structure for table `prestamosxcuenta`
---
-
-DROP TABLE IF EXISTS `prestamosxcuenta`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `prestamosxcuenta` (
-  `idcuenta` int(11) NOT NULL,
-  `idprestamo` int(11) NOT NULL,
-  `detalle` varchar(45) DEFAULT NULL,
-  PRIMARY KEY (`idcuenta`,`idprestamo`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `prestamosxcuenta`
---
-
-LOCK TABLES `prestamosxcuenta` WRITE;
-/*!40000 ALTER TABLE `prestamosxcuenta` DISABLE KEYS */;
-/*!40000 ALTER TABLE `prestamosxcuenta` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
 -- Table structure for table `tipocuentas`
 --
 
@@ -223,9 +183,9 @@ DROP TABLE IF EXISTS `tipocuentas`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `tipocuentas` (
-  `tipo` varchar(45) NOT NULL,
+  `tipocuenta` int(11) NOT NULL,
   `descripcion` varchar(45) DEFAULT NULL,
-  PRIMARY KEY (`tipo`)
+  PRIMARY KEY (`tipocuenta`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -235,6 +195,7 @@ CREATE TABLE `tipocuentas` (
 
 LOCK TABLES `tipocuentas` WRITE;
 /*!40000 ALTER TABLE `tipocuentas` DISABLE KEYS */;
+INSERT INTO `tipocuentas` VALUES (1,'Caja de ahorro'),(2,'Cuenta corriente');
 /*!40000 ALTER TABLE `tipocuentas` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -247,7 +208,6 @@ DROP TABLE IF EXISTS `tipomovimiento`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `tipomovimiento` (
   `idtipomovimiento` int(11) NOT NULL,
-  `detalle` varchar(45) DEFAULT NULL,
   `nombre` varchar(45) DEFAULT NULL,
   PRIMARY KEY (`idtipomovimiento`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -259,6 +219,7 @@ CREATE TABLE `tipomovimiento` (
 
 LOCK TABLES `tipomovimiento` WRITE;
 /*!40000 ALTER TABLE `tipomovimiento` DISABLE KEYS */;
+INSERT INTO `tipomovimiento` VALUES (1,'Alta de cuenta'),(2,'Alta de un Préstamo'),(3,'Pago de Préstamo'),(4,'Transferencia');
 /*!40000 ALTER TABLE `tipomovimiento` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -282,6 +243,7 @@ CREATE TABLE `tipousuario` (
 
 LOCK TABLES `tipousuario` WRITE;
 /*!40000 ALTER TABLE `tipousuario` DISABLE KEYS */;
+INSERT INTO `tipousuario` VALUES (1,'Administrador'),(2,'Cliente');
 /*!40000 ALTER TABLE `tipousuario` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -295,9 +257,13 @@ DROP TABLE IF EXISTS `usuarios`;
 CREATE TABLE `usuarios` (
   `dni` int(11) NOT NULL,
   `usuario` varchar(45) NOT NULL,
-  `contraseña` varchar(45) DEFAULT NULL,
-  `tipousuario` varchar(45) DEFAULT NULL,
-  PRIMARY KEY (`dni`,`usuario`)
+  `password` varchar(45) DEFAULT NULL,
+  `estado` tinyint(4) DEFAULT NULL,
+  `idtipousuario` int(11) DEFAULT NULL,
+  PRIMARY KEY (`dni`,`usuario`),
+  KEY `fk_usuarios_tipousuario1_idx` (`idtipousuario`),
+  CONSTRAINT `fk_usuarios_clientes1` FOREIGN KEY (`dni`) REFERENCES `clientes` (`dni`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  CONSTRAINT `fk_usuarios_tipousuario1` FOREIGN KEY (`idtipousuario`) REFERENCES `tipousuario` (`idtiposusuario`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -327,4 +293,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2020-10-27 18:27:26
+-- Dump completed on 2020-11-14  0:12:18
