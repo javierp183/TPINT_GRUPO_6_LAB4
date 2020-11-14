@@ -9,8 +9,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import daoImpl.ClienteDaoImpl;
 import dominio.Cliente;
+import daoImpl.ClienteDaoImpl;
 
 /**
  * Servlet implementation class servletLogin
@@ -18,7 +18,6 @@ import dominio.Cliente;
 @WebServlet("/servletLogin")
 public class servletLogin extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	private ClienteDaoImpl negocio;
        
     /**
      * @see HttpServlet#HttpServlet()
@@ -41,25 +40,25 @@ public class servletLogin extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		
 		String mail = request.getParameter("emailLogin").toString();
-		String pass = request.getParameter("passLogin").toString();
-		
-		System.out.println(mail);
-		System.out.println(pass);
-		
-		if(mail !=null && pass != null) {
-			Cliente client = negocio.getClientePorMail(mail, pass);
-			if(client.getCorreoElectronico() == mail && client.getPassword() == pass) {
-				System.out.println("True");
-				
-			}else if(client.getCorreoElectronico() == "Sin Correo") {
-				System.out.println("False");
-			}
-		}
-		//doGet(request, response);
-		RequestDispatcher rd = request.getRequestDispatcher("Login.jsp");
-		rd.forward(request, response);
+        String pass = request.getParameter("passLogin").toString();
+        ClienteDaoImpl negocio = new ClienteDaoImpl();
+
+        System.out.println(mail);
+        System.out.println(pass);
+
+        if(mail !=null && pass != null) {
+            Cliente client = negocio.getClientePorMail(mail, pass);
+            if(client.getCorreoElectronico() == mail && client.getPassword() == pass) {
+                System.out.println("True");
+
+            }else if(client.getCorreoElectronico() == "Sin Correo") {
+                System.out.println("False");
+            }
+        }
+        //doGet(request, response);
+        RequestDispatcher rd = request.getRequestDispatcher("Login.jsp");
+        rd.forward(request, response);
 	}
 
 }
