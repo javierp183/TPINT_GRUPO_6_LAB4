@@ -128,13 +128,13 @@ public class ClienteDaoImpl implements ClienteDao
 	///Para utilizarlo en el login.
 	public Cliente getClientePorMail(String emailWeb, String passWeb) {
 		PreparedStatement statement;
-		Connection connection = Conexion.getConexion().getSQLConexion();
+		Conexion conexion = Conexion.getConexion();
 		ResultSet resultSet; //Guarda el resultado de la query
 		try {
 			// Esta variable la inicialize para que no tire error, pero hay que ver.
 			//String readByMail = null;
 			
-			statement = connection.prepareStatement(readByMail);
+			statement = conexion.getSQLConexion().prepareStatement(readByMail);
 			statement.setString(1, emailWeb);
 			statement.setString(2, passWeb);
 			resultSet = statement.executeQuery();
@@ -176,20 +176,20 @@ public class ClienteDaoImpl implements ClienteDao
 	private Cliente getCliente(ResultSet resultSet) throws SQLException
 	{
 		
-		String Nombre = resultSet.getString("Nombre");
-		String Apellido = resultSet.getString("Apellido");
-		String Sexo = resultSet.getString("Sexo");
-		String Nacionalidad = resultSet.getString("Nacionalidad");
-		String CorreoElectronico = resultSet.getString("CorreoElectronico");
-		String Telefono = resultSet.getString("Telefono");
-		String Usuario = resultSet.getString("Usuario");
-		String Password = resultSet.getString("Password");
-		String Cuil = resultSet.getString("Cuil");
 		int Dni = Integer.parseInt(resultSet.getString("dni"));
-		String FechaNac = resultSet.getString("FechaNac");
-		String Localidad = resultSet.getString("Localidad");
-		String Provincia = resultSet.getString("Provincia");
-		String Direccion = resultSet.getString("Direccion");
+		String Cuil = resultSet.getString("cuil");
+		String Nombre = resultSet.getString("nombre");
+		String Apellido = resultSet.getString("apellido");
+		String Sexo = resultSet.getString("sexo");
+		String Nacionalidad = resultSet.getString("nacionalidad");
+		String FechaNac = resultSet.getString("fechanac");
+		String Direccion = resultSet.getString("dirección");
+		String Localidad = resultSet.getString("localidad");
+		String Provincia = resultSet.getString("provincia");
+		String CorreoElectronico = resultSet.getString("correo");
+		String Telefono = resultSet.getString("telefono");
+		String Usuario = resultSet.getString("usuario");
+		String Password = resultSet.getString("password");
 		
 		return new Cliente(Nombre, Apellido, Sexo, Nacionalidad, CorreoElectronico, Telefono, Usuario, Password, Cuil, Dni, FechaNac, Localidad, Provincia, Direccion);
 		

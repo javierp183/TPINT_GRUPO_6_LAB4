@@ -1,6 +1,7 @@
 package servlets;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -47,7 +48,7 @@ public class servletLogin extends HttpServlet {
         System.out.println(mail);
         System.out.println(pass);
 
-        if(mail !=null && pass != null) {
+        if(!mail.isEmpty() && !pass.isEmpty()) {
             Cliente client = negocio.getClientePorMail(mail, pass);
             if(client.getCorreoElectronico() == mail && client.getPassword() == pass) {
                 System.out.println("True");
@@ -55,7 +56,12 @@ public class servletLogin extends HttpServlet {
             }else if(client.getCorreoElectronico() == "Sin Correo") {
                 System.out.println("False");
             }
-        }
+        } 
+        
+        ArrayList<Cliente> Lista = new ArrayList<Cliente>();
+        Lista = (ArrayList<Cliente>) negocio.readAll();
+        System.out.println(Lista.toString());
+        
         //doGet(request, response);
         RequestDispatcher rd = request.getRequestDispatcher("Login.jsp");
         rd.forward(request, response);
