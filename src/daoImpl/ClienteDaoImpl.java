@@ -10,11 +10,11 @@ import dao.ClienteDao;
 
 public class ClienteDaoImpl implements ClienteDao
 {
-	private static final String insert = "INSERT INTO clientes(dni, usuario, cuil, nombre, apellido, sexo, nacionalidad, fechanac, direccion, localidad, provincia, correo, telefono, password) VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+	private static final String insert = "INSERT INTO clientes(dni, usuario, cuil, nombre, apellido, sexo, nacionalidad, fechanac, direccion, localidad, provincia, correo, telefono, password, tipousuario) VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 	private static final String delete = "DELETE FROM clientes WHERE dni = ?";
 	private static final String readall = "SELECT * FROM clientes";
 	private static final String readByMail = "Select * from clientes where correo = ? and password = ?";
-	private static final String update = "UPDATE clientes SET dni = ?, usuario = ?, cuil = ?, nombre = ?, apellido = ?, sexo = ?, nacionalidad = ?, fechanac = ?, direccion = ?, localidad = ?, provincia = ?, correo = ?, telefono = ?, password = ?, where Dni = ?";
+	private static final String update = "UPDATE clientes SET dni = ?, usuario = ?, cuil = ?, nombre = ?, apellido = ?, sexo = ?, nacionalidad = ?, fechanac = ?, direccion = ?, localidad = ?, provincia = ?, correo = ?, telefono = ?, password = ?, tipousuario = ?, where Dni = ?";
 	private static final String Provincia = null;
 
 	
@@ -40,6 +40,7 @@ public class ClienteDaoImpl implements ClienteDao
 			statement.setString(12, cliente.getCorreoElectronico());
 			statement.setString(13, cliente.getTelefono());
 			statement.setString(14, cliente.getPassword());
+			statement.setInt(14, cliente.getTipoUsuario());
 			if(statement.executeUpdate() > 0)
 			{
 				conexion.commit();
@@ -102,6 +103,7 @@ public class ClienteDaoImpl implements ClienteDao
 			statement.setString(12, cliente.getCorreoElectronico());
 			statement.setString(13, cliente.getTelefono());
 			statement.setString(14, cliente.getPassword());
+			statement.setInt(14, cliente.getTipoUsuario());
 			statement.setInt(15, cliente.getDni());
 			if(statement.executeUpdate() > 0)
 			{
@@ -183,15 +185,16 @@ public class ClienteDaoImpl implements ClienteDao
 		String Sexo = resultSet.getString("sexo");
 		String Nacionalidad = resultSet.getString("nacionalidad");
 		String FechaNac = resultSet.getString("fechanac");
-		String Direccion = resultSet.getString("dirección");
+		String Direccion = resultSet.getString("direcciï¿½n");
 		String Localidad = resultSet.getString("localidad");
 		String Provincia = resultSet.getString("provincia");
 		String CorreoElectronico = resultSet.getString("correo");
 		String Telefono = resultSet.getString("telefono");
 		String Usuario = resultSet.getString("usuario");
 		String Password = resultSet.getString("password");
+		int TipoUsuario = resultSet.getInt("tipousuario");
 		
-		return new Cliente(Nombre, Apellido, Sexo, Nacionalidad, CorreoElectronico, Telefono, Usuario, Password, Cuil, Dni, FechaNac, Localidad, Provincia, Direccion);
+		return new Cliente(Nombre, Apellido, Sexo, Nacionalidad, CorreoElectronico, Telefono, Usuario, Password, Cuil, Dni, FechaNac, Localidad, Provincia, Direccion, TipoUsuario);
 		
 	}
 

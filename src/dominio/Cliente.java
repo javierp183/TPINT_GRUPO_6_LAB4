@@ -15,6 +15,7 @@ public class Cliente {
 	private String Localidad;
 	private String Provincia;
 	private String Direccion;
+	private int TipoUsuario;
 	
 	
 	public Cliente()
@@ -24,11 +25,10 @@ public class Cliente {
 		Password = "Sin Password";
 	}
 
-	
-	// Constructor
+
 	public Cliente(String nombre, String apellido, String sexo, String nacionalidad, String correoElectronico,
 			String telefono, String usuario, String password, String cuil, int dni, String fechaNac, String localidad,
-			String provincia, String direccion) {
+			String provincia, String direccion, int tipoUsuario) {
 		super();
 		Nombre = nombre;
 		Apellido = apellido;
@@ -44,7 +44,11 @@ public class Cliente {
 		Localidad = localidad;
 		Provincia = provincia;
 		Direccion = direccion;
+		TipoUsuario = tipoUsuario;
 	}
+
+
+
 
 	// Getters and Setters
 	public String getNombre() {
@@ -186,13 +190,23 @@ public class Cliente {
 		Direccion = direccion;
 	}
 	
-	
+	public int getTipoUsuario() {
+		return TipoUsuario;
+	}
+
+
+	public void setTipoUsuario(int tipoUsuario) {
+		TipoUsuario = tipoUsuario;
+	}
+
+
 	@Override
 	public String toString() {
 		return "Cliente [Nombre=" + Nombre + ", Apellido=" + Apellido + ", Sexo=" + Sexo + ", Nacionalidad="
 				+ Nacionalidad + ", CorreoElectronico=" + CorreoElectronico + ", Telefono=" + Telefono + ", Usuario="
 				+ Usuario + ", Password=" + Password + ", Cuil=" + Cuil + ", Dni=" + Dni + ", FechaNac=" + FechaNac
-				+ ", Localidad=" + Localidad + ", Provincia=" + Provincia + ", Direccion=" + Direccion + "]";
+				+ ", Localidad=" + Localidad + ", Provincia=" + Provincia + ", Direccion=" + Direccion
+				+ ", TipoUsuario=" + TipoUsuario + "]";
 	}
 	
 	
