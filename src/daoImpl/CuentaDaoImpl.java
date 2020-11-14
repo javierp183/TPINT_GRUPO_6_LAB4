@@ -12,27 +12,28 @@ import dao.CuentaDao;
 
 public class CuentaDaoImpl implements CuentaDao
 {
-	private static final String insert = "INSERT INTO Cuentas(idcuenta, saldo, fecha, cuentascol, cbu, estado, tipocuenta, usuario) VALUES(?, ?, ?, ?, ?, ?, ?, ?)";
+	private static final String insert = "INSERT INTO Cuentas(saldo, fecha, cbu, estado, tipocuenta, dni , usuario) VALUES(?, ?, ?, ?, ?, ?, ?)";
 	private static final String delete = "UPDATE Cuentas SET estado = ?, WHERE idcuenta = ?";
 	private static final String readall = "SELECT * FROM Cuentas";
-	private static final String update = "UPDATE Cuentas SET idcuenta = ?, saldo = ?, fecha = ?, cuentascol = ?, cbu = ?, estado = ?, tipocuenta = ?, usuario = ?, where idcuenta = ?";
+	private static final String update = "UPDATE Cuentas SET saldo = ?, fecha = ?, cbu = ?, estado = ?, tipocuenta = ?, dni = ? usuario = ?, where idcuenta = ?";
 	
-	public boolean insert(Cuenta cuenta)
-	{
+	
+	
+	@Override
+	public Boolean Insert(Cuenta cuenta) {
 		PreparedStatement statement;
 		Connection conexion = Conexion.getConexion().getSQLConexion();
 		boolean isInsertExitoso = false;
 		try
 		{
 			statement = conexion.prepareStatement(insert);
-			statement.setInt(1, cuenta.getIdcuenta());
-			statement.setFloat(2, cuenta.getSaldo());
-			statement.setString(3, cuenta.getFecha());
-			statement.setString(4, cuenta.getCuentascol());
-			statement.setString(5, cuenta.getCbu());
-			statement.setInt(6, 1);
-			statement.setInt(7, cuenta.getTipoCuenta());
-			statement.setInt(8, cuenta.getUsuario());
+			statement.setFloat(1, cuenta.getSaldo());
+			statement.setString(2, cuenta.getFecha());
+			statement.setString(3, cuenta.getCbu());
+			statement.setInt(4, 1);
+			statement.setInt(5, cuenta.getTipoCuenta());
+			statement.setInt(6, cuenta.getDni());
+			statement.setString(7, cuenta.getUsuario());
 
 			if(statement.executeUpdate() > 0)
 			{
@@ -52,50 +53,26 @@ public class CuentaDaoImpl implements CuentaDao
 		
 		return isInsertExitoso;
 	}
-	
-	public boolean delete(Cuenta cuenta_a_eliminar)
-	{
-		PreparedStatement statement;
-		Connection conexion = Conexion.getConexion().getSQLConexion();
-		boolean isdeleteExitoso = false;
-		try 
-		{
-			statement = conexion.prepareStatement(delete);
-			statement.setInt(1, cuenta_a_eliminar.getIdcuenta());
-			if(statement.executeUpdate() > 0)
-			{
-				conexion.commit();
-				isdeleteExitoso = true;
-			}
-		} 
-		catch (SQLException e) 
-		{
-			e.printStackTrace();
-		}
-		return isdeleteExitoso;
-	}
-	
 
-	
 	/**
 	 * @param Objeto cuenta a modificar
 	 * @return Retorna true si modificó, sino, retorna false
 	 */
-	public boolean modify(Cuenta cuenta) {
+	@Override
+	public Boolean Modify(Cuenta cuenta, int IdCuenta) {
 		PreparedStatement statement;
 		Connection conexion = Conexion.getConexion().getSQLConexion();
 		boolean isInsertExitoso = false;
 		try
 		{
 			statement = conexion.prepareStatement(update);
-			statement.setInt(1, cuenta.getIdcuenta());
-			statement.setFloat(2, cuenta.getSaldo());
-			statement.setString(3, cuenta.getFecha());
-			statement.setString(4, cuenta.getCuentascol());
-			statement.setString(5, cuenta.getCbu());
-			statement.setInt(6, cuenta.getEstado());
-			statement.setInt(7, cuenta.getTipoCuenta());
-			statement.setInt(8, cuenta.getUsuario());
+			statement.setFloat(1, cuenta.getSaldo());
+			statement.setString(2, cuenta.getFecha());
+			statement.setString(3, cuenta.getCbu());
+			statement.setInt(4, cuenta.getEstado());
+			statement.setInt(5, cuenta.getTipoCuenta());
+			statement.setInt(6, cuenta.getDni());
+			statement.setString(7, cuenta.getUsuario());
 			
 			if(statement.executeUpdate() > 0)
 			{
@@ -116,8 +93,30 @@ public class CuentaDaoImpl implements CuentaDao
 		return isInsertExitoso;
 	}
 
-	public List<Cuenta> readAll()
-	{
+	@Override
+	public Boolean Delete(Cuenta cuenta) {
+		PreparedStatement statement;
+		Connection conexion = Conexion.getConexion().getSQLConexion();
+		boolean isdeleteExitoso = false;
+		try 
+		{
+			statement = conexion.prepareStatement(delete);
+			statement.setInt(1, cuenta.getIdcuenta());
+			if(statement.executeUpdate() > 0)
+			{
+				conexion.commit();
+				isdeleteExitoso = true;
+			}
+		} 
+		catch (SQLException e) 
+		{
+			e.printStackTrace();
+		}
+		return isdeleteExitoso;
+	}
+
+	@Override
+	public List<Cuenta> ReadAll() {
 		PreparedStatement statement;
 		ResultSet resultSet; //Guarda el resultado de la query
 		ArrayList<Cuenta> cuentas = new ArrayList<Cuenta>();
@@ -138,6 +137,8 @@ public class CuentaDaoImpl implements CuentaDao
 		return cuentas;
 	}
 
+
+
 	/**
 	 * @param Objeto resulSet que obtiene de la query.
 	 *
@@ -145,16 +146,18 @@ public class CuentaDaoImpl implements CuentaDao
 	 */
 	private Cuenta getCuenta(ResultSet resultSet) throws SQLException
 	{	
-		int Idcuenta = resultSet.getInt("idcuenta");
-		float Saldo = resultSet.getFloat("saldo");
-		String Fecha = resultSet.getString("fecha");
-		String Cuentascol = resultSet.getString("cuentascol");
-		String Cbu = resultSet.getString("cbu");
-		int Estado = resultSet.getInt("estado");
-		int TipoCuenta = resultSet.getInt("tipocuenta");
-		int Usuario = resultSet.getInt("usuario");
+		Cuenta c = new Cuenta();
+		c.setIdcuenta(resultSet.getInt("idcuenta"));
+		c.setSaldo(resultSet.getFloat("saldo"));
+		c.setFecha(resultSet.getString("fecha"));
+		c.setCbu(resultSet.getString("cbu"));
+		c.setEstado(resultSet.getInt("estado"));
+		c.setTipoCuenta(resultSet.getInt("tipocuenta"));
+		c.setDni(resultSet.getInt("dni"));
+		c.setUsuario(resultSet.getString("usuario"));
 		
-		return new Cuenta(Idcuenta, Saldo, Fecha, Cuentascol, Cbu, Estado, TipoCuenta, Usuario);
+		
+		return c;
 	}
 
 }

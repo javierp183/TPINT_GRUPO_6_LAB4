@@ -1,11 +1,17 @@
 package daoImpl;
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.ThreadLocalRandom;
+
 import dominio.Cliente;
+import dominio.Cuenta;
 import dao.ClienteDao;
 
 public class ClienteDaoImpl implements ClienteDao
@@ -16,6 +22,7 @@ public class ClienteDaoImpl implements ClienteDao
 	private static final String readByMail = "Select * from clientes where correo = ? and password = ?";
 	private static final String update = "UPDATE clientes SET dni = ?, usuario = ?, cuil = ?, nombre = ?, apellido = ?, sexo = ?, nacionalidad = ?, fechanac = ?, direccion = ?, localidad = ?, provincia = ?, correo = ?, telefono = ?, password = ?, tipousuario = ?, where Dni = ?";
 	private static final String Provincia = null;
+	private Date fecha;
 
 	
 	public boolean insert(Cliente cliente)
@@ -45,6 +52,15 @@ public class ClienteDaoImpl implements ClienteDao
 			{
 				conexion.commit();
 				isInsertExitoso = true;
+				
+				CuentaDaoImpl cuentaNeg = new CuentaDaoImpl();
+				//float saldo, String fecha, String cuentascol, String cbu, int estado, int tipoCuenta,
+				//String usuario
+				DateFormat df = new SimpleDateFormat("dd/MM/yy");
+				Date dateobj = new Date(0);
+				float monto = (float) 10000.00;
+				int rand_int1 = ThreadLocalRandom.current().nextInt();
+				cuentaNeg.Insert(new Cuenta(monto,df.format(dateobj).toString(),Integer.toString(rand_int1),0,0,cliente.getDni(),cliente.getCorreoElectronico()));
 			}
 		} 
 		catch (SQLException e) 
