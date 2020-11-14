@@ -124,7 +124,7 @@ CREATE TABLE `movimientos` (
   `fecha` date DEFAULT NULL,
   `detalle` varchar(45) DEFAULT NULL,
   `importe` float DEFAULT NULL,
-  `idtransacion` int(11) NOT NULL,
+  `idtransaccion` int(11) NOT NULL,
   `idtipomovimiento` int(11) DEFAULT NULL,
   `idcuenta` int(11) DEFAULT NULL,
   PRIMARY KEY (`idtransacion`),
