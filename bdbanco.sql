@@ -30,7 +30,7 @@ CREATE TABLE `clientes` (
   `sexo` varchar(45) DEFAULT NULL,
   `nacionalidad` varchar(45) DEFAULT NULL,
   `fechanac` varchar(45) DEFAULT NULL,
-  `dirección` varchar(45) DEFAULT NULL,
+  `direccion` varchar(45) DEFAULT NULL,
   `localidad` varchar(45) DEFAULT NULL,
   `provincia` varchar(45) DEFAULT NULL,
   `correo` varchar(45) DEFAULT NULL,

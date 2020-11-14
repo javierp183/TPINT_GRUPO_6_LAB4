@@ -18,6 +18,14 @@
 
 <div>
 
+<% if(session.getAttribute("user") == null){
+	
+	RequestDispatcher requestDispatcher = request
+            .getRequestDispatcher("/Login.jsp");
+    requestDispatcher.forward(request, response);
+	
+} %>
+
 <b>Mail:</b>
    <%= session.getAttribute("user") %>
 <b>Pass:</b>

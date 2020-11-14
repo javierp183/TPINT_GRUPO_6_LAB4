@@ -4,11 +4,11 @@ public class Cuenta {
 	private int Idcuenta;
 	private float Saldo;
 	private String Fecha;
-	private String Cuentascol;
 	private String Cbu;
 	private int estado;
 	private int TipoCuenta;
-	private int Usuario;
+	private int Dni;
+	private String Usuario;
 	
 	public Cuenta()
 	{
@@ -16,16 +16,15 @@ public class Cuenta {
 		Saldo = 10000;
 	}
 	
-	public Cuenta(int idcuenta, float saldo, String fecha, String cuentascol, String cbu, int estado, int tipoCuenta,
-			int usuario) {
+	public Cuenta(float saldo, String fecha, String cbu, int estado, int tipoCuenta, int dni,
+			String usuario) {
 		super();
-		Idcuenta = idcuenta;
 		Saldo = saldo;
 		Fecha = fecha;
-		Cuentascol = cuentascol;
 		Cbu = cbu;
 		this.estado = estado;
 		TipoCuenta = tipoCuenta;
+		Dni = dni;
 		Usuario = usuario;
 	}
 	
@@ -49,12 +48,6 @@ public class Cuenta {
 	public void setFecha(String fecha) {
 		Fecha = fecha;
 	}
-	public String getCuentascol() {
-		return Cuentascol;
-	}
-	public void setCuentascol(String cuentascol) {
-		Cuentascol = cuentascol;
-	}
 	public String getCbu() {
 		return Cbu;
 	}
@@ -73,18 +66,28 @@ public class Cuenta {
 	public void setTipoCuenta(int tipoCuenta) {
 		TipoCuenta = tipoCuenta;
 	}
-	public int getUsuario() {
+	public String getUsuario() {
 		return Usuario;
 	}
-	public void setUsuario(int usuario) {
+	public void setUsuario(String usuario) {
 		Usuario = usuario;
+	}
+
+	public int getDni() {
+		return Dni;
+	}
+
+	public void setDni(int dni) {
+		Dni = dni;
 	}
 
 	@Override
 	public String toString() {
-		return "Cuenta [Idcuenta=" + Idcuenta + ", Saldo=" + Saldo + ", Fecha=" + Fecha + ", Cuentascol=" + Cuentascol
-				+ ", Cbu=" + Cbu + ", estado=" + estado + ", TipoCuenta=" + TipoCuenta + ", Usuario=" + Usuario + "]";
+		return "Cuenta [Saldo=" + Saldo + ", Fecha=" + Fecha + ", Cbu=" + Cbu + ", estado=" + estado + ", TipoCuenta="
+				+ TipoCuenta + ", Dni=" + Dni + ", Usuario=" + Usuario + "]";
 	}
+	
+	
 
 	
 
