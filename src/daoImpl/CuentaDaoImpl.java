@@ -9,6 +9,7 @@ import dominio.Cuenta;
 import dao.CuentaDao;
 
 
+
 public class CuentaDaoImpl implements CuentaDao
 {
 	private static final String insert = "INSERT INTO Cuentas(idcuenta, saldo, fecha, cuentascol, cbu, estado, tipocuenta, usuario) VALUES(?, ?, ?, ?, ?, ?, ?, ?)";
@@ -29,7 +30,7 @@ public class CuentaDaoImpl implements CuentaDao
 			statement.setString(3, cuenta.getFecha());
 			statement.setString(4, cuenta.getCuentascol());
 			statement.setString(5, cuenta.getCbu());
-			statement.setInt(6, cuenta.getEstado());
+			statement.setInt(6, 1);
 			statement.setInt(7, cuenta.getTipoCuenta());
 			statement.setInt(8, cuenta.getUsuario());
 
@@ -74,6 +75,12 @@ public class CuentaDaoImpl implements CuentaDao
 		return isdeleteExitoso;
 	}
 	
+
+	
+	/**
+	 * @param Objeto cuenta a modificar
+	 * @return Retorna true si modificó, sino, retorna false
+	 */
 	public boolean modify(Cuenta cuenta) {
 		PreparedStatement statement;
 		Connection conexion = Conexion.getConexion().getSQLConexion();
@@ -131,7 +138,11 @@ public class CuentaDaoImpl implements CuentaDao
 		return cuentas;
 	}
 
-
+	/**
+	 * @param Objeto resulSet que obtiene de la query.
+	 *
+	 * @return Retorna una nueva instancia de cuenta.
+	 */
 	private Cuenta getCuenta(ResultSet resultSet) throws SQLException
 	{	
 		int Idcuenta = resultSet.getInt("idcuenta");

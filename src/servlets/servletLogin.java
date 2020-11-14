@@ -46,6 +46,7 @@ public class servletLogin extends HttpServlet {
 		// TODO Auto-generated method stub
 		String mail = request.getParameter("emailLogin").toString();
         String pass = request.getParameter("passLogin").toString();
+        
         ClienteDaoImpl negocio = new ClienteDaoImpl();
         
 
