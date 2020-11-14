@@ -37,6 +37,7 @@ CREATE TABLE `clientes` (
   `telefono` varchar(45) DEFAULT NULL,
   `usuario` varchar(45) DEFAULT NULL,
   `password` varchar(45) DEFAULT NULL,
+  `tipousuario` int(11) NOT NULL,
   PRIMARY KEY (`dni`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -256,10 +257,12 @@ DROP TABLE IF EXISTS `usuarios`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `usuarios` (
   `dni` int(11) NOT NULL,
+  `nombre` varchar(45) NOT NULL,
+  `apellido` varchar(45) NOT NULL,
   `usuario` varchar(45) NOT NULL,
   `password` varchar(45) DEFAULT NULL,
   `estado` tinyint(4) DEFAULT NULL,
-  `idtipousuario` int(11) DEFAULT NULL,
+  `tipousuario` int(11) DEFAULT NULL,
   PRIMARY KEY (`dni`,`usuario`),
   KEY `fk_usuarios_tipousuario1_idx` (`idtipousuario`),
   CONSTRAINT `fk_usuarios_clientes1` FOREIGN KEY (`dni`) REFERENCES `clientes` (`dni`) ON DELETE NO ACTION ON UPDATE NO ACTION,
