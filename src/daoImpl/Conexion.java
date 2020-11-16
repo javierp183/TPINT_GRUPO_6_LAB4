@@ -11,6 +11,8 @@ public class Conexion
 	
 	private Conexion()
 	{
+		System.out.println("genera coneccion");
+		
 		try {
 			Class.forName("com.mysql.jdbc.Driver");
 		} catch (ClassNotFoundException e) {
@@ -20,8 +22,11 @@ public class Conexion
 		try
 		{
 			//Class.forName("com.mysql.jdbc.Driver"); // quitar si no es necesario
-			this.connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/bdbanco","root","root");
+			this.connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/bdbanco","root","password");
+			System.out.println("preparando coneccion");
+			System.out.println(this.connection);
 			this.connection.setAutoCommit(false);
+			System.out.println("genera coneccion 2");
 		}
 		catch(Exception e)
 		{

@@ -16,7 +16,7 @@ import dao.ClienteDao;
 
 public class ClienteDaoImpl implements ClienteDao
 {
-	private static final String insert = "INSERT INTO clientes(dni, usuario, cuil, nombre, apellido, sexo, nacionalidad, fechanac, direccion, localidad, provincia, correo, telefono, password, tipousuario) VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+	private static final String insert = "INSERT INTO clientes(dni, cuil, nombre, apellido, sexo, nacionalidad, fechanac, direccion, localidad, provincia, correo, telefono, usuario, password,  tipousuario) VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 	private static final String delete = "DELETE FROM clientes WHERE dni = ?";
 	private static final String readall = "SELECT * FROM clientes";
 	private static final String readByMail = "Select * from clientes where correo = ? and password = ?";
@@ -29,38 +29,42 @@ public class ClienteDaoImpl implements ClienteDao
 	{
 		PreparedStatement statement;
 		Connection conexion = Conexion.getConexion().getSQLConexion();
+		System.out.println("la coneccion");
+		System.out.println(conexion);
 		boolean isInsertExitoso = false;
 		try
 		{
 			statement = conexion.prepareStatement(insert);
 			statement.setInt(1, cliente.getDni());
-			statement.setString(2, cliente.getUsuario());
-			statement.setString(3, cliente.getCuil());
-			statement.setString(4, cliente.getNombre());
-			statement.setString(5, cliente.getApellido());
-			statement.setString(6, cliente.getSexo());
-			statement.setString(7, cliente.getNacionalidad());
-			statement.setString(8, cliente.getFechaNac());
+			statement.setString(2, cliente.getCuil());
+			statement.setString(3, cliente.getNombre());
+			statement.setString(4, cliente.getApellido());
+			statement.setString(5, cliente.getSexo());
+			statement.setString(6, cliente.getNacionalidad());
+			statement.setString(7, cliente.getFechaNac());
+			statement.setString(8, cliente.getDireccion());
 			statement.setString(9, cliente.getDireccion());
 			statement.setString(10, cliente.getLocalidad());
 			statement.setString(11, cliente.getProvincia());
 			statement.setString(12, cliente.getCorreoElectronico());
 			statement.setString(13, cliente.getTelefono());
-			statement.setString(14, cliente.getPassword());
-			statement.setInt(14, cliente.getTipoUsuario());
+			statement.setString(14, cliente.getUsuario());
+			statement.setString(15, cliente.getPassword());
+			statement.setInt(15, cliente.getTipoUsuario()); 
+			
 			if(statement.executeUpdate() > 0)
 			{
 				conexion.commit();
 				isInsertExitoso = true;
 				
-				CuentaDaoImpl cuentaNeg = new CuentaDaoImpl();
+				//CuentaDaoImpl cuentaNeg = new CuentaDaoImpl();
 				//float saldo, String fecha, String cuentascol, String cbu, int estado, int tipoCuenta,
 				//String usuario
-				DateFormat df = new SimpleDateFormat("dd/MM/yy");
-				Date dateobj = new Date(0);
-				float monto = (float) 10000.00;
-				int rand_int1 = ThreadLocalRandom.current().nextInt();
-				cuentaNeg.Insert(new Cuenta(monto,df.format(dateobj).toString(),Integer.toString(rand_int1),0,0,cliente.getDni(),cliente.getCorreoElectronico()));
+				//DateFormat df = new SimpleDateFormat("dd/MM/yy");
+				//Date dateobj = new Date(0);
+				//float monto = (float) 10000.00;
+				//int rand_int1 = ThreadLocalRandom.current().nextInt();
+				//cuentaNeg.Insert(new Cuenta(monto,df.format(dateobj).toString(),Integer.toString(rand_int1),0,0,cliente.getDni(),cliente.getCorreoElectronico()));
 			}
 		} 
 		catch (SQLException e) 
