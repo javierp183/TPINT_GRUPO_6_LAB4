@@ -14,6 +14,7 @@ public class Cuenta {
 	{
 		super();
 		Saldo = 10000;
+		estado = 1;
 	}
 	
 	public Cuenta(float saldo, String fecha, String cbu, int estado, int tipoCuenta, int dni,

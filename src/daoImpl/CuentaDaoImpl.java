@@ -5,6 +5,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
+
 import dominio.Cuenta;
 import dao.CuentaDao;
 
@@ -12,11 +14,11 @@ import dao.CuentaDao;
 
 public class CuentaDaoImpl implements CuentaDao
 {
-	private static final String insert = "INSERT INTO Cuentas(saldo, fecha, cbu, estado, tipocuenta, dni , usuario) VALUES(?, ?, ?, ?, ?, ?, ?)";
-	private static final String delete = "UPDATE Cuentas SET estado = ?, WHERE idcuenta = ?";
-	private static final String readall = "SELECT * FROM Cuentas";
-	private static final String update = "UPDATE Cuentas SET saldo = ?, fecha = ?, cbu = ?, estado = ?, tipocuenta = ?, dni = ? usuario = ?, where idcuenta = ?";
-	
+	private static final String insert = "INSERT INTO cuentas(idcuenta, saldo, fecha, cbu, estado, tipocuenta, dnicliente) VALUES(?, ?, ?, ?, ?, ?, ?)";
+	private static final String delete = "UPDATE cuentas SET estado = ?, WHERE idcuenta = ?";
+	private static final String readall = "SELECT * FROM cuentas";
+	private static final String update = "UPDATE cuentas SET idcuenta = ?, saldo = ?, fecha = ?, cbu = ?, estado = ?, tipocuenta = ?, dnicliente = ?, where idcuenta = ?";
+	private String uuid = UUID.randomUUID().toString();
 	
 	
 	@Override
@@ -27,13 +29,16 @@ public class CuentaDaoImpl implements CuentaDao
 		try
 		{
 			statement = conexion.prepareStatement(insert);
-			statement.setFloat(1, cuenta.getSaldo());
-			statement.setString(2, cuenta.getFecha());
-			statement.setString(3, cuenta.getCbu());
-			statement.setInt(4, 1);
-			statement.setInt(5, cuenta.getTipoCuenta());
-			statement.setInt(6, cuenta.getDni());
-			statement.setString(7, cuenta.getUsuario());
+			statement.setInt(1, cuenta.getIdcuenta());
+			statement.setFloat(2, cuenta.getSaldo());
+			statement.setString(3, cuenta.getFecha());
+			
+			//UUID asignado al numero de CBU
+			cuenta.setCbu(uuid);
+			statement.setString(4, cuenta.getCbu());
+			statement.setInt(5, cuenta.getEstado());
+			statement.setInt(6, cuenta.getTipoCuenta());
+			statement.setInt(7, cuenta.getDni());
 
 			if(statement.executeUpdate() > 0)
 			{
@@ -56,7 +61,7 @@ public class CuentaDaoImpl implements CuentaDao
 
 	/**
 	 * @param Objeto cuenta a modificar
-	 * @return Retorna true si modificó, sino, retorna false
+	 * @return Retorna true si modificï¿½, sino, retorna false
 	 */
 	@Override
 	public Boolean Modify(Cuenta cuenta, int IdCuenta) {
