@@ -16,8 +16,8 @@ import dao.ClienteDao;
 
 public class ClienteDaoImpl implements ClienteDao
 {
-	private static final String insert = "INSERT INTO clientes(dni, cuil, nombre, apellido, sexo, nacionalidad, fechanac, direccion, localidad, provincia, correo, telefono, usuario, password,  tipousuario, estado) VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
-	private static final String delete = "UPDATE clientes set estado = ? where dni ?";
+	private static final String insert = "INSERT INTO clientes(dni, cuil, nombre, apellido, sexo, nacionalidad, fechanac, direccion, localidad, provincia, correo, telefono, usuario, password,  tipousuario, estado) VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+	private static final String delete = "UPDATE clientes SET estado = ? where Dni = ?";
 	private static final String readall = "SELECT * FROM clientes";
 	private static final String readByMail = "Select * from clientes where correo = ? and password = ?";
 	private static final String update = "UPDATE clientes SET dni = ?, cuil = ?, nombre = ?, apellido = ?, sexo = ?, nacionalidad = ?, fechanac = ?, direccion = ?, localidad = ?, provincia = ?, correo = ?, telefono = ?, usuario = ?, password = ?, tipousuario = ?, estado = ? where Dni = ?";
@@ -82,7 +82,7 @@ public class ClienteDaoImpl implements ClienteDao
 		return isInsertExitoso;
 	}
 	
-	public boolean delete(Cliente cliente_a_eliminar)
+	public boolean delete(Cliente cliente)
 	{
 		PreparedStatement statement;
 		Connection conexion = Conexion.getConexion().getSQLConexion();
@@ -90,7 +90,9 @@ public class ClienteDaoImpl implements ClienteDao
 		try 
 		{
 			statement = conexion.prepareStatement(delete);
-			statement.setInt(1, cliente_a_eliminar.getDni());
+			cliente.setEstado(0);
+			statement.setInt(1, cliente.getEstado());
+			statement.setInt(2, cliente.getDni());
 			if(statement.executeUpdate() > 0)
 			{
 				conexion.commit();

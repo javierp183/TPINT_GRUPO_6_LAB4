@@ -24,6 +24,7 @@ public class Cliente {
 		super();
 		CorreoElectronico = "Sin correo";
 		Password = "Sin Password";
+		Estado = 1;
 	}
 
 

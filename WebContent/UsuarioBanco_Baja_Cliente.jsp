@@ -50,7 +50,7 @@
 
 <h1>Baja de Cliente</h1>
 
-<form action="servletCliente" method="post">
+<form action="servletCliente" method="get">
  
  <div class="form-group">
     <label for="exampleInputEmail1">Ingrese DNI del cliente</label>
