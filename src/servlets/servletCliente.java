@@ -78,8 +78,9 @@ public class servletCliente extends HttpServlet {
 			
 			if(request.getParameter("inputUpdate")!=null)
 				{
-					clientedaoimpl.modify(cliente);
+					
 					System.out.println("modificando data");
+					clientedaoimpl.modify(cliente);
 				}
 			else
 			{

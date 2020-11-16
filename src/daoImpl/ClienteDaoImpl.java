@@ -20,7 +20,7 @@ public class ClienteDaoImpl implements ClienteDao
 	private static final String delete = "DELETE FROM clientes WHERE dni = ?";
 	private static final String readall = "SELECT * FROM clientes";
 	private static final String readByMail = "Select * from clientes where correo = ? and password = ?";
-	private static final String update = "UPDATE clientes SET dni = ?, usuario = ?, cuil = ?, nombre = ?, apellido = ?, sexo = ?, nacionalidad = ?, fechanac = ?, direccion = ?, localidad = ?, provincia = ?, correo = ?, telefono = ?, password = ?, tipousuario = ?, where Dni = ?";
+	private static final String update = "UPDATE clientes SET dni = ?, cuil = ?, nombre = ?, apellido = ?, sexo = ?, nacionalidad = ?, fechanac = ?, direccion = ?, localidad = ?, provincia = ?, correo = ?, telefono = ?, usuario = ?, password = ?, tipousuario = ? where Dni = ?";
 	private static final String Provincia = null;
 	private Date fecha;
 
@@ -110,21 +110,22 @@ public class ClienteDaoImpl implements ClienteDao
 		{
 			statement = conexion.prepareStatement(update);
 			statement.setInt(1, cliente.getDni());
-			statement.setString(2, cliente.getUsuario());
-			statement.setString(3, cliente.getCuil());
-			statement.setString(4, cliente.getNombre());
-			statement.setString(5, cliente.getApellido());
-			statement.setString(6, cliente.getSexo());
-			statement.setString(7, cliente.getNacionalidad());
-			statement.setString(8, cliente.getFechaNac());
+			statement.setString(2, cliente.getCuil());
+			statement.setString(3, cliente.getNombre());
+			statement.setString(4, cliente.getApellido());
+			statement.setString(5, cliente.getSexo());
+			statement.setString(6, cliente.getNacionalidad());
+			statement.setString(7, cliente.getFechaNac());
+			statement.setString(8, cliente.getDireccion());
 			statement.setString(9, cliente.getDireccion());
 			statement.setString(10, cliente.getLocalidad());
 			statement.setString(11, cliente.getProvincia());
 			statement.setString(12, cliente.getCorreoElectronico());
 			statement.setString(13, cliente.getTelefono());
-			statement.setString(14, cliente.getPassword());
-			statement.setInt(14, cliente.getTipoUsuario());
-			statement.setInt(15, cliente.getDni());
+			statement.setString(14, cliente.getUsuario());
+			statement.setString(15, cliente.getPassword());
+			statement.setInt(15, cliente.getTipoUsuario()); 
+			statement.setInt(16, cliente.getDni());
 			if(statement.executeUpdate() > 0)
 			{
 				conexion.commit();
