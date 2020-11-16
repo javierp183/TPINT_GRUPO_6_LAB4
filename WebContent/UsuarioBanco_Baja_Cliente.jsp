@@ -46,36 +46,17 @@
       </tr>
     </tbody>
 </table>
+ 
 
-<h1>Baja de Cuenta</h1>
+<h1>Baja de Cliente</h1>
 
-<table class="table">
-  <thead class="thead-dark">
-    <tr>
-      <th scope="col">#</th>
-      <th scope="col">Nombre</th>
-      <th scope="col">Apellido</th>
-      <th scope="col">Usuario Cliente</th>
-      <th scope="col">Baja de Cliente</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th scope="row">1</th>
-      <td>Javier</td>
-      <td>Pereyra</td>
-      <td>jpereyra</td>
-      <td><input type="checkbox"></input</td>
-    </tr>
-    <tr>
-      <th scope="row">2</th>
-      <td>Daniel</td>
-      <td>Thornton</td>
-      <td>dthorton</td>
-      <td><input type="checkbox"></input</td>
-    </tr>
-  </tbody>
-</table>
+<form action="servletCliente" method="post">
+ 
+ <div class="form-group">
+    <label for="exampleInputEmail1">Ingrese DNI del cliente</label>
+    <input type="input" class="form-control" name="inputDNIbaja" aria-describedby="emailHelp">
+    <small id="emailHelp" class="form-text text-muted">DNI</small>
+  </div>
 
   <button type="submit" class="btn btn-primary">Dar de Baja</button>
 </form>

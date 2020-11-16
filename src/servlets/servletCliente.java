@@ -33,6 +33,19 @@ public class servletCliente extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
+		Cliente cliente = new Cliente();
+		int inputDNIbaja = Integer.parseInt(request.getParameter("inputDNIbaja"));
+		cliente.setDni(inputDNIbaja);
+		ClienteDaoImpl clientedaoimpl = new ClienteDaoImpl();
+		
+		if(request.getParameter("inputDNIbaja")!=null)
+		{
+			System.out.println("baja papi");
+			clientedaoimpl.delete(cliente);
+			
+			RequestDispatcher rd = request.getRequestDispatcher("UsuarioBanco_Baja_Cliente.jsp");
+			rd.forward(request, response);
+		}
 		response.getWriter().append("Served at: ").append(request.getContextPath());
 	}
 
@@ -81,6 +94,8 @@ public class servletCliente extends HttpServlet {
 					
 					System.out.println("modificando data");
 					clientedaoimpl.modify(cliente);
+					RequestDispatcher rd = request.getRequestDispatcher("UsuarioBanco_Modificacion_Cliente.jsp");
+					rd.forward(request, response);
 				}
 			else
 			{
@@ -89,6 +104,9 @@ public class servletCliente extends HttpServlet {
 				System.out.println("guardando data");
 			}
 		}
+		
+
+		
 		
 		RequestDispatcher rd = request.getRequestDispatcher("UsuarioBanco_Alta_Clientes.jsp");
 		rd.forward(request, response);
