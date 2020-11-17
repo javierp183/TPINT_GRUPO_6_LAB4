@@ -16,6 +16,7 @@ public class Cliente {
 	private String Provincia;
 	private String Direccion;
 	private int TipoUsuario;
+	private int Estado;
 	
 	
 	public Cliente()
@@ -23,12 +24,13 @@ public class Cliente {
 		super();
 		CorreoElectronico = "Sin correo";
 		Password = "Sin Password";
+		Estado = 1;
 	}
 
 
 	public Cliente(String nombre, String apellido, String sexo, String nacionalidad, String correoElectronico,
 			String telefono, String usuario, String password, String cuil, int dni, String fechaNac, String localidad,
-			String provincia, String direccion, int tipoUsuario) {
+			String provincia, String direccion, int tipoUsuario, int estado) {
 		super();
 		Nombre = nombre;
 		Apellido = apellido;
@@ -45,6 +47,7 @@ public class Cliente {
 		Provincia = provincia;
 		Direccion = direccion;
 		TipoUsuario = tipoUsuario;
+		Estado = estado;
 	}
 
 
@@ -200,15 +203,24 @@ public class Cliente {
 	}
 
 
+	public int getEstado() {
+		return Estado;
+	}
+
+
+	public void setEstado(int estado) {
+		Estado = estado;
+	}
+
+
 	@Override
 	public String toString() {
 		return "Cliente [Nombre=" + Nombre + ", Apellido=" + Apellido + ", Sexo=" + Sexo + ", Nacionalidad="
 				+ Nacionalidad + ", CorreoElectronico=" + CorreoElectronico + ", Telefono=" + Telefono + ", Usuario="
 				+ Usuario + ", Password=" + Password + ", Cuil=" + Cuil + ", Dni=" + Dni + ", FechaNac=" + FechaNac
 				+ ", Localidad=" + Localidad + ", Provincia=" + Provincia + ", Direccion=" + Direccion
-				+ ", TipoUsuario=" + TipoUsuario + "]";
+				+ ", TipoUsuario=" + TipoUsuario + ", Estado=" + Estado + "]";
 	}
-	
 	
 
 }

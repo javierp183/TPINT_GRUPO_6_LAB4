@@ -4,6 +4,9 @@
 -- ------------------------------------------------------
 -- Server version	5.7.31-log
 
+SET GLOBAL time_zone = '-3:00';
+select * from clientes;
+
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
 /*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
@@ -15,6 +18,7 @@
 /*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
+select * from clientes;
 --
 -- Table structure for table `clientes`
 --
@@ -37,18 +41,40 @@ CREATE TABLE `clientes` (
   `telefono` varchar(45) DEFAULT NULL,
   `usuario` varchar(45) DEFAULT NULL,
   `password` varchar(45) DEFAULT NULL,
+  `tipousuario` int(11) NOT NULL,
   PRIMARY KEY (`dni`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
---
--- Dumping data for table `clientes`
---
+DROP TABLE IF EXISTS `usuarios`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `usuarios` (
+  `dni` int(11) NOT NULL,
+  `nombre` varchar(45) NOT NULL,
+  `apellido` varchar(45) NOT NULL,
+  `usuario` varchar(45) NOT NULL,
+  `password` varchar(45) DEFAULT NULL,
+  `estado` tinyint(4) DEFAULT NULL,
+  `tipousuario` int(11) DEFAULT NULL,
+  PRIMARY KEY (`dni`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
 
-LOCK TABLES `clientes` WRITE;
-/*!40000 ALTER TABLE `clientes` DISABLE KEYS */;
-/*!40000 ALTER TABLE `clientes` ENABLE KEYS */;
-UNLOCK TABLES;
+DROP TABLE IF EXISTS `cuentas`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `cuentas` (
+  `idcuenta` int(11) NOT NULL AUTO_INCREMENT,
+  `saldo` float DEFAULT NULL,
+  `fecha` date DEFAULT NULL,
+  `cbu` varchar(45) DEFAULT NULL,
+  `estado` tinyint(4) DEFAULT NULL,
+  `tipocuenta` int(11) DEFAULT NULL,
+  `dnicliente` int(11) NOT NULL,
+  PRIMARY KEY (`idcuenta`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Table structure for table `cuentas`
@@ -61,12 +87,10 @@ CREATE TABLE `cuentas` (
   `idcuenta` int(11) NOT NULL AUTO_INCREMENT,
   `saldo` float DEFAULT NULL,
   `fecha` date DEFAULT NULL,
-  `cuentascol` varchar(45) DEFAULT NULL,
   `cbu` varchar(45) DEFAULT NULL,
   `estado` tinyint(4) DEFAULT NULL,
   `tipocuenta` int(11) DEFAULT NULL,
-  `usuarios_dni` int(11) NOT NULL,
-  `usuarios_usuario` varchar(45) NOT NULL,
+  `dnicliente` int(11) NOT NULL,
   PRIMARY KEY (`idcuenta`,`usuarios_dni`,`usuarios_usuario`),
   KEY `fk_cuentas_tipocuentas_idx` (`tipocuenta`),
   KEY `fk_cuentas_usuarios1_idx` (`usuarios_dni`,`usuarios_usuario`),
@@ -123,7 +147,7 @@ CREATE TABLE `movimientos` (
   `fecha` date DEFAULT NULL,
   `detalle` varchar(45) DEFAULT NULL,
   `importe` float DEFAULT NULL,
-  `idtransacion` int(11) NOT NULL,
+  `idtransaccion` int(11) NOT NULL,
   `idtipomovimiento` int(11) DEFAULT NULL,
   `idcuenta` int(11) DEFAULT NULL,
   PRIMARY KEY (`idtransacion`),
@@ -251,15 +275,17 @@ UNLOCK TABLES;
 -- Table structure for table `usuarios`
 --
 
-DROP TABLE IF EXISTS `usuarios`;
+/*DROP TABLE IF EXISTS `usuarios`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `usuarios` (
+/*CREATE TABLE `usuarios` (
   `dni` int(11) NOT NULL,
+  `nombre` varchar(45) NOT NULL,
+  `apellido` varchar(45) NOT NULL,
   `usuario` varchar(45) NOT NULL,
   `password` varchar(45) DEFAULT NULL,
   `estado` tinyint(4) DEFAULT NULL,
-  `idtipousuario` int(11) DEFAULT NULL,
+  `tipousuario` int(11) DEFAULT NULL,
   PRIMARY KEY (`dni`,`usuario`),
   KEY `fk_usuarios_tipousuario1_idx` (`idtipousuario`),
   CONSTRAINT `fk_usuarios_clientes1` FOREIGN KEY (`dni`) REFERENCES `clientes` (`dni`) ON DELETE NO ACTION ON UPDATE NO ACTION,
@@ -270,11 +296,6 @@ CREATE TABLE `usuarios` (
 --
 -- Dumping data for table `usuarios`
 --
-
-LOCK TABLES `usuarios` WRITE;
-/*!40000 ALTER TABLE `usuarios` DISABLE KEYS */;
-/*!40000 ALTER TABLE `usuarios` ENABLE KEYS */;
-UNLOCK TABLES;
 
 --
 -- Dumping events for database 'bdbanco'

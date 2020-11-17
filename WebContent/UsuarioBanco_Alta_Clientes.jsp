@@ -126,10 +126,6 @@
     <input type="password" class="form-control" name="inputPassword2">
   </div>
     </div>
-    <div class="form-group">
-    <label for="exampleInputPassword1">Actualizar Datos</label>
-    <input type="checkbox" value="1" class="form-control" name="inputUpdate">
-  </div>
   <button type="submit" class="btn btn-primary">Aceptar</button>
 </form>
  </div>
