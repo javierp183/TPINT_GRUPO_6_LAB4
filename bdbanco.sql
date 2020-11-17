@@ -4,6 +4,8 @@
 -- ------------------------------------------------------
 -- Server version	5.7.31-log
 
+use bdbanco;
+
 SET GLOBAL time_zone = '-3:00';
 select * from clientes;
 
@@ -79,6 +81,8 @@ CREATE TABLE `cuentas` (
 --
 -- Table structure for table `cuentas`
 --
+
+/*
 
 DROP TABLE IF EXISTS `cuentas`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;

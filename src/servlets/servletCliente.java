@@ -69,6 +69,8 @@ public class servletCliente extends HttpServlet {
 			String inputTelefono = request.getParameter("inputTelefono");
 			String inputPassword = request.getParameter("inputPassword");
 			String inputPassword2 = request.getParameter("inputPassword2");
+			boolean estado = false;
+			String usuario = request.getParameter("inputUsuario");
 			
 			Cliente cliente = new Cliente();
 			cliente.setDni(inputDNI);
@@ -99,6 +101,10 @@ public class servletCliente extends HttpServlet {
 			{
 				
 				neg.insert(cliente);
+				estado = true;
+				
+				request.setAttribute("estado", estado);
+				request.setAttribute("usuario", usuario);
 				System.out.println("guardando data");
 			}
 		}
