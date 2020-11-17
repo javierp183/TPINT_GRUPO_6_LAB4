@@ -1,19 +1,12 @@
 package servlets;
 
 import java.io.IOException;
-import java.util.ArrayList;
-
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.SessionCookieConfig;
-
-import dominio.Cliente;
-import daoImpl.ClienteDaoImpl;
 
 /**
  * Servlet implementation class servletLogin
@@ -47,7 +40,7 @@ public class servletLogin extends HttpServlet {
 		String mail = request.getParameter("emailLogin").toString();
         String pass = request.getParameter("passLogin").toString();
         
-        ClienteDaoImpl negocio = new ClienteDaoImpl();
+        //ClienteNegocioImpl neg = new ClienteNegocioImpl();
         
 
         System.out.println(mail);

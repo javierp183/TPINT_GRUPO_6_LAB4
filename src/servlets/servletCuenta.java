@@ -9,9 +9,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import daoImpl.ClienteDaoImpl;
-import daoImpl.CuentaDaoImpl;
-import dominio.Cliente;
+import NegocioImpl.CuentaNegocioImpl;
 import dominio.Cuenta;
 
 /**
@@ -43,9 +41,9 @@ public class servletCuenta extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		System.out.println("Alta de cuenta papurringui");
 		Cuenta cuenta = new Cuenta();
-		CuentaDaoImpl cuentadaoimpl = new CuentaDaoImpl();
+		CuentaNegocioImpl neg = new CuentaNegocioImpl();
 		
-		cuentadaoimpl.Insert(cuenta);
+		neg.Insert(cuenta);
 		
 		RequestDispatcher rd = request.getRequestDispatcher("UsuarioBanco_Alta_Cuentas.jsp");
 		rd.forward(request, response);

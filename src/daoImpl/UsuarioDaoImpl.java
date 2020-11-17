@@ -12,13 +12,12 @@ import dao.UsuarioDao;
 public class UsuarioDaoImpl implements UsuarioDao
 {
 	private static final String insert = "INSERT INTO usuarios(dni, usuario, password, estado, idtipousuario) VALUES(?, ?, ?, ?, ?)";
-	private static final String delete = "DELETE FROM clientes WHERE dni = ?";
+	private static final String delete = "DELETE FROM usuarios WHERE dni = ?";
 	private static final String readall = "SELECT * FROM usuarios";
-	private static final String readByUser = "Select * from clientes where usuario = ? and password = ?";
-	private static final String update = "UPDATE clientes SET dni = ?, usuario = ?, password = ?, estado = ?, idtipousuario = ?, where Dni = ?";
-	private static final String Provincia = null;
+	private static final String readByUser = "Select * from usuarios where usuario = ? and password = ?";
+	private static final String update = "UPDATE usuarios SET dni = ?, usuario = ?, password = ?, estado = ?, idtipousuario = ?, where Dni = ?";
 	
-	
+	@Override
 	public boolean insert(Usuario usuario)
 	{
 		PreparedStatement statement;
@@ -51,6 +50,7 @@ public class UsuarioDaoImpl implements UsuarioDao
 		return isInsertExitoso;
 	}
 	
+	@Override
 	public boolean delete(Usuario usuario_a_eliminar)
 	{
 		PreparedStatement statement;
@@ -73,6 +73,7 @@ public class UsuarioDaoImpl implements UsuarioDao
 		return isdeleteExitoso;
 	}
 	
+	@Override
 	public boolean modify(Usuario usuario) {
 		PreparedStatement statement;
 		Connection conexion = Conexion.getConexion().getSQLConexion();
@@ -109,6 +110,7 @@ public class UsuarioDaoImpl implements UsuarioDao
 	///Si el cliente no existe, por constructor
 	///Genera un cliente con "Sin Correo" y "Sin password"
 	///Para utilizarlo en el login.
+	@Override
 	public Usuario getClientePorMail(String emailWeb, String passWeb) {
 		PreparedStatement statement;
 		Conexion conexion = Conexion.getConexion();

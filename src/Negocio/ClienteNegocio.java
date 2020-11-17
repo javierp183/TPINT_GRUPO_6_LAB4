@@ -1,10 +1,12 @@
-package dao;
+package Negocio;
 
 import java.util.List;
 
+import dao.ClienteDao;
+import daoImpl.ClienteDaoImpl;
 import dominio.Cliente;
 
-public interface ClienteDao {
+public interface ClienteNegocio {
 	public boolean insert(Cliente cliente);
 	public boolean delete(Cliente cliente_a_eliminar);
 	public boolean modify(Cliente c);

@@ -1,8 +1,6 @@
 package servlets;
 
 import java.io.IOException;
-import java.util.ArrayList;
-
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -10,8 +8,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import NegocioImpl.ClienteNegocioImpl;
 import dominio.Cliente;
-import daoImpl.ClienteDaoImpl;
 
 /**
  * Servlet implementation class servletCliente
@@ -36,7 +34,7 @@ public class servletCliente extends HttpServlet {
 		Cliente cliente = new Cliente();
 		int inputDNIbaja = Integer.parseInt(request.getParameter("inputDNIbaja"));
 		cliente.setDni(inputDNIbaja);
-		ClienteDaoImpl clientedaoimpl = new ClienteDaoImpl();
+		ClienteNegocioImpl clientedaoimpl = new ClienteNegocioImpl();
 		
 		if(request.getParameter("inputDNIbaja")!=null)
 		{
@@ -87,20 +85,20 @@ public class servletCliente extends HttpServlet {
 			cliente.setCorreoElectronico(inputEmail);
 			cliente.setTelefono(inputTelefono);
 			cliente.setPassword(inputPassword);
-			ClienteDaoImpl clientedaoimpl = new ClienteDaoImpl();
+			ClienteNegocioImpl neg = new ClienteNegocioImpl();
 			
 			if(request.getParameter("inputUpdate")!=null)
 				{
 					
 					System.out.println("modificando data");
-					clientedaoimpl.modify(cliente);
+					neg.modify(cliente);
 					RequestDispatcher rd = request.getRequestDispatcher("UsuarioBanco_Modificacion_Cliente.jsp");
 					rd.forward(request, response);
 				}
 			else
 			{
 				
-				clientedaoimpl.insert(cliente);
+				neg.insert(cliente);
 				System.out.println("guardando data");
 			}
 		}

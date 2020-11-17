@@ -24,7 +24,7 @@ public class ClienteDaoImpl implements ClienteDao
 	private static final String Provincia = null;
 	private Date fecha;
 
-	
+	@Override
 	public boolean insert(Cliente cliente)
 	{
 		PreparedStatement statement;
@@ -82,6 +82,7 @@ public class ClienteDaoImpl implements ClienteDao
 		return isInsertExitoso;
 	}
 	
+	@Override
 	public boolean delete(Cliente cliente)
 	{
 		PreparedStatement statement;
@@ -106,6 +107,7 @@ public class ClienteDaoImpl implements ClienteDao
 		return isdeleteExitoso;
 	}
 	
+	@Override
 	public boolean modify(Cliente cliente) {
 		PreparedStatement statement;
 		Connection conexion = Conexion.getConexion().getSQLConexion();
@@ -154,6 +156,7 @@ public class ClienteDaoImpl implements ClienteDao
 	///Si el cliente no existe, por constructor
 	///Genera un cliente con "Sin Correo" y "Sin password"
 	///Para utilizarlo en el login.
+	@Override
 	public Cliente getClientePorMail(String emailWeb, String passWeb) {
 		PreparedStatement statement;
 		Conexion conexion = Conexion.getConexion();
@@ -179,6 +182,7 @@ public class ClienteDaoImpl implements ClienteDao
 			
 	}
 
+	@Override
 	public List<Cliente> readAll()
 	{
 		PreparedStatement statement;
@@ -200,6 +204,7 @@ public class ClienteDaoImpl implements ClienteDao
 		}
 		return clientes;
 	}
+	
 	
 	private Cliente getCliente(ResultSet resultSet) throws SQLException
 	{
@@ -224,5 +229,7 @@ public class ClienteDaoImpl implements ClienteDao
 		return new Cliente(Nombre, Apellido, Sexo, Nacionalidad, CorreoElectronico, Telefono, Usuario, Password, Cuil, Dni, FechaNac, Localidad, Provincia, Direccion, TipoUsuario, Estado);
 		
 	}
+	
+	
 
 }
