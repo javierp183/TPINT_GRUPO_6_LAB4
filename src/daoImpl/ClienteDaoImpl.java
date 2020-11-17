@@ -201,7 +201,7 @@ public class ClienteDaoImpl implements ClienteDao
 		String Sexo = resultSet.getString("sexo");
 		String Nacionalidad = resultSet.getString("nacionalidad");
 		String FechaNac = resultSet.getString("fechanac");
-		String Direccion = resultSet.getString("direcci�n");
+		String Direccion = resultSet.getString("direccion");
 		String Localidad = resultSet.getString("localidad");
 		String Provincia = resultSet.getString("provincia");
 		String CorreoElectronico = resultSet.getString("correo");
