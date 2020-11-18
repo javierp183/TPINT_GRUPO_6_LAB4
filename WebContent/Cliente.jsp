@@ -24,7 +24,7 @@
         Usuario 
       </th>
       <th>
-        Operador
+        Cliente
       </th>
     </tr>
     </thead>
