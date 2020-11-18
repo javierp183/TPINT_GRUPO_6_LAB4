@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import NegocioImpl.ClienteNegocioImpl;
 import NegocioImpl.CuentaNegocioImpl;
 import dominio.Cliente;
 import dominio.Cuenta;
@@ -41,6 +42,10 @@ public class servletCuenta_Asignacion extends HttpServlet {
 		request.setAttribute("listacuentas", listacuentas);
 		System.out.println(listacuentas);
 		
+		ClienteNegocioImpl clientedaoimpl = new ClienteNegocioImpl();
+		ArrayList<Cliente> listaclientes = (ArrayList<Cliente>) clientedaoimpl.readAll();
+		request.setAttribute("listaclientes", listaclientes);
+		System.out.println(listaclientes);
 		RequestDispatcher rd = request.getRequestDispatcher("UsuarioBanco_Alta_Cuentas_Asignacion.jsp");
 		rd.forward(request, response);
 		

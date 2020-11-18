@@ -51,8 +51,7 @@ public class ClienteDaoImpl implements ClienteDao
 			statement.setString(14, cliente.getUsuario());
 			statement.setString(15, cliente.getPassword());
 			statement.setInt(15, cliente.getTipoUsuario());
-			statement.setInt(16, 0); 
-			
+			statement.setInt(16,  cliente.getEstado());
 			
 			if(statement.executeUpdate() > 0)
 			{

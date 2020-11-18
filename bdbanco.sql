@@ -7,7 +7,7 @@
 use bdbanco;
 
 SET GLOBAL time_zone = '-3:00';
-select * from clientes;
+
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -20,7 +20,6 @@ select * from clientes;
 /*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
-select * from clientes;
 --
 -- Table structure for table `clientes`
 --
@@ -44,6 +43,7 @@ CREATE TABLE `clientes` (
   `usuario` varchar(45) DEFAULT NULL,
   `password` varchar(45) DEFAULT NULL,
   `tipousuario` int(11) NOT NULL,
+  `estado` int(11) NOT NULL,
   PRIMARY KEY (`dni`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
