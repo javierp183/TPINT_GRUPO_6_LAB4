@@ -28,8 +28,7 @@
 
 <b>Mail:</b>
    <%= session.getAttribute("user") %>
-<b>Pass:</b>
-   <%= session.getAttribute("pass") %>
+
 
 </div>
 
@@ -78,14 +77,14 @@
   </thead>
   <tbody>
     <tr>
-      <td><button type="submit" class="btn btn-primary">Asignar</button></td>
-      <td><button type="submit" class="btn btn-primary">Alta</button></td>
-      <td><button type="submit" class="btn btn-primary">Baja</button></td>
-      <td><button type="submit" class="btn btn-primary">Modificacion</button></td>
-      <td><button type="submit" class="btn btn-primary">Alta Cuenta</button></td>
-      <td><button type="submit" class="btn btn-primary">Modificar Cuenta</button></td>
-      <td><button type="submit" class="btn btn-primary">Baja Cuenta</button></td>
-    </tr>
+      <td><a type="button" href="UsuarioBanco_Alta_Cuentas_Asignacion.jsp" class="btn btn-primary">Asignar cuenta</a></td>
+      <td><a type="button" href="UsuarioBanco_Alta_Clientes.jsp" class="btn btn-primary">Alta Cliente</a></td>
+      <td><a type="button" href="UsuarioBanco_Baja_Cliente.jsp" class="btn btn-primary">Baja Cliente</a></td>
+      <td><a type="button" href="UsuarioBanco_Modificacion_Cliente.jsp" class="btn btn-primary">Modificacion Cliente</a></td>
+      <td><a type="button" href="UsuarioBanco_Alta_Cuentas.jsp" class="btn btn-primary">Alta Cuenta</a></td>
+      <td><a type="button" href="UsuarioBanco_Modificacion_Cuenta.jsp" class="btn btn-primary">Modificar Cuenta</a></td>
+      <td><a type="button" href="UsuarioBanco_Alta_Clientes.jsp" class="btn btn-primary">Baja Cuenta</a></td>
+      
     </tr>
   </tbody>
 </table>
