@@ -1,6 +1,7 @@
 package servlets;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -9,22 +10,21 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import NegocioImpl.ClienteNegocioImpl;
 import NegocioImpl.CuentaNegocioImpl;
 import dominio.Cliente;
 import dominio.Cuenta;
 
 /**
- * Servlet implementation class servletCuenta
+ * Servlet implementation class servletCuenta_Asignacion
  */
-@WebServlet("/servletCuenta")
-public class servletCuenta extends HttpServlet {
+@WebServlet("/servletCuenta_Asignacion")
+public class servletCuenta_Asignacion extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public servletCuenta() {
+    public servletCuenta_Asignacion() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -34,38 +34,24 @@ public class servletCuenta extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		System.out.println("Baja de cuenta papurringui");
-		Cuenta cuenta = new Cuenta();
-		String inputCBUbaja = request.getParameter("inputCBUbaja");
-		cuenta.setCbu(inputCBUbaja);
+		System.out.println("listando cuentas");
 		CuentaNegocioImpl cuentadaoimpl = new CuentaNegocioImpl();
+		Cuenta cuenta = new Cuenta();
+		ArrayList<Cuenta> listacuentas = (ArrayList<Cuenta>) cuentadaoimpl.ReadAll();
+		request.setAttribute("listacuentas", listacuentas);
+		System.out.println(listacuentas);
 		
-		if(request.getParameter("inputCBUbaja")!=null)
-		{
-			System.out.println("baja papi");
-			cuentadaoimpl.Delete(cuenta);
-			
-			RequestDispatcher rd = request.getRequestDispatcher("UsuarioBanco_Baja_Cuenta.jsp");
-			rd.forward(request, response);
-		}
-	    
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+		RequestDispatcher rd = request.getRequestDispatcher("UsuarioBanco_Alta_Cuentas_Asignacion.jsp");
+		rd.forward(request, response);
+		
 	}
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		System.out.println("Alta de cuenta papurringui");
-		Cuenta cuenta = new Cuenta();
-		CuentaNegocioImpl neg = new CuentaNegocioImpl();
-		
-		neg.Insert(cuenta);
-		
-		RequestDispatcher rd = request.getRequestDispatcher("UsuarioBanco_Alta_Cuentas.jsp");
-		rd.forward(request, response);
+		// TODO Auto-generated method stub
+		doGet(request, response);
 	}
 
-	}
-
-
+}

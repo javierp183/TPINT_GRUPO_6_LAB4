@@ -46,29 +46,26 @@
     </tbody>
 </table>
 
-<h1>Alta de Cuenta y Asignacion</h1>
+<h1>Asignacion de cuentas a usuarios</h1>
 
 <div class="container">
  <div class="row">
- <form>
-  <div class="form-group">
-    <label for="exampleInputEmail1">Nombre de Cuenta</label>
-    <input type="input" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
-    <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
-  </div>
-  <div>
- 	<label for="cars">Elegir Tipo de Cuenta:</label>
-		<select name="cars" id="cars">
+ 
+ <form action="servletCuenta_Asignacion" method="get">
+ 	<label for="cars">Elegir Tipo de Cuenta:
+		<select name="cuentas" id="cars">
   			<option value="volvo">Caja de ahorro</option>
   			<option value="saab">Cuenta Corriente</option>
-		</select> 
+		</select>
+	</label>
   </div>
    <div>
- 	<label for="cars">Elegir Usuario:</label>
+ 	<label for="cars">Elegir Usuario:
 		<select name="cars" id="cars">
   			<option value="volvo">Usuario A</option>
   			<option value="saab">Usuario B</option>
-		</select> 
+		</select><button type="submit" class="btn btn-primary">Listar Usuarios y Cuentas</button>
+	</label> 
   </div>
   <button type="submit" class="btn btn-primary">Aceptar</button>
 </form>

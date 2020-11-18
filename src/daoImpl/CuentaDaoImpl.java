@@ -18,7 +18,6 @@ public class CuentaDaoImpl implements CuentaDao
 	private static final String delete = "UPDATE cuentas SET estado = ? WHERE cbu = ?";
 	private static final String readall = "SELECT * FROM cuentas";
 	private static final String update = "UPDATE cuentas SET idcuenta = ?, saldo = ?, fecha = ?, cbu = ?, estado = ?, tipocuenta = ?, dnicliente = ?, where idcuenta = ?";
-	private String uuid = UUID.randomUUID().toString();
 	
 	
 	@Override
@@ -32,9 +31,6 @@ public class CuentaDaoImpl implements CuentaDao
 			statement.setInt(1, cuenta.getIdcuenta());
 			statement.setFloat(2, cuenta.getSaldo());
 			statement.setString(3, cuenta.getFecha());
-			
-			//UUID asignado al numero de CBU
-			cuenta.setCbu(uuid);
 			statement.setString(4, cuenta.getCbu());
 			statement.setInt(5, cuenta.getEstado());
 			statement.setInt(6, cuenta.getTipoCuenta());
@@ -160,9 +156,7 @@ public class CuentaDaoImpl implements CuentaDao
 		c.setCbu(resultSet.getString("cbu"));
 		c.setEstado(resultSet.getInt("estado"));
 		c.setTipoCuenta(resultSet.getInt("tipocuenta"));
-		c.setDni(resultSet.getInt("dni"));
-		c.setUsuario(resultSet.getString("usuario"));
-		
+		c.setDni(resultSet.getInt("dnicliente"));
 		
 		return c;
 	}

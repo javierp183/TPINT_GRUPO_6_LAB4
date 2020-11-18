@@ -1,5 +1,7 @@
 package dominio;
 
+import java.util.UUID;
+
 public class Cuenta {
 	private int Idcuenta;
 	private float Saldo;
@@ -9,12 +11,15 @@ public class Cuenta {
 	private int TipoCuenta;
 	private int Dni;
 	private String Usuario;
+	private String uuid = UUID.randomUUID().toString();
 	
 	public Cuenta()
 	{
 		super();
 		Saldo = 10000;
 		estado = 1;
+		//UUID asignado auto magicamente de CBU
+		Cbu = uuid;
 	}
 	
 	public Cuenta(float saldo, String fecha, String cbu, int estado, int tipoCuenta, int dni,
