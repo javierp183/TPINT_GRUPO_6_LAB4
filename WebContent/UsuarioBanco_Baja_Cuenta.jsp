@@ -10,7 +10,11 @@
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
  integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
  crossorigin="anonymous">
-<title>Lista de Cuentas - Baja de Cuenta - Banco Tecnologico</title>
+ <title>Baja de Cliente - Banco Tecnologico</title>
+</head>
+<body>
+
+<title>Lista de Usuarios - Baja de Usuario - Banco Tecnologico</title>
 </head>
 <body>
 
@@ -42,45 +46,20 @@
       </tr>
     </tbody>
 </table>
+ 
 
 <h1>Baja de Cuenta</h1>
 
-<form>
-
-<table class="table">
-  <thead class="thead-dark">
-    <tr>
-      <th scope="col">#</th>
-      <th scope="col">Nombre</th>
-      <th scope="col">Apellido</th>
-      <th scope="col">Usuario Cliente</th>
-      <th scope="col">Baja de Cliente</th>
-      <th scope="col">Cuenta</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th scope="row">1</th>
-      <td>Javier</td>
-      <td>Pereyra</td>
-      <td>jpereyra</td>
-      <td>00000001</td>
-      <td><input type="checkbox"></input</td>
-    </tr>
-    <tr>
-      <th scope="row">2</th>
-      <td>Daniel</td>
-      <td>Thornton</td>
-      <td>dthorton</td>
-      <td>00000002</td>
-      <td><input type="checkbox"></input</td>
-    </tr>
-  </tbody>
-</table>
+<form action="servletCuenta" method="get">
+ 
+ <div class="form-group">
+    <label for="exampleInputEmail1">Ingrese CBU de la Cuenta</label>
+    <input type="input" class="form-control" name="inputCBUbaja" aria-describedby="emailHelp">
+    <small id="emailHelp" class="form-text text-muted">DNI</small>
+  </div>
 
   <button type="submit" class="btn btn-primary">Dar de Baja</button>
 </form>
-<button type="submit" class="btn btn-primary">Volver a Pagina Principal</button>
 
 </body>
 </html>

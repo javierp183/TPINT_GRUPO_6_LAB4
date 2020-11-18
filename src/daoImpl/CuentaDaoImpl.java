@@ -15,7 +15,7 @@ import dao.CuentaDao;
 public class CuentaDaoImpl implements CuentaDao
 {
 	private static final String insert = "INSERT INTO cuentas(idcuenta, saldo, fecha, cbu, estado, tipocuenta, dnicliente) VALUES(?, ?, ?, ?, ?, ?, ?)";
-	private static final String delete = "UPDATE cuentas SET estado = ?, WHERE idcuenta = ?";
+	private static final String delete = "UPDATE cuentas SET estado = ? WHERE cbu = ?";
 	private static final String readall = "SELECT * FROM cuentas";
 	private static final String update = "UPDATE cuentas SET idcuenta = ?, saldo = ?, fecha = ?, cbu = ?, estado = ?, tipocuenta = ?, dnicliente = ?, where idcuenta = ?";
 	private String uuid = UUID.randomUUID().toString();
@@ -106,7 +106,9 @@ public class CuentaDaoImpl implements CuentaDao
 		try 
 		{
 			statement = conexion.prepareStatement(delete);
-			statement.setInt(1, cuenta.getIdcuenta());
+			cuenta.setEstado(0);
+			statement.setInt(1, cuenta.getEstado());
+			statement.setString(2, cuenta.getCbu());
 			if(statement.executeUpdate() > 0)
 			{
 				conexion.commit();

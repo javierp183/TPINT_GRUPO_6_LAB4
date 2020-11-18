@@ -94,6 +94,8 @@ public class servletCliente extends HttpServlet {
 					
 					System.out.println("modificando data");
 					neg.modify(cliente);
+					estado = true;
+					request.setAttribute("estado", estado);
 					RequestDispatcher rd = request.getRequestDispatcher("UsuarioBanco_Modificacion_Cliente.jsp");
 					rd.forward(request, response);
 				}

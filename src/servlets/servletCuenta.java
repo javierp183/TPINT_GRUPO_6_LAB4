@@ -9,7 +9,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import NegocioImpl.ClienteNegocioImpl;
 import NegocioImpl.CuentaNegocioImpl;
+import dominio.Cliente;
 import dominio.Cuenta;
 
 /**
@@ -32,6 +34,20 @@ public class servletCuenta extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
+		System.out.println("Baja de cuenta papurringui");
+		Cuenta cuenta = new Cuenta();
+		String inputCBUbaja = request.getParameter("inputCBUbaja");
+		cuenta.setCbu(inputCBUbaja);
+		CuentaNegocioImpl cuentadaoimpl = new CuentaNegocioImpl();
+		
+		if(request.getParameter("inputCBUbaja")!=null)
+		{
+			System.out.println("baja papi");
+			cuentadaoimpl.Delete(cuenta);
+			
+			RequestDispatcher rd = request.getRequestDispatcher("UsuarioBanco_Baja_Cuenta.jsp");
+			rd.forward(request, response);
+		}
 		response.getWriter().append("Served at: ").append(request.getContextPath());
 	}
 
