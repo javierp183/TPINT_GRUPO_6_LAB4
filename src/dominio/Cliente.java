@@ -25,6 +25,7 @@ public class Cliente {
 		CorreoElectronico = "Sin correo";
 		Password = "Sin Password";
 		Estado = 1;
+		TipoUsuario = 1;
 	}
 
 

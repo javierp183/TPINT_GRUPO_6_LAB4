@@ -13,6 +13,7 @@ public class Usuario {
 	public Usuario()
 	{
 		super();
+		TipoUsuario = 0;
 	}
 
 
