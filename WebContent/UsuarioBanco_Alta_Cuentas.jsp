@@ -55,7 +55,7 @@
  <div class="form-group">
     <label for="exampleInputEmail1">CBU</label>
     <input type="input" class="form-control" name="inputCBU" aria-describedby="emailHelp">
-    <small id="emailHelp" class="form-text text-muted">Numero de CBU - si no ingresa uno, el sistema auto generara uno -</small>
+    <small id="emailHelp" class="form-text text-muted">Numero de CBU - aaaaa-bbbb-cccc-dddd-eeeee - -</small>
   </div>
     <div class="form-group">
     <label for="exampleInputEmail1">Saldo</label>
