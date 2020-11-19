@@ -43,29 +43,20 @@ public class ClienteDaoImpl implements ClienteDao
 			statement.setString(6, cliente.getNacionalidad());
 			statement.setString(7, cliente.getFechaNac());
 			statement.setString(8, cliente.getDireccion());
-			statement.setString(9, cliente.getDireccion());
-			statement.setString(10, cliente.getLocalidad());
-			statement.setString(11, cliente.getProvincia());
-			statement.setString(12, cliente.getCorreoElectronico());
-			statement.setString(13, cliente.getTelefono());
-			statement.setString(14, cliente.getUsuario());
-			statement.setString(15, cliente.getPassword());
-			statement.setInt(15, cliente.getTipoUsuario());
-			statement.setInt(16,  cliente.getEstado());
+			statement.setString(9, cliente.getLocalidad());
+			statement.setString(10, cliente.getProvincia());
+			statement.setString(11, cliente.getCorreoElectronico());
+			statement.setString(12, cliente.getTelefono());
+			statement.setString(13, cliente.getUsuario());
+			statement.setString(14, cliente.getPassword());
+			statement.setInt(15,cliente.getTipoUsuario());
+			statement.setInt(16,cliente.getEstado());
 			
 			if(statement.executeUpdate() > 0)
 			{
 				conexion.commit();
 				isInsertExitoso = true;
 				
-				//CuentaDaoImpl cuentaNeg = new CuentaDaoImpl();
-				//float saldo, String fecha, String cuentascol, String cbu, int estado, int tipoCuenta,
-				//String usuario
-				//DateFormat df = new SimpleDateFormat("dd/MM/yy");
-				//Date dateobj = new Date(0);
-				//float monto = (float) 10000.00;
-				//int rand_int1 = ThreadLocalRandom.current().nextInt();
-				//cuentaNeg.Insert(new Cuenta(monto,df.format(dateobj).toString(),Integer.toString(rand_int1),0,0,cliente.getDni(),cliente.getCorreoElectronico()));
 			}
 		} 
 		catch (SQLException e) 
@@ -122,13 +113,12 @@ public class ClienteDaoImpl implements ClienteDao
 			statement.setString(6, cliente.getNacionalidad());
 			statement.setString(7, cliente.getFechaNac());
 			statement.setString(8, cliente.getDireccion());
-			statement.setString(9, cliente.getDireccion());
-			statement.setString(10, cliente.getLocalidad());
-			statement.setString(11, cliente.getProvincia());
-			statement.setString(12, cliente.getCorreoElectronico());
-			statement.setString(13, cliente.getTelefono());
-			statement.setString(14, cliente.getUsuario());
-			statement.setString(15, cliente.getPassword());
+			statement.setString(9, cliente.getLocalidad());
+			statement.setString(10, cliente.getProvincia());
+			statement.setString(11, cliente.getCorreoElectronico());
+			statement.setString(12, cliente.getTelefono());
+			statement.setString(13, cliente.getUsuario());
+			statement.setString(14, cliente.getPassword());
 			statement.setInt(15, cliente.getTipoUsuario()); 
 			statement.setInt(16, cliente.getEstado());
 			statement.setInt(17, cliente.getDni());
