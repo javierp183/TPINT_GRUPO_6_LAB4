@@ -32,6 +32,13 @@ public class CuentaNegocioImpl implements CuentaDao
 	public List<Cuenta> ReadAll() {
 		return (List<Cuenta>)cdao.ReadAll();
 	}
+
+	@Override
+	public int contarCuenta(int dnicuenta) {
+		
+		
+		return cdao.contarCuenta(dnicuenta);
+	}
 	
 	
 

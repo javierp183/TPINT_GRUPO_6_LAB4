@@ -9,4 +9,5 @@ public interface CuentaNegocio {
 	public Boolean Modify(Cuenta cuenta, int IdCuenta);
 	public Boolean Delete(Cuenta cuenta);
 	public List<Cuenta> ReadAll();
+	public int contar(int dnicuenta);
 }

@@ -8,6 +8,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import NegocioImpl.CuentaNegocioImpl;
+
 /**
  * Servlet implementation class servletLogin
  */
@@ -41,7 +43,8 @@ public class servletLogin extends HttpServlet {
         String pass = request.getParameter("passLogin").toString();
         
         //ClienteNegocioImpl neg = new ClienteNegocioImpl();
-        
+	
+       
 
         System.out.println(mail);
         System.out.println(pass);

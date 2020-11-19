@@ -18,7 +18,7 @@ public class CuentaDaoImpl implements CuentaDao
 	private static final String delete = "UPDATE cuentas SET estado = ? WHERE cbu = ?";
 	private static final String readall = "SELECT * FROM cuentas";
 	private static final String update = "UPDATE cuentas SET idcuenta = ?, saldo = ?, fecha = ?, cbu = ?, estado = ?, tipocuenta = ?, dnicliente = ?, where idcuenta = ?";
-	
+	private static final String contar = "SELECT COUNT(*) AS contar  FROM cuentas WHERE dnicliente = ?";
 	
 	@Override
 	public Boolean Insert(Cuenta cuenta) {
@@ -161,4 +161,30 @@ public class CuentaDaoImpl implements CuentaDao
 		return c;
 	}
 
+	@Override
+	public int contarCuenta(int dnicuenta) {
+		// TODO Auto-generated method stub
+		PreparedStatement statement;
+		Conexion conexion = Conexion.getConexion();
+		try 
+		{
+			statement = conexion.getSQLConexion().prepareStatement(contar);
+			statement.setInt(1, dnicuenta);
+			ResultSet resultSet = statement.executeQuery();
+			
+			while(resultSet.next())
+			{
+				return resultSet.getInt("contar");
+				
+			}
+		} 
+		catch (SQLException e) 
+		{
+			e.printStackTrace();
+		}
+		return -1;
+	}
+
+	
+	
 }
