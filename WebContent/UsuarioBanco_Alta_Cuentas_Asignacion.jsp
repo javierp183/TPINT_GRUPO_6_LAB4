@@ -49,6 +49,8 @@
     </tbody>
 </table>
 
+<h1>Asignacion de cuentas a usuarios</h1>
+
 <%
 ArrayList<Cliente> listaClientes = null;
 ArrayList<Cuenta> listaCuentas = null;
@@ -59,8 +61,8 @@ if(request.getAttribute("listaclientes")!=null)
 	
 	%>
 	
-
-	
+ <form action="servletCuentaAsignacion" method="post">
+	<label for="cars">Seleccionar Cliente:
  	<select name="inputCliente" id="idCliente">
 	<% 
 	if(listaClientes!=null)
@@ -70,10 +72,10 @@ if(request.getAttribute("listaclientes")!=null)
 			<option value=<%=cliente.getDni()%>><%=cliente.getUsuario()%></option>
 	<%	}  %>
 	
-	</select>
+	</select><br>
 	
-	
-	 	<select name="inputCuenta" id="idCuenta">
+	<label for="cars">Seleccionar Cuenta disponible:
+	<select name="inputCuenta" id="idCuenta">
 	<% 
 	if(listaCuentas!=null)
 		for(Cuenta cuenta: listaCuentas)
@@ -81,7 +83,9 @@ if(request.getAttribute("listaclientes")!=null)
 			%>
 			<option value=<%=cuenta.getCbu()%>><%= cuenta.getCbu()%></option>
 	<%	}  %>
+	</select><button type="submit" class="btn btn-primary">Asignar Cuenta</button>
 	</select>
+	</form>
 	
 	
 	
@@ -90,29 +94,16 @@ if(request.getAttribute("listaclientes")!=null)
 }
 %>
 
-<h1>Asignacion de cuentas a usuarios</h1>
+
 
 <div class="container">
  <div class="row">
  
  <form action="servletCuentaAsignacion" method="get">
- 	<label for="cars">Elegir Tipo de Cuenta:
-		<select name="cuentas" id="cars">
-  			<option value="volvo">Caja de ahorro</option>
-  			<option value="saab">Cuenta Corriente</option>
-		</select>
-	</label>
-  </div>
-   <div>
- 	<label for="cars">Elegir Usuario:
-		<select name="cars" id="cars">
-  			<option value="volvo">Usuario A</option>
-  			<option value="saab">Usuario B</option>
-		</select><button type="submit" class="btn btn-primary">Listar Usuarios y Cuentas</button>
-	</label> 
-  </div>
-  <button type="submit" class="btn btn-primary">Aceptar</button>
+
+</select><button type="submit" class="btn btn-primary">Listar Usuarios y Cuentas</button>
 </form>
+
  </div>
 </div>
 
