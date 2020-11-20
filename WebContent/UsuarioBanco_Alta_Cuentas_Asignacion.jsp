@@ -14,7 +14,7 @@
  integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
  crossorigin="anonymous">
  
- <title>Alta de Cliente - Banco Tecnologico</title>
+ <title>Asignacion de cuenta - Banco Tecnologico</title>
 
 
 </head>
@@ -58,8 +58,34 @@ if(request.getAttribute("listaclientes")!=null)
 	listaCuentas = (ArrayList<Cuenta>) request.getAttribute("listacuentas");
 	
 	%>
-	<%=listaClientes %>
-	<%=listaCuentas %>
+	
+
+	
+ 	<select name="inputCliente" id="idCliente">
+	<% 
+	if(listaClientes!=null)
+		for(Cliente cliente: listaClientes)
+		{
+			%>
+			<option value=<%=cliente.getDni()%>><%=cliente.getUsuario()%></option>
+	<%	}  %>
+	
+	</select>
+	
+	
+	 	<select name="inputCuenta" id="idCuenta">
+	<% 
+	if(listaCuentas!=null)
+		for(Cuenta cuenta: listaCuentas)
+		{
+			%>
+			<option value=<%=cuenta.getCbu()%>><%= cuenta.getCbu()%></option>
+	<%	}  %>
+	</select>
+	
+	
+	
+	
 	<% 
 }
 %>
@@ -69,7 +95,7 @@ if(request.getAttribute("listaclientes")!=null)
 <div class="container">
  <div class="row">
  
- <form action="servletCuenta_Asignacion" method="get">
+ <form action="servletCuentaAsignacion" method="get">
  	<label for="cars">Elegir Tipo de Cuenta:
 		<select name="cuentas" id="cars">
   			<option value="volvo">Caja de ahorro</option>
