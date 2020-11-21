@@ -30,6 +30,26 @@
 	});
 </script>
 
+<script type="text/javascript">
+
+function readselectFunc() {
+
+var selectedValue = inputCuenta.options[inputCuenta.selectedIndex].value;
+return selectedValue;
+}
+
+
+function addURL(element)
+{
+	var leerCBU = readselectFunc();
+    $(element).attr('href', function() {
+        return this.href + '&inputCuenta=' + leerCBU;
+    });
+}
+
+
+</script>
+
 </head>
 <body>
 
@@ -104,19 +124,33 @@ if(request.getAttribute("listaclientes")!=null)
 <td><%=cliente.getDni() %></td>
 <td><%=cliente.getNombre()%></td>
 <td><%=cliente.getApellido() %></td>
-<td><td><input type="submit" value="Asignar" name="btnAsignar" onclick="window.location.href='servletCuentaAsignacion?btnAsignar=1&inputDni=<%=cliente.getDni() %>'"/></td>
 <td>
 
-<label for="cuenta">Seleccionar cuenta ( CBU ):</label>
-   <select name="inputCuenta" id="inputCuenta">
+<label for="inputCuenta">Seleccionar cuenta ( CBU ):</label>
+ 
+
+ 
+ <select name="inputCuenta" id="inputCuenta">
 	<% 
 	if(listaCuentas!=null)
 		for(Cuenta cuenta: listaCuentas)
 		{
 			%>
 			<option value=<%=cuenta.getCbu()%>><%= cuenta.getCbu()%></option>
+			
 	<%	}  %>
 </select>
+
+
+
+</td>
+
+<td>
+
+<input type="submit" value="Asignar" name="btnAsignar" onclick="addURL(this);"/>
+
+
+<a onclick="addURL(this)" href="servletCuentaAsignacion?btnAsignar=1&inputDni=<%=cliente.getDni() %>">Click this</a>
 
 
 </td>

@@ -22,6 +22,7 @@ public class Conexion
 		try
 		{
 			//Class.forName("com.mysql.jdbc.Driver"); // quitar si no es necesario
+			System.out.println("preparando coneccion");
 			this.connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/bdbanco","root","password");
 			System.out.println("preparando coneccion");
 			System.out.println(this.connection);
