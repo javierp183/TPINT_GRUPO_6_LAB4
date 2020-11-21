@@ -7,15 +7,31 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+ <title>Asignacion de cuenta - Banco Tecnologico</title>
+<link rel="stylesheet" type="text/css"
+	href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.css">
+	
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+<script type="text/javascript" charset="utf8"
+	src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.js"></script>
 <meta name="viewport" content="width=device-width,
 					  initial-scale=1, shrink-to-fit=no">
 					  
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
  integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
  crossorigin="anonymous">
- 
- <title>Asignacion de cuenta - Banco Tecnologico</title>
 
+
+
+<script type="text/javascript">
+	$(document).ready(function() {
+		$('#table_id').DataTable();
+	});
+</script>
+
+</head>
+<body>
 
 </head>
 <body>
@@ -49,33 +65,42 @@
     </tbody>
 </table>
 
+ <form action="servletCuentaAsignacion" method="get">
+
 <h1>Asignacion de cuentas a usuarios</h1>
+
+	
+	<table id="table_id" class="display">
+		<thead>
+			<tr>
+				<th>Dni</th>
+				<th>Nombre</th>
+				<th>Apellido</th>
+				<th>Asignar cuenta</th>
+				<th></th>
+			</tr>
+		</thead>
+		<tbody>
 
 <%
 ArrayList<Cliente> listaClientes = null;
 ArrayList<Cuenta> listaCuentas = null;
+
 if(request.getAttribute("listaclientes")!=null)
 {
 	listaClientes = (ArrayList<Cliente>) request.getAttribute("listaclientes");
 	listaCuentas = (ArrayList<Cuenta>) request.getAttribute("listacuentas");
-	
-	%>
-	
- <form action="servletCuentaAsignacion" method="post">
-	<label for="cars">Seleccionar Cliente:
- 	<select name="inputCliente" id="idCliente">
-	<% 
-	if(listaClientes!=null)
-		for(Cliente cliente: listaClientes)
-		{
-			%>
-			<option value=<%=cliente.getDni()%>><%=cliente.getUsuario()%></option>
-	<%	}  %>
-	
-	</select><br>
-	
-	<label for="cars">Seleccionar Cuenta disponible:
-	<select name="inputCuenta" id="idCuenta">
+	for(Cliente cliente : listaClientes)
+	{
+%>
+
+<tr>
+<td><%=cliente.getDni() %></td>
+<td><%=cliente.getNombre()%></td>
+<td><%=cliente.getApellido() %></td>
+<td><td><input type="submit" value="Asignar" name="btnAsignar" onclick="window.location.href='servletCuentaAsignacion?btnAsignar=1&inputDni=<%=cliente.getDni() %>'"/></td>
+<td>
+   <select name="inputCuenta" id="idCuenta">
 	<% 
 	if(listaCuentas!=null)
 		for(Cuenta cuenta: listaCuentas)
@@ -83,29 +108,26 @@ if(request.getAttribute("listaclientes")!=null)
 			%>
 			<option value=<%=cuenta.getCbu()%>><%= cuenta.getCbu()%></option>
 	<%	}  %>
-	</select><button type="submit" class="btn btn-primary">Asignar Cuenta</button>
 	</select>
-	</form>
-	
-	
-	
-	
-	<% 
+
+
+</td>
+</tr>
+
+<%
+
+
+	}
 }
 %>
 
-
-
-<div class="container">
- <div class="row">
- 
- <form action="servletCuentaAsignacion" method="get">
-
-</select><button type="submit" class="btn btn-primary">Listar Usuarios y Cuentas</button>
+		</tbody>
+	</table>
+	
+	<button type="submit" class="btn btn-primary">Listar Usuarios y Cuentas</button>
+	
 </form>
 
- </div>
-</div>
 
 <button type="submit" class="btn btn-primary">Volver a Pagina Principal</button>
 
