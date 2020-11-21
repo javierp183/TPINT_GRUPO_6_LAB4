@@ -147,11 +147,7 @@ if(request.getAttribute("listaclientes")!=null)
 
 <td>
 
-<input type="submit" value="Asignar" name="btnAsignar" onclick="addURL(this);"/>
-
-
-<a onclick="addURL(this)" href="servletCuentaAsignacion?btnAsignar=1&inputDni=<%=cliente.getDni() %>">Click this</a>
-
+<a onclick="addURL(this)" href="servletCuentaAsignacion?btnAsignar=1&inputDni=<%=cliente.getDni() %>">Asignar Cuenta a Cliente</a>
 
 </td>
 </tr>
