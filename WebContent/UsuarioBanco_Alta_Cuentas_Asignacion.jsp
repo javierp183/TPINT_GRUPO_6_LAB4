@@ -65,9 +65,15 @@
     </tbody>
 </table>
 
- <form action="servletCuentaAsignacion" method="get">
+
 
 <h1>Asignacion de cuentas a usuarios</h1>
+
+ <form action="servletCuentaAsignacion" method="get">
+
+	<button type="submit" class="btn btn-primary">Listar Usuarios y Cuentas</button>
+	
+</form>
 
 	
 	<table id="table_id" class="display">
@@ -100,7 +106,9 @@ if(request.getAttribute("listaclientes")!=null)
 <td><%=cliente.getApellido() %></td>
 <td><td><input type="submit" value="Asignar" name="btnAsignar" onclick="window.location.href='servletCuentaAsignacion?btnAsignar=1&inputDni=<%=cliente.getDni() %>'"/></td>
 <td>
-   <select name="inputCuenta" id="idCuenta">
+
+<label for="cuenta">Seleccionar cuenta ( CBU ):</label>
+   <select name="inputCuenta" id="inputCuenta">
 	<% 
 	if(listaCuentas!=null)
 		for(Cuenta cuenta: listaCuentas)
@@ -108,7 +116,7 @@ if(request.getAttribute("listaclientes")!=null)
 			%>
 			<option value=<%=cuenta.getCbu()%>><%= cuenta.getCbu()%></option>
 	<%	}  %>
-	</select>
+</select>
 
 
 </td>
@@ -124,9 +132,7 @@ if(request.getAttribute("listaclientes")!=null)
 		</tbody>
 	</table>
 	
-	<button type="submit" class="btn btn-primary">Listar Usuarios y Cuentas</button>
-	
-</form>
+
 
 
 <button type="submit" class="btn btn-primary">Volver a Pagina Principal</button>
