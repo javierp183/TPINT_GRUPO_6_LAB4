@@ -1,17 +1,20 @@
 package dominio;
 
 import java.util.UUID;
+import java.sql.Date;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 public class Cuenta {
 	private int Idcuenta;
 	private float Saldo;
-	private String Fecha;
 	private String Cbu;
 	private int estado;
 	private int TipoCuenta;
 	private int Dni;
 	private String Usuario;
 	private String uuid = UUID.randomUUID().toString();
+	LocalDateTime Fecha;
 	
 	public Cuenta()
 	{
@@ -20,13 +23,13 @@ public class Cuenta {
 		estado = 1;
 		//UUID asignado auto magicamente de CBU
 		Cbu = uuid;
+		Fecha = Fecha.now();
 	}
-	
-	public Cuenta(float saldo, String fecha, String cbu, int estado, int tipoCuenta, int dni,
+
+	public Cuenta(float saldo, String cbu, int estado, int tipoCuenta, int dni,
 			String usuario) {
 		super();
 		Saldo = saldo;
-		Fecha = fecha;
 		Cbu = cbu;
 		this.estado = estado;
 		TipoCuenta = tipoCuenta;
@@ -47,12 +50,6 @@ public class Cuenta {
 	}
 	public void setSaldo(float saldo) {
 		Saldo = saldo;
-	}
-	public String getFecha() {
-		return Fecha;
-	}
-	public void setFecha(String fecha) {
-		Fecha = fecha;
 	}
 	public String getCbu() {
 		return Cbu;
@@ -87,13 +84,28 @@ public class Cuenta {
 		Dni = dni;
 	}
 
+	public String getUuid() {
+		return uuid;
+	}
+
+	public void setUuid(String uuid) {
+		this.uuid = uuid;
+	}
+
+	public LocalDateTime getFecha() {
+		return Fecha;
+	}
+
+	public void setFecha(LocalDateTime fecha) {
+		Fecha = fecha;
+	}
+
 	@Override
 	public String toString() {
-		return "Cuenta [Saldo=" + Saldo + ", Fecha=" + Fecha + ", Cbu=" + Cbu + ", estado=" + estado + ", TipoCuenta="
-				+ TipoCuenta + ", Dni=" + Dni + ", Usuario=" + Usuario + "]";
-	}
-	
-	
+		return "Cuenta [Idcuenta=" + Idcuenta + ", Saldo=" + Saldo + ", Cbu=" + Cbu + ", estado=" + estado
+				+ ", TipoCuenta=" + TipoCuenta + ", Dni=" + Dni + ", Usuario=" + Usuario + ", uuid=" + uuid + ", Fecha="
+				+ Fecha + "]";
+	}	
 
 	
 

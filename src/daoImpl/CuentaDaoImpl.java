@@ -1,5 +1,6 @@
 package daoImpl;
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -17,8 +18,10 @@ public class CuentaDaoImpl implements CuentaDao
 	private static final String insert = "INSERT INTO cuentas(idcuenta, saldo, fecha, cbu, estado, tipocuenta, dnicliente) VALUES(?, ?, ?, ?, ?, ?, ?)";
 	private static final String delete = "UPDATE cuentas SET estado = ? WHERE cbu = ?";
 	private static final String readall = "SELECT * FROM cuentas";
-	private static final String update = "UPDATE cuentas SET idcuenta = ?, saldo = ?, fecha = ?, cbu = ?, estado = ?, tipocuenta = ?, dnicliente = ?, where idcuenta = ?";
+	private static final String update = "UPDATE cuentas SET idcuenta = ?, saldo = ?, fecha = ?, cbu = ?, estado = ?, tipocuenta = ?, dnicliente = ? where cbu = ?";
 	private static final String contar = "SELECT COUNT(*) AS contar  FROM cuentas WHERE dnicliente = ?";
+	private static final String search = "SELECT * FROM cuentas WHERE cbu = ?";
+	private static Date FechaInsert = null;
 	
 	@Override
 	public Boolean Insert(Cuenta cuenta) {
@@ -27,10 +30,12 @@ public class CuentaDaoImpl implements CuentaDao
 		boolean isInsertExitoso = false;
 		try
 		{
+			FechaInsert = FechaInsert.valueOf(cuenta.getFecha().toLocalDate());
+			
 			statement = conexion.prepareStatement(insert);
 			statement.setInt(1, cuenta.getIdcuenta());
 			statement.setFloat(2, cuenta.getSaldo());
-			statement.setString(3, cuenta.getFecha());
+			statement.setDate(3, FechaInsert);
 			statement.setString(4, cuenta.getCbu());
 			statement.setInt(5, cuenta.getEstado());
 			statement.setInt(6, cuenta.getTipoCuenta());
@@ -60,20 +65,22 @@ public class CuentaDaoImpl implements CuentaDao
 	 * @return Retorna true si modific�, sino, retorna false
 	 */
 	@Override
-	public Boolean Modify(Cuenta cuenta, int IdCuenta) {
+	public Boolean Modify(Cuenta cuenta) {
 		PreparedStatement statement;
 		Connection conexion = Conexion.getConexion().getSQLConexion();
 		boolean isInsertExitoso = false;
 		try
 		{
+			FechaInsert = FechaInsert.valueOf(cuenta.getFecha().toLocalDate());
 			statement = conexion.prepareStatement(update);
-			statement.setFloat(1, cuenta.getSaldo());
-			statement.setString(2, cuenta.getFecha());
-			statement.setString(3, cuenta.getCbu());
-			statement.setInt(4, cuenta.getEstado());
-			statement.setInt(5, cuenta.getTipoCuenta());
-			statement.setInt(6, cuenta.getDni());
-			statement.setString(7, cuenta.getUsuario());
+			statement.setFloat(1, cuenta.getIdcuenta());
+			statement.setFloat(2, cuenta.getSaldo());
+			statement.setDate(3, FechaInsert);
+			statement.setString(4, cuenta.getCbu());
+			statement.setInt(5, cuenta.getEstado());
+			statement.setInt(6, cuenta.getTipoCuenta());
+			statement.setInt(7, cuenta.getDni());
+			statement.setString(8, cuenta.getCbu());
 			
 			if(statement.executeUpdate() > 0)
 			{
@@ -152,13 +159,39 @@ public class CuentaDaoImpl implements CuentaDao
 		Cuenta c = new Cuenta();
 		c.setIdcuenta(resultSet.getInt("idcuenta"));
 		c.setSaldo(resultSet.getFloat("saldo"));
-		c.setFecha(resultSet.getString("fecha"));
+		//c.setFecha(resultSet.getDate("fecha"));
 		c.setCbu(resultSet.getString("cbu"));
 		c.setEstado(resultSet.getInt("estado"));
 		c.setTipoCuenta(resultSet.getInt("tipocuenta"));
 		c.setDni(resultSet.getInt("dnicliente"));
 		
 		return c;
+	}
+	
+	
+	@Override
+	public Cuenta Search(String Cbu)
+	{	
+		
+		PreparedStatement statement;
+		Cuenta cuenta = new Cuenta();
+		ResultSet resultSet; //Guarda el resultado de la query
+		Conexion conexion = Conexion.getConexion();
+		try 
+		{
+			statement = conexion.getSQLConexion().prepareStatement(search);
+			statement.setString(1, Cbu);
+			resultSet = statement.executeQuery();
+			while(resultSet.next())
+			{
+				cuenta = getCuenta(resultSet);
+			}
+		} 
+		catch (SQLException e) 
+		{
+			e.printStackTrace();
+		}
+		return cuenta;
 	}
 
 	@Override
@@ -184,7 +217,6 @@ public class CuentaDaoImpl implements CuentaDao
 		}
 		return -1;
 	}
-
 	
 	
 }

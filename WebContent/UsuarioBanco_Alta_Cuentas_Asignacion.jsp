@@ -34,7 +34,7 @@
 
 function readselectFunc() {
 
-var selectedValue = inputCuenta.options[inputCuenta.selectedIndex].value;
+var selectedValue = inputCbu.options[inputCbu.selectedIndex].value;
 return selectedValue;
 }
 
@@ -43,7 +43,7 @@ function addURL(element)
 {
 	var leerCBU = readselectFunc();
     $(element).attr('href', function() {
-        return this.href + '&inputCuenta=' + leerCBU;
+        return this.href + '&inputCbu=' + leerCBU;
     });
 }
 
@@ -120,17 +120,30 @@ if(request.getAttribute("listaclientes")!=null)
 	{
 %>
 
+ <% 
+if(request.getAttribute("estado")!=null)
+		{
+	
+%>
+
+Cuenta Asignada!
+
+<%
+
+}
+%>
+
 <tr>
 <td><%=cliente.getDni() %></td>
 <td><%=cliente.getNombre()%></td>
 <td><%=cliente.getApellido() %></td>
 <td>
 
-<label for="inputCuenta">Seleccionar cuenta ( CBU ):</label>
+<label for="inputCbu">Seleccionar cuenta ( CBU ):</label>
  
 
  
- <select name="inputCuenta" id="inputCuenta">
+ <select name="inputCbu" id="inputCbu">
 	<% 
 	if(listaCuentas!=null)
 		for(Cuenta cuenta: listaCuentas)

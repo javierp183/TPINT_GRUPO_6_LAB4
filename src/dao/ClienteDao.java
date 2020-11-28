@@ -10,4 +10,5 @@ public interface ClienteDao {
 	public boolean modify(Cliente c);
 	public List<Cliente> readAll();
 	public Cliente getClientePorMail(String emailWeb, String passWeb);
+	Cliente getTipoUsuario(String usuario);
 }

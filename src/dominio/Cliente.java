@@ -1,20 +1,20 @@
 package dominio;
 
 public class Cliente {
+	private int Dni;
+	private String Cuil;
 	private String Nombre;
 	private String Apellido;
 	private String Sexo;
 	private String Nacionalidad;
+	private String FechaNac;
+	private String Direccion;
+	private String Localidad;
+	private String Provincia;
 	private String CorreoElectronico;
 	private String Telefono;
 	private String Usuario;
 	private String Password;
-	private String Cuil;
-	private int Dni;
-	private String FechaNac;
-	private String Localidad;
-	private String Provincia;
-	private String Direccion;
 	private int TipoUsuario;
 	private int Estado;
 	
@@ -27,26 +27,28 @@ public class Cliente {
 		Estado = 1;
 		TipoUsuario = 1;
 	}
+	
+	
 
 
-	public Cliente(String nombre, String apellido, String sexo, String nacionalidad, String correoElectronico,
-			String telefono, String usuario, String password, String cuil, int dni, String fechaNac, String localidad,
-			String provincia, String direccion, int tipoUsuario, int estado) {
+	public Cliente(int dni, String cuil, String nombre, String apellido, String sexo, String nacionalidad,
+			String fechaNac, String direccion, String localidad, String provincia, String correoElectronico,
+			String telefono, String usuario, String password, int tipoUsuario, int estado) {
 		super();
+		Dni = dni;
+		Cuil = cuil;
 		Nombre = nombre;
 		Apellido = apellido;
 		Sexo = sexo;
 		Nacionalidad = nacionalidad;
+		FechaNac = fechaNac;
+		Direccion = direccion;
+		Localidad = localidad;
+		Provincia = provincia;
 		CorreoElectronico = correoElectronico;
 		Telefono = telefono;
 		Usuario = usuario;
 		Password = password;
-		Cuil = cuil;
-		Dni = dni;
-		FechaNac = fechaNac;
-		Localidad = localidad;
-		Provincia = provincia;
-		Direccion = direccion;
 		TipoUsuario = tipoUsuario;
 		Estado = estado;
 	}
@@ -54,7 +56,26 @@ public class Cliente {
 
 
 
-	// Getters and Setters
+	public int getDni() {
+		return Dni;
+	}
+
+
+	public void setDni(int dni) {
+		Dni = dni;
+	}
+
+
+	public String getCuil() {
+		return Cuil;
+	}
+
+
+	public void setCuil(String cuil) {
+		Cuil = cuil;
+	}
+
+
 	public String getNombre() {
 		return Nombre;
 	}
@@ -92,6 +113,46 @@ public class Cliente {
 
 	public void setNacionalidad(String nacionalidad) {
 		Nacionalidad = nacionalidad;
+	}
+
+
+	public String getFechaNac() {
+		return FechaNac;
+	}
+
+
+	public void setFechaNac(String fechaNac) {
+		FechaNac = fechaNac;
+	}
+
+
+	public String getDireccion() {
+		return Direccion;
+	}
+
+
+	public void setDireccion(String direccion) {
+		Direccion = direccion;
+	}
+
+
+	public String getLocalidad() {
+		return Localidad;
+	}
+
+
+	public void setLocalidad(String localidad) {
+		Localidad = localidad;
+	}
+
+
+	public String getProvincia() {
+		return Provincia;
+	}
+
+
+	public void setProvincia(String provincia) {
+		Provincia = provincia;
 	}
 
 
@@ -135,65 +196,6 @@ public class Cliente {
 	}
 
 
-	public String getCuil() {
-		return Cuil;
-	}
-
-
-	public void setCuil(String cuil) {
-		Cuil = cuil;
-	}
-
-
-	public int getDni() {
-		return Dni;
-	}
-
-
-	public void setDni(int dni) {
-		Dni = dni;
-	}
-
-
-	public String getFechaNac() {
-		return FechaNac;
-	}
-
-
-	public void setFechaNac(String fechaNac) {
-		FechaNac = fechaNac;
-	}
-
-
-	public String getLocalidad() {
-		return Localidad;
-	}
-
-
-	public void setLocalidad(String localidad) {
-		Localidad = localidad;
-	}
-
-
-	public String getProvincia() {
-		return Provincia;
-	}
-
-
-	public void setProvincia(String provincia) {
-		Provincia = provincia;
-	}
-
-
-	public String getDireccion() {
-		return Direccion;
-	}
-
-
-	public void setDireccion(String direccion) {
-		Direccion = direccion;
-	}
-	
 	public int getTipoUsuario() {
 		return TipoUsuario;
 	}
@@ -216,12 +218,14 @@ public class Cliente {
 
 	@Override
 	public String toString() {
-		return "Cliente [Nombre=" + Nombre + ", Apellido=" + Apellido + ", Sexo=" + Sexo + ", Nacionalidad="
-				+ Nacionalidad + ", CorreoElectronico=" + CorreoElectronico + ", Telefono=" + Telefono + ", Usuario="
-				+ Usuario + ", Password=" + Password + ", Cuil=" + Cuil + ", Dni=" + Dni + ", FechaNac=" + FechaNac
-				+ ", Localidad=" + Localidad + ", Provincia=" + Provincia + ", Direccion=" + Direccion
-				+ ", TipoUsuario=" + TipoUsuario + ", Estado=" + Estado + "]";
+		return "Cliente [Dni=" + Dni + ", Cuil=" + Cuil + ", Nombre=" + Nombre + ", Apellido=" + Apellido + ", Sexo="
+				+ Sexo + ", Nacionalidad=" + Nacionalidad + ", FechaNac=" + FechaNac + ", Direccion=" + Direccion
+				+ ", Localidad=" + Localidad + ", Provincia=" + Provincia + ", CorreoElectronico=" + CorreoElectronico
+				+ ", Telefono=" + Telefono + ", Usuario=" + Usuario + ", Password=" + Password + ", TipoUsuario="
+				+ TipoUsuario + ", Estado=" + Estado + "]";
 	}
+	
+	
 	
 
 }

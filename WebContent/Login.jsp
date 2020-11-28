@@ -20,12 +20,12 @@
  <div class="row" >
  <form action="servletLogin" method="post" style="margin: 0 auto;">
   <div class="form-group" >
-    <label for="exampleInputEmail1">E-Mail</label>
-    <input type="input" class="form-control" id="txtMail" name="emailLogin" aria-describedby="emailHelp">
-    <small id="emailHelp" class="form-text text-muted">Ingrese su e-mail con el cual se dio de alta.</small>
+    <label for="userLogin">Usuario</label>
+    <input type="input" class="form-control" id="txtMail" name="userLogin" aria-describedby="emailHelp">
+    <small id="emailHelp" class="form-text text-muted">Ingrese su Usuario con el cual se dio de alta.</small>
   </div>
   <div class="form-group">
-    <label for="exampleInputPassword1">Ingrese su clave</label>
+    <label for="passLogin">Ingrese su clave</label>
     <input type="password" class="form-control" name="passLogin" id="exampleInputPassword1">
   </div>
   <button type="submit" class="btn btn-outline-primary">Aceptar</button>

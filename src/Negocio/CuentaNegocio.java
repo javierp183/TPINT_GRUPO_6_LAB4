@@ -10,4 +10,5 @@ public interface CuentaNegocio {
 	public Boolean Delete(Cuenta cuenta);
 	public List<Cuenta> ReadAll();
 	public int contar(int dnicuenta);
+	public Cuenta Search(String Cbu);
 }

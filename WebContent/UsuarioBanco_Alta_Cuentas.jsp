@@ -48,33 +48,34 @@
 
 <h1>Alta de Cuenta</h1>
 
+ <% 
+if(request.getAttribute("estado")!=null)
+		{
+	
+%>
+
+Cuenta Creada!
+
+<%
+
+}
+%>
+
 <div class="container">
  <div class="row">
  <form action="servletCuenta" method="post">
- 
- <div class="form-group">
-    <label for="exampleInputEmail1">CBU</label>
-    <input type="input" class="form-control" name="inputCBU" aria-describedby="emailHelp">
-    <small id="emailHelp" class="form-text text-muted">Numero de CBU - aaaaa-bbbb-cccc-dddd-eeeee - -</small>
-  </div>
     <div class="form-group">
-    <label for="exampleInputEmail1">Saldo</label>
+    <label for="inputSaldo">Saldo</label>
     <input type="input" class="form-control" name="inputSaldo" aria-describedby="emailHelp">
     <small id="emailHelp" class="form-text text-muted">Saldo a asignar a la cuenta - si no se ingresa un monto, 10 mil pesos seran los auto asignados -</small>
   </div>
    <div class="form-group">
-    <label for="exampleInputEmail1">
+    <label for="inputTipoCuenta">
     <select name="inputTipoCuenta">
-     <option value=1> Caja de Ahorro </option>
-     <option value=2> Cuenta Corriente </option>
+     <option value=0> Caja de Ahorro </option>
+     <option value=1> Cuenta Corriente </option>
     </select> </label>
     <small id="emailHelp" class="form-text text-muted">Cuenta Corriente o Cuenta Sueldo</small>
-  </div>
-    <div class="form-group">
-    <label for="exampleInputEmail1">Fecha de Alta</label>
-    <input type="input" class="form-control" name="inputNombre" aria-describedby="emailHelp">
-    <small id="emailHelp" class="form-text text-muted">Ingrese Fecha de Alta (DD/MM/YYYY)</small>
-  </div>
   <button type="submit" class="btn btn-primary">Generar Cuenta</button>
 </form>
  </div>

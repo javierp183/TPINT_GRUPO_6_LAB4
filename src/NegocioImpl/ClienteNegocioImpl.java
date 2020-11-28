@@ -45,4 +45,11 @@ public class ClienteNegocioImpl implements ClienteDao
 	}
 
 
+
+	@Override
+	public Cliente getTipoUsuario(String usuario) {
+		return cdao.getTipoUsuario(usuario);
+	}
+
+
 }

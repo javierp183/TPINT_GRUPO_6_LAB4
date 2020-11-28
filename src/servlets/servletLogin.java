@@ -8,7 +8,11 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import NegocioImpl.ClienteNegocioImpl;
 import NegocioImpl.CuentaNegocioImpl;
+import NegocioImpl.UsuarioNegocioImpl;
+import dominio.Cliente;
+import dominio.Usuario;
 
 /**
  * Servlet implementation class servletLogin
@@ -39,21 +43,40 @@ public class servletLogin extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		String mail = request.getParameter("emailLogin").toString();
-        String pass = request.getParameter("passLogin").toString();
+		String usuario = request.getParameter("userLogin").toString();
+        String password = request.getParameter("passLogin").toString();
+        Cliente cliente = new Cliente();
+        Usuario usuariobanco = new Usuario();
+        ClienteNegocioImpl clientedaoimpl = new ClienteNegocioImpl();
+        UsuarioNegocioImpl usuariodaoimpl = new UsuarioNegocioImpl();
         
-        //ClienteNegocioImpl neg = new ClienteNegocioImpl();
+        if(request.getParameter("userLogin")!=null)
+        {
+        	
+        	cliente = clientedaoimpl.getTipoUsuario(usuario);
+        	if(cliente.getTipoUsuario() == 0) {
+        		if(cliente.getPassword().equals(password))
+        		{
+                    RequestDispatcher requestDispatcher = request.getRequestDispatcher("/Cliente.jsp");
+                    requestDispatcher.forward(request, response);
+        		}
+        		
+        	}
+        	System.out.println("metio usuario");
+        }
+        
 	
        
 
-        System.out.println(mail);
-        System.out.println(pass);
+        System.out.println(usuario);
+        System.out.println(password);
              
-        request.getSession().setAttribute("user", mail);
-        request.getSession().setAttribute("pass", pass);
+        //request.getSession().setAttribute("user", mail);
+        //request.getSession().setAttribute("pass", pass);
         
-        RequestDispatcher requestDispatcher = request
-                .getRequestDispatcher("/Usuario.jsp");
+        
+        
+        RequestDispatcher requestDispatcher = request.getRequestDispatcher("/Usuario.jsp");
         requestDispatcher.forward(request, response);
         
 //        Cliente client = negocio.getClientePorMail(mail, pass);

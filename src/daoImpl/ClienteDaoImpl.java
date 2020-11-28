@@ -22,6 +22,8 @@ public class ClienteDaoImpl implements ClienteDao
 	private static final String readByMail = "Select * from clientes where correo = ? and password = ?";
 	private static final String update = "UPDATE clientes SET dni = ?, cuil = ?, nombre = ?, apellido = ?, sexo = ?, nacionalidad = ?, fechanac = ?, direccion = ?, localidad = ?, provincia = ?, correo = ?, telefono = ?, usuario = ?, password = ?, tipousuario = ?, estado = ? where Dni = ?";
 	private static final String Provincia = null;
+	private static final String TipoUsuarioCliente = "SELECT * from clientes where usuario = ?";
+	
 	private Date fecha;
 
 	@Override
@@ -154,7 +156,7 @@ public class ClienteDaoImpl implements ClienteDao
 			// Esta variable la inicialize para que no tire error, pero hay que ver.
 			//String readByMail = null;
 			
-			statement = conexion.getSQLConexion().prepareStatement(readByMail);
+			statement = conexion.getSQLConexion().prepareStatement(TipoUsuarioCliente);
 			statement.setString(1, emailWeb);
 			statement.setString(2, passWeb);
 			resultSet = statement.executeQuery();
@@ -170,6 +172,32 @@ public class ClienteDaoImpl implements ClienteDao
 		return new Cliente();
 			
 	}
+	
+	@Override
+	public Cliente getTipoUsuario(String usuario)
+	{		
+		PreparedStatement statement;
+		Conexion conexion = Conexion.getConexion();
+		ResultSet resultSet; //Guarda el resultado de la query
+		try {
+			// Esta variable la inicialize para que no tire error, pero hay que ver.
+			//String readByMail = null;
+			
+			statement = conexion.getSQLConexion().prepareStatement(TipoUsuarioCliente);
+			statement.setString(1, usuario);
+			resultSet = statement.executeQuery();
+			if(resultSet.next()) {
+
+				return getCliente(resultSet);
+			}
+			
+		} catch (Exception e) {
+			return new Cliente();
+		}
+		
+		return new Cliente();
+	}
+	
 
 	@Override
 	public List<Cliente> readAll()
@@ -214,8 +242,8 @@ public class ClienteDaoImpl implements ClienteDao
 		String Password = resultSet.getString("password");
 		int TipoUsuario = resultSet.getInt("tipousuario");
 		int Estado = resultSet.getInt("estado");
-		
-		return new Cliente(Nombre, Apellido, Sexo, Nacionalidad, CorreoElectronico, Telefono, Usuario, Password, Cuil, Dni, FechaNac, Localidad, Provincia, Direccion, TipoUsuario, Estado);
+
+		return new Cliente(Dni, Cuil, Nombre, Apellido, Sexo, Nacionalidad, FechaNac, Direccion, Localidad, Provincia, CorreoElectronico, Telefono, Usuario, Password, TipoUsuario, Estado);
 		
 	}
 	

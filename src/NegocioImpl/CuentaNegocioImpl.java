@@ -19,8 +19,8 @@ public class CuentaNegocioImpl implements CuentaDao
 	}
 
 	@Override
-	public Boolean Modify(Cuenta cuenta, int IdCuenta) {
-		return cdao.Modify(cuenta, IdCuenta);
+	public Boolean Modify(Cuenta cuenta) {
+		return cdao.Modify(cuenta);
 	}
 
 	@Override
@@ -35,11 +35,12 @@ public class CuentaNegocioImpl implements CuentaDao
 
 	@Override
 	public int contarCuenta(int dnicuenta) {
-		
-		
 		return cdao.contarCuenta(dnicuenta);
 	}
-	
-	
+
+	@Override
+	public Cuenta Search(String Cbu) {
+		return cdao.Search(Cbu);
+	}
 
 }

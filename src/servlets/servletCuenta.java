@@ -40,6 +40,7 @@ public class servletCuenta extends HttpServlet {
 		cuenta.setCbu(inputCBUbaja);
 		CuentaNegocioImpl cuentadaoimpl = new CuentaNegocioImpl();
 		
+		
 		if(request.getParameter("inputCBUbaja")!=null)
 		{
 			System.out.println("baja papi");
@@ -59,8 +60,17 @@ public class servletCuenta extends HttpServlet {
 		System.out.println("Alta de cuenta papurringui");
 		Cuenta cuenta = new Cuenta();
 		CuentaNegocioImpl neg = new CuentaNegocioImpl();
+		int estado = 0;
+		int TipoCuenta = Integer.parseInt(request.getParameter("inputTipoCuenta"));
+		float saldo = Float.parseFloat(request.getParameter("inputSaldo"));
+		cuenta.setTipoCuenta(TipoCuenta);
+		cuenta.setSaldo(saldo);
 		
-		neg.Insert(cuenta);
+		if(neg.Insert(cuenta) == true) {
+			estado = 1;
+			request.setAttribute("estado", estado );
+		}
+		
 		
 		RequestDispatcher rd = request.getRequestDispatcher("UsuarioBanco_Alta_Cuentas.jsp");
 		rd.forward(request, response);

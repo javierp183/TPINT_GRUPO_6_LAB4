@@ -87,6 +87,8 @@ public class servletCliente extends HttpServlet {
 			cliente.setCorreoElectronico(inputEmail);
 			cliente.setTelefono(inputTelefono);
 			cliente.setPassword(inputPassword);
+			System.out.println("paso password");
+			System.out.println(inputPassword);
 			ClienteNegocioImpl neg = new ClienteNegocioImpl();
 			
 			if(request.getParameter("inputUpdate")!=null)
