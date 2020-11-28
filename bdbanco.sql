@@ -78,6 +78,23 @@ CREATE TABLE `cuentas` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 
+DROP TABLE IF EXISTS `prestamos`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `prestamos` (
+  `idprestamo` int(11) NOT NULL AUTO_INCREMENT,
+  `dnicliente` int(11) NOT NULL,
+  `montototal` float DEFAULT NULL,
+  `cbu` varchar(45) DEFAULT NULL,
+  `fecha` date DEFAULT NULL,
+  `estado` tinyint(4) DEFAULT NULL,
+  `pagoxmes` int(11) DEFAULT NULL,
+  `montopormes` float DEFAULT NULL,
+  `numcuotas` int(11) DEFAULT NULL,
+  PRIMARY KEY (`idprestamo`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -177,24 +194,7 @@ UNLOCK TABLES;
 -- Table structure for table `prestamos`
 --
 
-DROP TABLE IF EXISTS `prestamos`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `prestamos` (
-  `cliente` varchar(45) DEFAULT NULL,
-  `fecha` date DEFAULT NULL,
-  `importe` float DEFAULT NULL,
-  `importeinteres` float DEFAULT NULL,
-  `plazopago` int(11) DEFAULT NULL,
-  `montopormes` float DEFAULT NULL,
-  `numcuotas` int(11) DEFAULT NULL,
-  `idprestamo` int(11) NOT NULL,
-  `idcuenta` int(11) DEFAULT NULL,
-  PRIMARY KEY (`idprestamo`),
-  KEY `fk_prestamos_cuentas1_idx` (`idcuenta`),
-  CONSTRAINT `fk_prestamos_cuentas1` FOREIGN KEY (`idcuenta`) REFERENCES `cuentas` (`idcuenta`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-/*!40101 SET character_set_client = @saved_cs_client */;
+
 
 --
 -- Dumping data for table `prestamos`

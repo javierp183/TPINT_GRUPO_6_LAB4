@@ -46,7 +46,7 @@
 
 <div class="container">
  <div class="row">
- <form>
+ <form  action="servletPrestamo" method="get">
   <div>
  	<label for="cars">Elegir Cuenta</label>
 		<select name="cars" id="cars">
@@ -62,8 +62,8 @@
 		</select> 
   </div>
    <div class="form-group">
-    <label for="exampleInputEmail1">Monto De Prestamo</label>
-    <input type="input" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+    <label for="inputMonto">Monto De Prestamo</label>
+    <input type="input" class="form-control" name="inputMonto" id="inputMonto" aria-describedby="emailHelp">
     <small id="emailHelp" class="form-text text-muted">Sin interes</small>
   </div>
   <button type="submit" class="btn btn-primary">Aceptar</button>

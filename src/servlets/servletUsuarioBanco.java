@@ -27,6 +27,8 @@ public class servletUsuarioBanco extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
+		String AsignarCuenta = request.getParameter("inputAsignarCuenta");
+		System.out.println(AsignarCuenta);
 		response.getWriter().append("Served at: ").append(request.getContextPath());
 	}
 
