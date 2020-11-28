@@ -30,8 +30,10 @@ public class servletPrestamo extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		String Monto = request.getParameter("inputMonto");
+		String Cuotas = request.getParameter("inputCuotas");
 		
 		System.out.println(Monto);
+		System.out.println(Cuotas);
 		
 		RequestDispatcher rd = request.getRequestDispatcher("Cliente_Pedido_Prestamo.jsp");
 		rd.forward(request, response);

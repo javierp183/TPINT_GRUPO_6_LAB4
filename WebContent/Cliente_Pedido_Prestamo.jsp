@@ -48,17 +48,17 @@
  <div class="row">
  <form  action="servletPrestamo" method="get">
   <div>
- 	<label for="cars">Elegir Cuenta</label>
-		<select name="cars" id="cars">
+ 	<label for="cuenta">Elegir Cuenta</label>
+		<select name="InputCuenta" id="cars">
   			<option value="volvo">Caja de ahorro</option>
   			<option value="saab">Cuenta Corriente</option>
 		</select> 
   </div>
    <div>
- 	<label for="cars">Cuotas</label>
-		<select name="cars" id="cars">
-  			<option value="volvo">12</option>
-  			<option value="saab">18</option>
+ 	<label for="ccuotasars">Cuotas</label>
+		<select name="inputCuotas" id="cars">
+  			<option value="12">12</option>
+  			<option value="18">18</option>
 		</select> 
   </div>
    <div class="form-group">
