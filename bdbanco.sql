@@ -91,6 +91,7 @@ CREATE TABLE `prestamos` (
   `pagoxmes` int(11) DEFAULT NULL,
   `montopormes` float DEFAULT NULL,
   `numcuotas` int(11) DEFAULT NULL,
+  `montorestante` float DEFAULT NULL,
   PRIMARY KEY (`idprestamo`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 

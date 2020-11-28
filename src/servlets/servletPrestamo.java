@@ -32,6 +32,7 @@ public class servletPrestamo extends HttpServlet {
 		String Monto = request.getParameter("inputMonto");
 		
 		System.out.println(Monto);
+		
 		RequestDispatcher rd = request.getRequestDispatcher("Cliente_Pedido_Prestamo.jsp");
 		rd.forward(request, response);
 	}
