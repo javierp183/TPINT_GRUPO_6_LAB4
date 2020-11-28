@@ -37,6 +37,11 @@ public class UsuarioNegocioImpl implements UsuarioDao
 	public Usuario getClientePorMail(String emailWeb, String passWeb) {
 		return udao.getClientePorMail(emailWeb, passWeb);
 	}
+
+	@Override
+	public Usuario getTipoUsuario(String usuario) {
+		return udao.getTipoUsuario(usuario);
+	}
 	
 	
 	

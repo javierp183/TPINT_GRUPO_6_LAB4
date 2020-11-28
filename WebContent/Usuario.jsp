@@ -18,20 +18,6 @@
 
 <div>
 
-<% if(session.getAttribute("user") == null){
-	
-	RequestDispatcher requestDispatcher = request
-            .getRequestDispatcher("/Login.jsp");
-    requestDispatcher.forward(request, response);
-	
-} %>
-
-<b>Mail:</b>
-   <%= session.getAttribute("user") %>
-
-
-</div>
-
 <table class="table table-dark">
   <thead>
     <tr>

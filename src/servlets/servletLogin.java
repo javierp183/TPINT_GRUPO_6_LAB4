@@ -62,14 +62,16 @@ public class servletLogin extends HttpServlet {
         		}
         		
         	}
-        	System.out.println("metio usuario");
+        	
+        	usuariobanco = usuariodaoimpl.getTipoUsuario(usuario);
+        	if(usuariobanco.getTipoUsuario() == 1) {
+        		if(usuariobanco.getPassword().equals(password)) 
+        		{
+                    RequestDispatcher requestDispatcher = request.getRequestDispatcher("/Usuario.jsp");
+                    requestDispatcher.forward(request, response);
+        		}
+        	}
         }
-        
-	
-       
-
-        System.out.println(usuario);
-        System.out.println(password);
              
         //request.getSession().setAttribute("user", mail);
         //request.getSession().setAttribute("pass", pass);

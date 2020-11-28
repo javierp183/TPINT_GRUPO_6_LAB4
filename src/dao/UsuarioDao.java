@@ -10,4 +10,5 @@ public interface UsuarioDao {
 	public boolean modify(Usuario u);
 	public List<Usuario> readAll();
 	Usuario getClientePorMail(String emailWeb, String passWeb);
+	Usuario getTipoUsuario(String usuario);
 }

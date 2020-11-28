@@ -6,6 +6,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+
+import dominio.Cliente;
 import dominio.Usuario;
 import dao.UsuarioDao;
 
@@ -16,6 +18,7 @@ public class UsuarioDaoImpl implements UsuarioDao
 	private static final String readall = "SELECT * FROM usuarios";
 	private static final String readByUser = "Select * from usuarios where usuario = ? and password = ?";
 	private static final String update = "UPDATE usuarios SET dni = ?, usuario = ?, password = ?, estado = ?, idtipousuario = ?, where Dni = ?";
+	private static final String TipoUsuario = "SELECT * from usuarios where usuario = ?";
 	
 	@Override
 	public boolean insert(Usuario usuario)
@@ -135,6 +138,31 @@ public class UsuarioDaoImpl implements UsuarioDao
 		return new Usuario();
 			
 	}
+	
+	@Override
+	public Usuario getTipoUsuario(String usuario)
+	{		
+		PreparedStatement statement;
+		Conexion conexion = Conexion.getConexion();
+		ResultSet resultSet; //Guarda el resultado de la query
+		try {
+			// Esta variable la inicialize para que no tire error, pero hay que ver.
+			//String readByMail = null;
+			
+			statement = conexion.getSQLConexion().prepareStatement(TipoUsuario);
+			statement.setString(1, usuario);
+			resultSet = statement.executeQuery();
+			if(resultSet.next()) {
+
+				return getUsuario(resultSet);
+			}
+			
+		} catch (Exception e) {
+			return new Usuario();
+		}
+		
+		return new Usuario();
+	}
 
 	public List<Usuario> readAll()
 	{
@@ -162,14 +190,14 @@ public class UsuarioDaoImpl implements UsuarioDao
 	{
 		
 		int Dni = resultSet.getInt("dni");
+		String Nombre = resultSet.getString("nombre");
+		String Apellido = resultSet.getString("apellido");
 		String Usuario = resultSet.getString("usuario");
 		String Password = resultSet.getString("password");
 		int Estado = resultSet.getInt("estado");
 		int TipoUsuario = resultSet.getInt("tipousuario");
-		
 
-		
-		return new Usuario(Dni, Usuario, Password, Estado, TipoUsuario);
+		return new Usuario(Dni, Nombre, Apellido, Usuario, Password, Estado, TipoUsuario);
 
 	}
 }
