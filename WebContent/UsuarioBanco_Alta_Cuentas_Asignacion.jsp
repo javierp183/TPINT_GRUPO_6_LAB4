@@ -43,7 +43,6 @@ console.log(selectedValue);
 
 
 return selectedValue.value;
-
 }
 
 
@@ -154,16 +153,20 @@ Cuenta Asignada!
  
  <select id="inputCBU">
 	<% 
-	if(listaCuentas!=null)
+	if(listaCuentas!=null) {
 		for(Cuenta cuenta: listaCuentas)
 		{
 			%>
+			
 			<option value=<%=cuenta.getCbu()%>><%= cuenta.getCbu()%></option>
 			
 	<%	}  %>
+	
+	<%	}else {%>
+	<option>no hay nada que asignar</option>
+	<%	}%>
+	<option>no hay nada que asignar</option>
 </select>
-
-
 
 </td>
 
@@ -174,12 +177,19 @@ Cuenta Asignada!
 </td>
 </tr>
 
-<%
+<%}}%>
 
 
-	}
-}
-%>
+
+
+
+
+
+
+
+	
+
+
 
 		</tbody>
 	</table>
