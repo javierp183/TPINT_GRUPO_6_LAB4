@@ -50,32 +50,27 @@ public class servletCuentaAsignacion extends HttpServlet {
 		ClienteNegocioImpl clientedaoimpl = new ClienteNegocioImpl();
 		ArrayList<Cliente> listaclientes = (ArrayList<Cliente>) clientedaoimpl.readAll();
 		request.setAttribute("listaclientes", listaclientes);
-		System.out.println(listaclientes);
 		String Cbu = request.getParameter("inputCbu");
 		
 		if(request.getParameter("btnAsignar")!=null)
 		{
 		int dnicliente = Integer.parseInt(request.getParameter("inputDni"));
-		//int TipoCuenta = Integer.parseInt(request.getParameter("inputTipoCuenta"));
-		
 
 		
-		System.out.println("cuenta asignada");
 		cuentaaux = cuentadaoimpl.Search(Cbu);
 		cuentaaux.setDni(dnicliente);
-		//cuentaaux.setTipoCuenta(TipoCuenta);
+		
+		System.out.println("cbu");
+		System.out.println(Cbu);
+		System.out.println("Dni");
+		System.out.println(dnicliente);
 	
 		
-		if(cuentadaoimpl.Modify(cuentaaux) == true)
-		{
-			estado = 1;
-			request.setAttribute("estado", estado );
-		}
-		
-		
-		
-		System.out.println(dnicliente);
-		System.out.println(Cbu);
+			if(cuentadaoimpl.Modify(cuentaaux) == true)
+				{
+					estado = 1;
+					request.setAttribute("estado", estado );
+			}
 		
 		}
 		

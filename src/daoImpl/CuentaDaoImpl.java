@@ -21,7 +21,10 @@ public class CuentaDaoImpl implements CuentaDao
 	private static final String update = "UPDATE cuentas SET idcuenta = ?, saldo = ?, fecha = ?, cbu = ?, estado = ?, tipocuenta = ?, dnicliente = ? where cbu = ?";
 	private static final String contar = "SELECT COUNT(*) AS contar  FROM cuentas WHERE dnicliente = ?";
 	private static final String search = "SELECT * FROM cuentas WHERE cbu = ?";
+	private static final String readallunassigned = "SELECT * from cuentas WHERE dnicliente = 0";
+	
 	private static Date FechaInsert = null;
+	
 	
 	@Override
 	public Boolean Insert(Cuenta cuenta) {
@@ -128,12 +131,34 @@ public class CuentaDaoImpl implements CuentaDao
 	@Override
 	public List<Cuenta> ReadAll() {
 		PreparedStatement statement;
-		ResultSet resultSet; //Guarda el resultado de la query
+		ResultSet resultSet;
 		ArrayList<Cuenta> cuentas = new ArrayList<Cuenta>();
 		Conexion conexion = Conexion.getConexion();
 		try 
 		{
 			statement = conexion.getSQLConexion().prepareStatement(readall);
+			resultSet = statement.executeQuery();
+			while(resultSet.next())
+			{
+				cuentas.add(getCuenta(resultSet));
+			}
+		} 
+		catch (SQLException e) 
+		{
+			e.printStackTrace();
+		}
+		return cuentas;
+	}
+
+	@Override
+	public List<Cuenta> Readallunassigned() {
+		PreparedStatement statement;
+		ResultSet resultSet;
+		ArrayList<Cuenta> cuentas = new ArrayList<Cuenta>();
+		Conexion conexion = Conexion.getConexion();
+		try 
+		{
+			statement = conexion.getSQLConexion().prepareStatement(readallunassigned);
 			resultSet = statement.executeQuery();
 			while(resultSet.next())
 			{

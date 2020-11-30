@@ -43,4 +43,10 @@ public class CuentaNegocioImpl implements CuentaDao
 		return cdao.Search(Cbu);
 	}
 
+	@Override
+	public List<Cuenta> Readallunassigned() {
+		// TODO Auto-generated method stub
+		return cdao.Readallunassigned();
+	}
+
 }

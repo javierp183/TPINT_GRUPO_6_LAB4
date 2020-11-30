@@ -34,13 +34,22 @@
 
 function readselectFunc() {
 
-var selectedValue = inputCbu.options[inputCbu.selectedIndex].value;
-return selectedValue;
+
+var selectedValue = document.getElementById("inputCBU");
+
+
+console.log(selectedValue);
+
+
+
+return selectedValue.value;
+
 }
 
 
 function addURL(element)
 {
+	
 	var leerCBU = readselectFunc();
     $(element).attr('href', function() {
         return this.href + '&inputCbu=' + leerCBU;
@@ -143,7 +152,7 @@ Cuenta Asignada!
  
 
  
- <select name="inputCbu" id="inputCbu">
+ <select id="inputCBU">
 	<% 
 	if(listaCuentas!=null)
 		for(Cuenta cuenta: listaCuentas)

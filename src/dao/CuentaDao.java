@@ -11,4 +11,5 @@ public interface CuentaDao {
 	public List<Cuenta> ReadAll();
 	public int contarCuenta(int dnicuenta);
 	public Cuenta Search(String Cbu);
+	List<Cuenta> Readallunassigned();
 }
