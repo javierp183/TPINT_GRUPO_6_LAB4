@@ -31,6 +31,13 @@ public class servletCliente extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
+		
+		if(request.getParameter("volverPagina")!=null) {
+			System.out.println("quiere volver, con la frente marchita");
+			RequestDispatcher rd = request.getRequestDispatcher("Usuario.jsp");
+			rd.forward(request, response);
+		}
+		
 		Cliente cliente = new Cliente();
 		int inputDNIbaja = Integer.parseInt(request.getParameter("inputDNIbaja"));
 		cliente.setDni(inputDNIbaja);
@@ -52,6 +59,9 @@ public class servletCliente extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
+		
+
+		
 		if(request.getParameter("inputDNI")!=null)
 		{
 			int inputDNI = Integer.parseInt(request.getParameter("inputDNI"));

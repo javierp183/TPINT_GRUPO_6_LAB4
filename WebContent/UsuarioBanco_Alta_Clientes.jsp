@@ -148,9 +148,11 @@ Cliente creado!
  </div>
 </div>
 
-<button type="submit" class="btn btn-primary">Volver a Pagina Principal</button>
+ <form action="servletCliente" method="get">
 
-
+	<button type="submit" class="btn btn-primary" name="volverPagina" value="1">Volver a Pagina Principal</button>
+	
+</form>
 
 
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>

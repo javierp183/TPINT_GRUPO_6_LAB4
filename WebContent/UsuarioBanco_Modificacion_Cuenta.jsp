@@ -61,6 +61,12 @@
 
   <button type="submit" class="btn btn-primary">Aceptar</button>
 </form>
+
+ <form action="servletCliente" method="get">
+
+	<button type="submit" class="btn btn-primary" name="volverPagina" value="1">Volver a Pagina Principal</button>
+	
+</form>
  </div>
 </div>
 

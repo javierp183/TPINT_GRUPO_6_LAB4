@@ -75,6 +75,12 @@ public class servletCuentaAsignacion extends HttpServlet {
 		
 		}
 		
+		if(request.getParameter("volverPagina")!=null) {
+			System.out.println("quiere volver, con la frente marchita");
+			RequestDispatcher rd = request.getRequestDispatcher("Usuario.jsp");
+			rd.forward(request, response);
+		}
+		
 		RequestDispatcher rd = request.getRequestDispatcher("UsuarioBanco_Alta_Cuentas_Asignacion.jsp");
 		rd.forward(request, response);
 	}
