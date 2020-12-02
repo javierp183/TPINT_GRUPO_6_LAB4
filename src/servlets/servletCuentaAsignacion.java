@@ -50,7 +50,10 @@ public class servletCuentaAsignacion extends HttpServlet {
 		
 		ClienteNegocioImpl clientedaoimpl = new ClienteNegocioImpl();
 		ArrayList<Cliente> listaclientes = (ArrayList<Cliente>) clientedaoimpl.readAll();
-		request.setAttribute("listaclientes", listaclientes);
+		
+		ArrayList<Cliente> listaclientesactivos = (ArrayList<Cliente>) clientedaoimpl.getClientesActivos();
+		System.out.println(listaclientesactivos);
+		request.setAttribute("listaclientes", listaclientesactivos);
 		String Cbu = request.getParameter("inputCbu");
 		
 		if(request.getParameter("btnAsignar")!=null)

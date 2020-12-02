@@ -23,6 +23,7 @@ public class ClienteDaoImpl implements ClienteDao
 	private static final String update = "UPDATE clientes SET dni = ?, cuil = ?, nombre = ?, apellido = ?, sexo = ?, nacionalidad = ?, fechanac = ?, direccion = ?, localidad = ?, provincia = ?, correo = ?, telefono = ?, usuario = ?, password = ?, tipousuario = ?, estado = ? where Dni = ?";
 	private static final String Provincia = null;
 	private static final String TipoUsuarioCliente = "SELECT * from clientes where usuario = ?";
+	private static final String UsuariosClienteActivo = "SELECT * from clientes where estado = 1";
 	
 	private Date fecha;
 
@@ -209,6 +210,30 @@ public class ClienteDaoImpl implements ClienteDao
 		try 
 		{
 			statement = conexion.getSQLConexion().prepareStatement(readall);
+			resultSet = statement.executeQuery();
+			while(resultSet.next())
+			{
+				clientes.add(getCliente(resultSet));
+			}
+		} 
+		catch (SQLException e) 
+		{
+			e.printStackTrace();
+		}
+		return clientes;
+	}
+	
+
+	@Override
+	public List<Cliente> getClientesActivos()
+	{
+		PreparedStatement statement;
+		ResultSet resultSet; //Guarda el resultado de la query
+		ArrayList<Cliente> clientes = new ArrayList<Cliente>();
+		Conexion conexion = Conexion.getConexion();
+		try 
+		{
+			statement = conexion.getSQLConexion().prepareStatement(UsuariosClienteActivo);
 			resultSet = statement.executeQuery();
 			while(resultSet.next())
 			{

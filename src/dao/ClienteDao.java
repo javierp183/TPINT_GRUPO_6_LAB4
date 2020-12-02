@@ -11,4 +11,5 @@ public interface ClienteDao {
 	public List<Cliente> readAll();
 	public Cliente getClientePorMail(String emailWeb, String passWeb);
 	Cliente getTipoUsuario(String usuario);
+	List<Cliente> getClientesActivos();
 }

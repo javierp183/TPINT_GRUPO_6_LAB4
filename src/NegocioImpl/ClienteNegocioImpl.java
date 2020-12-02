@@ -52,4 +52,12 @@ public class ClienteNegocioImpl implements ClienteDao
 	}
 
 
+
+	@Override
+	public List<Cliente> getClientesActivos() {
+		// TODO Auto-generated method stub
+		return cdao.getClientesActivos();
+	}
+
+
 }
