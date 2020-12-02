@@ -146,11 +146,31 @@ Cuenta Asignada!
 	if(listaCuentas!=null) {
 		for(Cuenta cuenta: listaCuentas)
 		{
+			
+			if(cuenta.getTipoCuenta()==0)
+			{
+				String cajadeahorro = "caja de ahorro";
+			
 			%>
 			
-			<option value=<%=cuenta.getCbu()%>><%= cuenta.getCbu()%></option>
+			<option value=<%=cuenta.getCbu()%>><%= cuenta.getCbu()%> - <%=cajadeahorro %></option>
 			
-	<%	}  %>
+	<%	} else {
+		
+		String cuentacorriente = "cuenta corriente";
+		%>
+		
+		<option value=<%=cuenta.getCbu()%>><%= cuenta.getCbu()%> - <%=cuentacorriente %></option>
+		
+	<%
+	}
+			
+			
+			
+		} 
+	
+	
+	%>
 	
 	<%	}else {%>
 	<option>no hay nada que asignar</option>

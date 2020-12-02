@@ -42,11 +42,11 @@ public class servletCuentaAsignacion extends HttpServlet {
 		CuentaNegocioImpl cuentadaoimpl = new CuentaNegocioImpl();
 		Cuenta cuenta = new Cuenta();
 		Cuenta cuentaaux = new Cuenta();
-		ArrayList<Cuenta> listacuentas = (ArrayList<Cuenta>) cuentadaoimpl.ReadAll();
+		//ArrayList<Cuenta> listacuentas = (ArrayList<Cuenta>) cuentadaoimpl.ReadAll();
 		ArrayList<Cuenta> listacuentassinasignar = (ArrayList<Cuenta>) cuentadaoimpl.Readallunassigned();
 		request.setAttribute("listacuentas", listacuentassinasignar);
 		int estado = 0;
-		System.out.println(listacuentas);
+		//System.out.println(listacuentas);
 		
 		ClienteNegocioImpl clientedaoimpl = new ClienteNegocioImpl();
 		ArrayList<Cliente> listaclientes = (ArrayList<Cliente>) clientedaoimpl.readAll();
