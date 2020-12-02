@@ -2,7 +2,9 @@ package servlets;
 
 import java.io.IOException;
 import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
+import javax.servlet.ServletRequest;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -57,6 +59,10 @@ public class servletLogin extends HttpServlet {
         	if(cliente.getTipoUsuario() == 0) {
         		if(cliente.getPassword().equals(password))
         		{
+        			
+        			request.setAttribute("nombre", cliente.getNombre());
+        			request.setAttribute("apellido", cliente.getApellido());
+        			request.setAttribute("usuario", cliente.getUsuario());
                     RequestDispatcher requestDispatcher = request.getRequestDispatcher("/Cliente.jsp");
                     requestDispatcher.forward(request, response);
         		}
@@ -67,6 +73,9 @@ public class servletLogin extends HttpServlet {
         	if(usuariobanco.getTipoUsuario() == 1) {
         		if(usuariobanco.getPassword().equals(password)) 
         		{
+        			request.setAttribute("nombre", usuariobanco.getNombre());
+        			request.setAttribute("apellido", usuariobanco.getApellido());
+        			request.setAttribute("usuario", usuariobanco.getUsuario());
                     RequestDispatcher requestDispatcher = request.getRequestDispatcher("/Usuario.jsp");
                     requestDispatcher.forward(request, response);
         		}
