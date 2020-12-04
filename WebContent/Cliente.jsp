@@ -57,11 +57,13 @@
   </thead>
   <tbody>
     <tr>
-      <td><button type="submit" class="btn btn-primary">Pedido Prestamo</button></td>
+    <td><a type="button" href="Cliente_Pedido_Prestamo.jsp?test=1" class="btn btn-primary">Pedido Prestamo</a></td>
+      <td><button type="submit" class="btn btn-primary"></button></td>
       <td><button type="submit" class="btn btn-primary">Pago Prestamo</button></td>
       <td><button type="submit" class="btn btn-primary">Ver Historial</button></td>
       <td><button type="submit" class="btn btn-primary">Transferencias</button></td>
       <td><button type="submit" class="btn btn-primary">Ver Informacion</button></td>
+       
     </tr>
     </tr>
   </tbody>

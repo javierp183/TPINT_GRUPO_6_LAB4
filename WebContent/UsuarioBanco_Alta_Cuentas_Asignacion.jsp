@@ -138,9 +138,7 @@ Cuenta Asignada!
 <td>
 
 <label for="inputCbu">Seleccionar cuenta ( CBU ):</label>
- 
 
- 
  <select id="inputCBU">
 	<% 
 	if(listaCuentas!=null) {

@@ -37,8 +37,6 @@ public class servletCuentaAsignacion extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		System.out.println("todo bien?");
-		System.out.println("listando cuentas");
 		CuentaNegocioImpl cuentadaoimpl = new CuentaNegocioImpl();
 		Cuenta cuenta = new Cuenta();
 		Cuenta cuentaaux = new Cuenta();

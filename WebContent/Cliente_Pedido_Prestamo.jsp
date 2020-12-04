@@ -46,16 +46,67 @@
 
 <h1>Pedido de prestamo</h1>
 
+<%
+ArrayList<Cuenta> listaCuentas = null;
+
+if(request.getAttribute("listacuentas")!=null)
+{
+	listaCuentas = (ArrayList<Cuenta>) request.getAttribute("listacuentas");
+
+}
+%>
+
+
 <div class="container">
  <div class="row">
  <form  action="servletPrestamo" method="get">
   <div>
- 	<label for="cuenta">Elegir Cuenta</label>
-		<select name="InputCuenta" id="cars">
-  			<option value="volvo">Caja de ahorro</option>
-  			<option value="saab">Cuenta Corriente</option>
-		</select> 
+  
+  
+  <td>
+
+<label for="inputCbu">Seleccionar cuenta ( CBU ):</label>
+
+ <select id="inputCBU">
+	<% 
+	if(listaCuentas!=null) {
+		for(Cuenta cuenta: listaCuentas)
+		{
+			
+			if(cuenta.getTipoCuenta()==0)
+			{
+				String cajadeahorro = "caja de ahorro";
+			%>
+			
+			<option value=<%=cuenta.getCbu()%>><%= cuenta.getCbu()%> - <%=cajadeahorro %></option>
+			<h1>test</h1>
+	<%	} else {
+		
+		String cuentacorriente = "cuenta corriente";
+		%>
+		
+		<option value=<%=cuenta.getCbu()%>><%= cuenta.getCbu()%> - <%=cuentacorriente %></option>
+		
+	<%
+	}		
+		}
+	%>
+
   </div>
+	<%	}else {%>
+	<option>no hay nada que asignar</option>
+	<%	}%>
+	<option>no hay nada que asignar</option>
+</select>
+
+<%
+if(listaCuentas!=null) {
+%>
+
+
+<div class="container">
+ <div class="row">
+ <form  action="servletPrestamo" method="get">
    <div>
  	<label for="ccuotasars">Cuotas</label>
 		<select name="inputCuotas" id="cars">
@@ -68,10 +119,15 @@
     <input type="input" class="form-control" name="inputMonto" id="inputMonto" aria-describedby="emailHelp">
     <small id="emailHelp" class="form-text text-muted">Sin interes</small>
   </div>
-  <button type="submit" class="btn btn-primary">Aceptar</button>
+  <button type="submit" class="btn btn-primary">Pedir Prestamo</button>
 </form>
  </div>
 </div>
+<%
+}
+%>
+<button type="submit" class="btn btn-primary">Listar Cuentas</button>
+
 
 <button type="submit" class="btn btn-primary">Volver a Pagina Principal</button>
 

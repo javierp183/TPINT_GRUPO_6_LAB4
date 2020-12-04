@@ -63,6 +63,7 @@ public class servletLogin extends HttpServlet {
         			request.setAttribute("nombre", cliente.getNombre());
         			request.setAttribute("apellido", cliente.getApellido());
         			request.setAttribute("usuario", cliente.getUsuario());
+        			request.setAttribute("dni", cliente.getDni());
                     RequestDispatcher requestDispatcher = request.getRequestDispatcher("/Cliente.jsp");
                     requestDispatcher.forward(request, response);
         		}
