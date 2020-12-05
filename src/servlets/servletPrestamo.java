@@ -2,6 +2,8 @@ package servlets;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.LinkedHashMap;
+import java.util.Map;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -34,18 +36,27 @@ public class servletPrestamo extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		Cliente cliente = new Cliente();
 		
+		if(request.getParameter("usuario")!=null)
+		{
+			System.out.println("amigo, esta es la rula!!!");
+			
+		}
+		
+		Cliente cliente = new Cliente();
 		String Monto = request.getParameter("inputMonto");
 		String Cuotas = request.getParameter("inputCuotas");
+		String Dni = request.getParameter("inputDNI");
 		CuentaNegocioImpl cuentadaoimpl = new CuentaNegocioImpl();
 		ArrayList<Cuenta> listacuentassinasignar = (ArrayList<Cuenta>) cuentadaoimpl.Readallunassigned();
 		request.setAttribute("listacuentas", listacuentassinasignar);
 		request.setAttribute("dni", cliente.getDni());
+		String[] uris=request.getRequestURI().split("/");
 		
 		System.out.println(Monto);
 		System.out.println(Cuotas);
-		
+		System.out.println(request.getAttribute("test"));
+		System.out.println(Dni);
 		
 		
 		

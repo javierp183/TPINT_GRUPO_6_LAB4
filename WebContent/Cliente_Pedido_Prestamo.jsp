@@ -11,6 +11,8 @@
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
  integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
  crossorigin="anonymous">
+
+
 <title>Cliente Banco - Pedido de Prestamo - Banco Tecnologico</title>
 </head>
 <body>
@@ -32,10 +34,10 @@
     <tbody>
       <tr>
         <td>
-           Javier Pereyra
+           ${nombre} ${apellido}
         </td>
         <td>
-           Admin123
+           ${usuario}
         </td>
         <td>
             <img src="/static/img/{{ context.6.operator.userid }}.jpg"  height="60" width="60">
@@ -126,8 +128,8 @@ if(listaCuentas!=null) {
 <%
 }
 %>
-<button type="submit" class="btn btn-primary">Listar Cuentas</button>
 
+<button type="submit" class="btn btn-primary">Listar Cuentas</button>
 
 <button type="submit" class="btn btn-primary">Volver a Pagina Principal</button>
 

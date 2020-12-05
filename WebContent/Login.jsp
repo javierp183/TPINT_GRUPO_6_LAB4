@@ -22,9 +22,12 @@
  <form action="servletLogin" method="post" style="margin: 0 auto;">
  
 
+ 
+
 
   <div class="form-group" >
     <label for="userLogin">Usuario</label>
+ 
     <input type="input" class="form-control" id="txtMail" name="userLogin" aria-describedby="emailHelp">
     <small id="emailHelp" class="form-text text-muted">Ingrese su Usuario con el cual se dio de alta.</small>
   </div>

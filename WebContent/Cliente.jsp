@@ -45,6 +45,10 @@
 
 <h1> Menu de Opciones </h1>
 
+<% String name=request.getParameter("userLogin");
+request.setAttribute("miusuario", name);
+%>
+
 <table class="table">
   <thead class="thead-dark">
     <tr>
@@ -57,7 +61,7 @@
   </thead>
   <tbody>
     <tr>
-    <td><a type="button" href="Cliente_Pedido_Prestamo.jsp?test=1" class="btn btn-primary">Pedido Prestamo</a></td>
+    <td><a href="servletPrestamo?usuario=${miusuario}">Pedir Prestamo</a></td>
       <td><button type="submit" class="btn btn-primary"></button></td>
       <td><button type="submit" class="btn btn-primary">Pago Prestamo</button></td>
       <td><button type="submit" class="btn btn-primary">Ver Historial</button></td>
