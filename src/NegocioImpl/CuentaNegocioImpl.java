@@ -49,4 +49,10 @@ public class CuentaNegocioImpl implements CuentaDao
 		return cdao.Readallunassigned();
 	}
 
+	@Override
+	public List<Cuenta> ListarCuentasPorDNI(int dni) {
+		// TODO Auto-generated method stub
+		return cdao.ListarCuentasPorDNI(dni);
+	}
+
 }

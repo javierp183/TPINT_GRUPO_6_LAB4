@@ -12,9 +12,12 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import NegocioImpl.ClienteNegocioImpl;
 import NegocioImpl.CuentaNegocioImpl;
+import NegocioImpl.PrestamoNegocioImpl;
 import dominio.Cliente;
 import dominio.Cuenta;
+import dominio.Prestamo;
 
 /**
  * Servlet implementation class servletPrestamo
@@ -36,29 +39,48 @@ public class servletPrestamo extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		
+		CuentaNegocioImpl cuentadaoimpl = new CuentaNegocioImpl();
+		ClienteNegocioImpl clientedaoimpl = new ClienteNegocioImpl();
+		PrestamoNegocioImpl prestamodaoimpl = new PrestamoNegocioImpl();
+		Prestamo prestamo = new Prestamo();
 		if(request.getParameter("usuario")!=null)
 		{
-			System.out.println("amigo, esta es la rula!!!");
+			// Obtener el DNI
+			Cliente cliente = new Cliente();
+			cliente = clientedaoimpl.getClientePorDNI(request.getParameter("usuario"));
+			System.out.println(cliente.getDni());
+			ArrayList<Cuenta> cuentaspordni = (ArrayList<Cuenta>) cuentadaoimpl.ListarCuentasPorDNI(cliente.getDni());
+			System.out.println("te muestro las cuentas de Lazaro Baes");
+			System.out.println(cuentaspordni);
+			request.setAttribute("listacuentas", cuentaspordni);
+			request.setAttribute("dnidelcliente", cliente.getDni());
 			
 		}
 		
-		Cliente cliente = new Cliente();
-		String Monto = request.getParameter("inputMonto");
-		String Cuotas = request.getParameter("inputCuotas");
-		String Dni = request.getParameter("inputDNI");
-		CuentaNegocioImpl cuentadaoimpl = new CuentaNegocioImpl();
-		ArrayList<Cuenta> listacuentassinasignar = (ArrayList<Cuenta>) cuentadaoimpl.Readallunassigned();
-		request.setAttribute("listacuentas", listacuentassinasignar);
-		request.setAttribute("dni", cliente.getDni());
-		String[] uris=request.getRequestURI().split("/");
+		if(request.getParameter("btnAsignar")!=null)
+		{
+			String Cbu = (String) request.getParameter("inputCbu");
+			int Dni = Integer.parseInt(request.getParameter("inputDni"));
+			float Monto = Float.parseFloat(request.getParameter("inputMonto"));
+			int Cuotas = Integer.parseInt(request.getParameter("inputCuotas"));
+			
+			prestamo.setCbu(Cbu);
+			prestamo.setDniCliente(Dni);
+			prestamo.setMontoTotal(Monto);
+			prestamo.setEstado(0);
+			prestamo.setNumCuotas(Cuotas);
+			prestamo.setMontoRestante(Monto);
+			prestamo.setPagoxmes(Monto);
+			
+			prestamodaoimpl.insert(prestamo);
+			System.out.println("salio todo oka");
+		}
 		
-		System.out.println(Monto);
-		System.out.println(Cuotas);
-		System.out.println(request.getAttribute("test"));
-		System.out.println(Dni);
-		
-		
+		if(request.getParameter("volverPagina")!=null)
+		{
+			RequestDispatcher rd = request.getRequestDispatcher("Cliente.jsp");
+			rd.forward(request, response);
+		}
 		
 		
 		RequestDispatcher rd = request.getRequestDispatcher("Cliente_Pedido_Prestamo.jsp");

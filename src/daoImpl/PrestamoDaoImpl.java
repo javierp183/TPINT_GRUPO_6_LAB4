@@ -35,20 +35,23 @@ public class PrestamoDaoImpl implements PrestamoDao
 		PreparedStatement statement;
 		Connection conexion = Conexion.getConexion().getSQLConexion();
 		FechaInsert = FechaInsert.valueOf(prestamo.getFecha().toLocalDate());
+		//FechaInsert = Date.valueOf(prestamo.getFecha().toLocalDate());
 		
 		boolean isInsertExitoso = false;
 		try
 		{
+			System.out.println("seteo de variable al objeto de la base");
 			statement = conexion.prepareStatement(insert);
 			statement.setInt(1, prestamo.getIdPrestamo());
 			statement.setInt(2, prestamo.getDniCliente());
 			statement.setFloat(3, prestamo.getMontoTotal());
 			statement.setString(4, prestamo.getCbu());
-			statement.setDate(4, FechaInsert);
-			statement.setInt(5, prestamo.getEstado());
-			statement.setFloat(6, prestamo.getPagoxmes());
-			statement.setInt(7, prestamo.getNumCuotas());
-			statement.setFloat(8, prestamo.getMontoRestante());
+			statement.setDate(5, FechaInsert);
+			statement.setInt(6, prestamo.getEstado());
+			statement.setFloat(7, prestamo.getPagoxmes());
+			statement.setFloat(8, prestamo.getPagoxmes());
+			statement.setInt(9, prestamo.getNumCuotas());
+			statement.setFloat(10, prestamo.getMontoRestante());
 			
 			if(statement.executeUpdate() > 0)
 			{

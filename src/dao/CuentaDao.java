@@ -12,4 +12,5 @@ public interface CuentaDao {
 	public int contarCuenta(int dnicuenta);
 	public Cuenta Search(String Cbu);
 	List<Cuenta> Readallunassigned();
+	List<Cuenta> ListarCuentasPorDNI(int dni);
 }

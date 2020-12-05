@@ -24,6 +24,7 @@ public class ClienteDaoImpl implements ClienteDao
 	private static final String Provincia = null;
 	private static final String TipoUsuarioCliente = "SELECT * from clientes where usuario = ?";
 	private static final String UsuariosClienteActivo = "SELECT * from clientes where estado = 1";
+	private static final String obtenerDni = "SELECT * from clientes where usuario = ?";
 	
 	private Date fecha;
 
@@ -245,6 +246,31 @@ public class ClienteDaoImpl implements ClienteDao
 			e.printStackTrace();
 		}
 		return clientes;
+	}
+	
+	@Override
+	public Cliente getClientePorDNI(String usuario)
+	{		
+		PreparedStatement statement;
+		Conexion conexion = Conexion.getConexion();
+		ResultSet resultSet; //Guarda el resultado de la query
+		try {
+			// Esta variable la inicialize para que no tire error, pero hay que ver.
+			//String readByMail = null;
+			
+			statement = conexion.getSQLConexion().prepareStatement(obtenerDni);
+			statement.setString(1, usuario);
+			resultSet = statement.executeQuery();
+			if(resultSet.next()) {
+
+				return getCliente(resultSet);
+			}
+			
+		} catch (Exception e) {
+			return new Cliente();
+		}
+		
+		return new Cliente();
 	}
 	
 	

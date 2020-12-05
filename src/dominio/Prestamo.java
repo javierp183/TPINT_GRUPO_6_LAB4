@@ -17,7 +17,7 @@ public class Prestamo {
 	public Prestamo()
 	{
 		super();
-		
+		Fecha = Fecha.now();
 	}
 	
 	

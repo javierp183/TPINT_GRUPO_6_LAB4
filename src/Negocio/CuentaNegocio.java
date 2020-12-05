@@ -11,4 +11,5 @@ public interface CuentaNegocio {
 	public List<Cuenta> ReadAll();
 	public int contar(int dnicuenta);
 	public Cuenta Search(String Cbu);
+	
 }

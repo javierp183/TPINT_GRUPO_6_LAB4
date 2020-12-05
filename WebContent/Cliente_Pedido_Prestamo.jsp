@@ -17,6 +17,52 @@
 </head>
 <body>
 
+<script type="text/javascript">
+	$(document).ready(function() {
+		$('#table_id').DataTable();
+	});
+</script>
+
+<script type="text/javascript">
+
+function readselectFunc() {
+
+
+var selectedValue = document.getElementById("inputCBU");
+
+return selectedValue.value;
+}
+
+function readMonto() {
+
+
+	var MontoValue = document.getElementById("inputMonto");
+
+	return MontoValue.value;
+}
+
+function readCuotas() {
+
+
+	var selectedCuotas = document.getElementById("inputCuotas");
+
+	return selectedCuotas.value;
+}
+
+
+function addURL(element)
+{
+	
+	var leerCBU = readselectFunc();
+	var leerMonto = readMonto();
+	var leerCuotas = readCuotas();
+    $(element).attr('href', function() {
+        return this.href + '&inputCbu=' + leerCBU + '&inputMonto=' + leerMonto + '&inputCuotas=' + leerCuotas;
+    });
+}
+
+</script>
+
 <table class="table table-dark">
   <thead>
     <tr>
@@ -111,7 +157,7 @@ if(listaCuentas!=null) {
  <form  action="servletPrestamo" method="get">
    <div>
  	<label for="ccuotasars">Cuotas</label>
-		<select name="inputCuotas" id="cars">
+		<select name="inputCuotas" id="inputCuotas">
   			<option value="12">12</option>
   			<option value="18">18</option>
 		</select> 
@@ -121,7 +167,9 @@ if(listaCuentas!=null) {
     <input type="input" class="form-control" name="inputMonto" id="inputMonto" aria-describedby="emailHelp">
     <small id="emailHelp" class="form-text text-muted">Sin interes</small>
   </div>
-  <button type="submit" class="btn btn-primary">Pedir Prestamo</button>
+ 
+  <a onclick="addURL(this)" href="servletPrestamo?btnAsignar=1&inputDni=${dnidelcliente}">Pedir Prestamo</a>
+  
 </form>
  </div>
 </div>
@@ -129,9 +177,8 @@ if(listaCuentas!=null) {
 }
 %>
 
-<button type="submit" class="btn btn-primary">Listar Cuentas</button>
 
-<button type="submit" class="btn btn-primary">Volver a Pagina Principal</button>
+<button type="submit" class="btn btn-primary" name="volverPagina" value="1">Volver a Pagina Principal</button>
 
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>

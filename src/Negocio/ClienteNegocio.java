@@ -12,4 +12,5 @@ public interface ClienteNegocio {
 	public boolean modify(Cliente c);
 	public List<Cliente> readAll();
 	public Cliente getClientePorMail(String emailWeb, String passWeb);
+	public Cliente getClientePorDNI(String usuario);
 }

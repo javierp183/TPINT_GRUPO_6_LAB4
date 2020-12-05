@@ -60,4 +60,12 @@ public class ClienteNegocioImpl implements ClienteDao
 	}
 
 
+
+	@Override
+	public Cliente getClientePorDNI(String usuario) {
+		// TODO Auto-generated method stub
+		return cdao.getClientePorDNI(usuario);
+	}
+
+
 }
