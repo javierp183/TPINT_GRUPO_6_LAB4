@@ -34,14 +34,39 @@ public class servletAdministrador extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
+		Prestamo prestamo = new Prestamo();
+		PrestamoNegocioImpl prestamodaoimpl = new PrestamoNegocioImpl();
 		if(request.getParameter("btnListarPedidos")!=null)
 		{
 			System.out.println("te voy a listar los pedidos");
-			Prestamo prestamo = new Prestamo();
-			PrestamoNegocioImpl prestamodaoimpl = new PrestamoNegocioImpl();
+			
+			
 			ArrayList<Prestamo> prestamossinaprobar = (ArrayList<Prestamo>) prestamodaoimpl.readAllUnapproved();
 			System.out.println(prestamossinaprobar);
 			request.setAttribute("prestamossinaprobar", prestamossinaprobar);
+			
+			RequestDispatcher rd = request.getRequestDispatcher("Administrador_Autorizacion_Prestamo.jsp");
+			rd.forward(request, response);
+		}
+		
+		if(request.getParameter("btnHabilitarPrestamo")!=null)
+		{
+			System.out.println("habilitando prestamo");
+			int IdPrestamo = Integer.parseInt(request.getParameter("txtPrestamoID"));
+			System.out.println("ID de prestamo");
+			System.out.println(IdPrestamo);
+			
+			prestamo = prestamodaoimpl.getPrestamoPorID(IdPrestamo);
+			System.out.println(prestamo.getDniCliente());
+			System.out.println(prestamo.getNombre());
+			System.out.println("DNI:");
+			System.out.println(prestamo.getDniCliente());
+			prestamo.setEstado(1);
+			System.out.println(prestamo.getEstado());
+			prestamodaoimpl.modify(prestamo);
+			System.out.println("habilitando finalizar prestamo");
+			
+			
 			
 			
 			

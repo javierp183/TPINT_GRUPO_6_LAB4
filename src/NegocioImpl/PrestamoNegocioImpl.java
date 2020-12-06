@@ -48,4 +48,10 @@ public class PrestamoNegocioImpl implements PrestamoDao
 		return pdao.readAllUnapproved();
 	}
 
+	@Override
+	public Prestamo getPrestamoID(int idprestamo) {
+		// TODO Auto-generated method stub
+		return pdao.getPrestamoID(idprestamo);
+	}
+
 }

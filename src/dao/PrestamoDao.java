@@ -12,4 +12,5 @@ public interface PrestamoDao {
 	Prestamo getPrestamoPorID(int idprestamo);
 	public List<Prestamo> readAll();
 	public List<Prestamo> readAllUnapproved();
+	Prestamo getPrestamoID(int idprestamo);
 }

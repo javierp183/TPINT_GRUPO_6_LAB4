@@ -23,9 +23,10 @@ public class PrestamoDaoImpl implements PrestamoDao
 	private static final String readall = "SELECT * FROM clientes";
 	private static final String readallunaproved = "SELECT * FROM prestamos where estado = 0";
 	private static final String readByMail = "Select * from clientes where correo = ? and password = ?";
-	private static final String update = "UPDATE clientes SET dni = ?, cuil = ?, nombre = ?, apellido = ?, sexo = ?, nacionalidad = ?, fechanac = ?, direccion = ?, localidad = ?, provincia = ?, correo = ?, telefono = ?, usuario = ?, password = ?, tipousuario = ?, estado = ? where Dni = ?";
+	private static final String update = "UPDATE prestamos SET idprestamo = ?, dnicliente = ?, montototal = ?, cbu = ?, fecha = ?, estado = ?, pagoxmes = ?, montopormes = ?, numcuotas = ?, montorestante = ?, nombre = ?, apellido = ? where idprestamo = ?";
 	private static final String Provincia = null;
 	private static final String TipoUsuarioCliente = "SELECT * from clientes where usuario = ?";
+	private static final String readprestamo = "SELECT * from prestamos where idprestamo = ?";
 	private static Date FechaInsert = null;
 	private static String Fechastring = null;
 	
@@ -51,7 +52,7 @@ public class PrestamoDaoImpl implements PrestamoDao
 			statement.setString(5, prestamo.getFecha());
 			statement.setInt(6, prestamo.getEstado());
 			statement.setFloat(7, prestamo.getPagoxmes());
-			statement.setFloat(8, prestamo.getPagoxmes());
+			statement.setFloat(8, prestamo.getMontopormes());
 			statement.setInt(9, prestamo.getNumCuotas());
 			statement.setFloat(10, prestamo.getMontoRestante());
 			statement.setString(11, prestamo.getNombre());
@@ -114,11 +115,15 @@ public class PrestamoDaoImpl implements PrestamoDao
 			statement.setInt(2, prestamo.getDniCliente());
 			statement.setFloat(3, prestamo.getMontoTotal());
 			statement.setString(4, prestamo.getCbu());
-			statement.setDate(4, FechaInsert);
-			statement.setInt(5, prestamo.getEstado());
-			statement.setFloat(6, prestamo.getPagoxmes());
-			statement.setInt(7, prestamo.getNumCuotas());
-			statement.setFloat(8, prestamo.getMontoRestante());
+			statement.setString(5, prestamo.getFecha());
+			statement.setInt(6, prestamo.getEstado());
+			statement.setFloat(7, prestamo.getPagoxmes());
+			statement.setFloat(8, prestamo.getMontopormes());
+			statement.setInt(9, prestamo.getNumCuotas());
+			statement.setFloat(10, prestamo.getMontoRestante());
+			statement.setString(11, prestamo.getNombre());
+			statement.setString(12, prestamo.getApellido());
+			statement.setInt(13, prestamo.getIdPrestamo());
 			
 			if(statement.executeUpdate() > 0)
 			{
@@ -149,8 +154,33 @@ public class PrestamoDaoImpl implements PrestamoDao
 			// Esta variable la inicialize para que no tire error, pero hay que ver.
 			//String readByMail = null;
 			
-			statement = conexion.getSQLConexion().prepareStatement(TipoUsuarioCliente);
-			//statement.setString(1, usuario);
+			statement = conexion.getSQLConexion().prepareStatement(readprestamo);
+			statement.setInt(1, idprestamo);
+			resultSet = statement.executeQuery();
+			if(resultSet.next()) {
+
+				return getPrestamo(resultSet);
+			}
+			
+		} catch (Exception e) {
+			return new Prestamo();
+		}
+		
+		return new Prestamo();
+	}
+	
+	@Override
+	public Prestamo getPrestamoID(int idprestamo)
+	{		
+		PreparedStatement statement;
+		Conexion conexion = Conexion.getConexion();
+		ResultSet resultSet; //Guarda el resultado de la query
+		try {
+			// Esta variable la inicialize para que no tire error, pero hay que ver.
+			//String readByMail = null;
+			
+			statement = conexion.getSQLConexion().prepareStatement(readprestamo);
+			statement.setInt(1, idprestamo);
 			resultSet = statement.executeQuery();
 			if(resultSet.next()) {
 
@@ -211,9 +241,6 @@ public class PrestamoDaoImpl implements PrestamoDao
 		return clientes;
 	}
 	
-    public static LocalDateTime asLocalDateTime(java.util.Date date) {
-        return asLocalDateTime(date);
-    }
 	
 	private Prestamo getPrestamo(ResultSet resultSet) throws SQLException
 	{

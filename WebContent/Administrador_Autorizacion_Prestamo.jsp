@@ -66,10 +66,8 @@
 <table class="table">
   <thead class="thead-dark">
     <tr>
-      <th scope="col">#</th>
       <th scope="col">Nombre</th>
       <th scope="col">Apellido</th>
-      <th scope="col">Usuario Cliente</th>
       <th scope="col">Monto a aprobar</th>
       <th scope="col">Plan de pago ( En cuotas )</th>
       <th scope="col">Valor de la cuota</th>
@@ -86,20 +84,14 @@ if(request.getAttribute("prestamossinaprobar")!=null)
 	for(Prestamo prestamo : listaPrestamos)
 	{
 %>
-
-
- 
-   
-      <th scope="row">2</th>
       <td><%=prestamo.getNombre() %> </td>
       <td><%=prestamo.getApellido() %></td>
-      <td>dthorton</td>
-      <td>10.000</td>
-      <td>60</td>
-      <td>166.666</td>
-      <td><input type="checkbox"></input</td>
-      
-      	<h1></h1>
+      <td><%=prestamo.getMontoTotal() %></td>
+      <td><%=prestamo.getNumCuotas() %></td>
+      <td><%=prestamo.getMontopormes() %></td>
+      <td><input type="submit" onclick="window.location.href='servletAdministrador?btnHabilitarPrestamo=1&txtPrestamoID=<%=prestamo.getIdPrestamo()%>">
+       <a  href="servletAdministrador?btnHabilitarPrestamo=1&txtPrestamoID=<%=prestamo.getIdPrestamo()%>">Aprobar Prestamo</a>
+      </td>
 
 <%
 }}
