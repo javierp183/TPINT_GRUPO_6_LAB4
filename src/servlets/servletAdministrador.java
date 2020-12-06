@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import NegocioImpl.CuentaNegocioImpl;
 import NegocioImpl.PrestamoNegocioImpl;
 import dominio.Cuenta;
 import dominio.Prestamo;
@@ -35,7 +36,9 @@ public class servletAdministrador extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		Prestamo prestamo = new Prestamo();
+		Cuenta cuenta = new Cuenta();
 		PrestamoNegocioImpl prestamodaoimpl = new PrestamoNegocioImpl();
+		CuentaNegocioImpl cuentanegocioimpl = new CuentaNegocioImpl();
 		if(request.getParameter("btnListarPedidos")!=null)
 		{
 			System.out.println("te voy a listar los pedidos");
@@ -51,6 +54,7 @@ public class servletAdministrador extends HttpServlet {
 		
 		if(request.getParameter("btnHabilitarPrestamo")!=null)
 		{
+			float SaldoFinalDeCuenta = 0;
 			System.out.println("habilitando prestamo");
 			int IdPrestamo = Integer.parseInt(request.getParameter("txtPrestamoID"));
 			System.out.println("ID de prestamo");
@@ -64,6 +68,12 @@ public class servletAdministrador extends HttpServlet {
 			prestamo.setEstado(1);
 			System.out.println(prestamo.getEstado());
 			prestamodaoimpl.modify(prestamo);
+			cuenta = cuentanegocioimpl.Search(prestamo.getCbu());
+			SaldoFinalDeCuenta = cuenta.getSaldo() + prestamo.getMontoTotal();
+			
+			cuenta.setSaldo(SaldoFinalDeCuenta);
+			cuentanegocioimpl.Modify(cuenta);
+			
 			System.out.println("habilitando finalizar prestamo");
 			
 			
