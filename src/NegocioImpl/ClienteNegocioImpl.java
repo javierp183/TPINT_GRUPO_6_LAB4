@@ -68,4 +68,11 @@ public class ClienteNegocioImpl implements ClienteDao
 	}
 
 
+
+	public Cliente getClientePorUsuario(int Dni) {
+		// TODO Auto-generated method stub
+		return cdao.getClientePorUsuario(Dni);
+	}
+
+
 }

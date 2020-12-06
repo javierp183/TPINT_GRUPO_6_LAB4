@@ -18,14 +18,16 @@ import dao.PrestamoDao;
 
 public class PrestamoDaoImpl implements PrestamoDao
 {
-	private static final String insert = "INSERT INTO prestamos(idprestamo, dnicliente, montototal, cbu, fecha, estado, pagoxmes, montopormes, numcuotas, montorestante) VALUES(?,?,?,?,?,?,?,?,?,?)";
+	private static final String insert = "INSERT INTO prestamos(idprestamo, dnicliente, montototal, cbu, fecha, estado, pagoxmes, montopormes, numcuotas, montorestante, nombre, apellido) VALUES(?,?,?,?,?,?,?,?,?,?,?,?)";
 	private static final String delete = "UPDATE clientes SET estado = ? where Dni = ?";
 	private static final String readall = "SELECT * FROM clientes";
+	private static final String readallunaproved = "SELECT * FROM prestamos where estado = 0";
 	private static final String readByMail = "Select * from clientes where correo = ? and password = ?";
 	private static final String update = "UPDATE clientes SET dni = ?, cuil = ?, nombre = ?, apellido = ?, sexo = ?, nacionalidad = ?, fechanac = ?, direccion = ?, localidad = ?, provincia = ?, correo = ?, telefono = ?, usuario = ?, password = ?, tipousuario = ?, estado = ? where Dni = ?";
 	private static final String Provincia = null;
 	private static final String TipoUsuarioCliente = "SELECT * from clientes where usuario = ?";
 	private static Date FechaInsert = null;
+	private static String Fechastring = null;
 	
 	private Date fecha;
 
@@ -34,7 +36,7 @@ public class PrestamoDaoImpl implements PrestamoDao
 	{
 		PreparedStatement statement;
 		Connection conexion = Conexion.getConexion().getSQLConexion();
-		FechaInsert = FechaInsert.valueOf(prestamo.getFecha().toLocalDate());
+		//FechaInsert = FechaInsert.valueOf(prestamo.getFecha().toLocalDate());
 		//FechaInsert = Date.valueOf(prestamo.getFecha().toLocalDate());
 		
 		boolean isInsertExitoso = false;
@@ -46,12 +48,14 @@ public class PrestamoDaoImpl implements PrestamoDao
 			statement.setInt(2, prestamo.getDniCliente());
 			statement.setFloat(3, prestamo.getMontoTotal());
 			statement.setString(4, prestamo.getCbu());
-			statement.setDate(5, FechaInsert);
+			statement.setString(5, prestamo.getFecha());
 			statement.setInt(6, prestamo.getEstado());
 			statement.setFloat(7, prestamo.getPagoxmes());
 			statement.setFloat(8, prestamo.getPagoxmes());
 			statement.setInt(9, prestamo.getNumCuotas());
 			statement.setFloat(10, prestamo.getMontoRestante());
+			statement.setString(11, prestamo.getNombre());
+			statement.setString(12, prestamo.getApellido());
 			
 			if(statement.executeUpdate() > 0)
 			{
@@ -183,24 +187,53 @@ public class PrestamoDaoImpl implements PrestamoDao
 		}
 		return clientes;
 	}
+
+	@Override
+	public List<Prestamo> readAllUnapproved()
+	{
+		PreparedStatement statement;
+		ResultSet resultSet; //Guarda el resultado de la query
+		ArrayList<Prestamo> clientes = new ArrayList<Prestamo>();
+		Conexion conexion = Conexion.getConexion();
+		try 
+		{
+			statement = conexion.getSQLConexion().prepareStatement(readallunaproved);
+			resultSet = statement.executeQuery();
+			while(resultSet.next())
+			{
+				clientes.add(getPrestamo(resultSet));
+			}
+		} 
+		catch (SQLException e) 
+		{
+			e.printStackTrace();
+		}
+		return clientes;
+	}
 	
+    public static LocalDateTime asLocalDateTime(java.util.Date date) {
+        return asLocalDateTime(date);
+    }
 	
 	private Prestamo getPrestamo(ResultSet resultSet) throws SQLException
 	{
-		
 		int IdPrestamo = Integer.parseInt(resultSet.getString("idprestamo"));
 		int DniCliente = Integer.parseInt(resultSet.getString("dnicliente"));
 		Float MontoTotal = Float.parseFloat(resultSet.getString("montototal"));
 		String Cbu = resultSet.getString("cbu");
-		Date Fecha = resultSet.getDate("fecha");
-		LocalDateTime InsertFecha = LocalDateTime.ofInstant(Fecha.toInstant(),ZoneId.systemDefault());
+		String Fecha = resultSet.getString("fecha");
 		int Estado = resultSet.getInt("estado");
 		float Pagoxmes = resultSet.getFloat("pagoxmes");
+		float Montopormes = resultSet.getFloat("montopormes");
 		int NumCuotas = resultSet.getInt("numcuotas");
 		float MontoRestante = resultSet.getFloat("montorestante");
+		String Nombre = resultSet.getString("nombre");
+		String Apellido = resultSet.getString("apellido");
 		
-		return new Prestamo(IdPrestamo, DniCliente, MontoTotal, Cbu, InsertFecha, Estado, Pagoxmes, NumCuotas, MontoRestante);
+		return new Prestamo(IdPrestamo, DniCliente, MontoTotal, Cbu, Fecha, Estado, Pagoxmes, Montopormes, NumCuotas, MontoRestante, Nombre, Apellido);
 	}
+
+
 	
 	
 

@@ -13,4 +13,5 @@ public interface ClienteNegocio {
 	public List<Cliente> readAll();
 	public Cliente getClientePorMail(String emailWeb, String passWeb);
 	public Cliente getClientePorDNI(String usuario);
+	public Cliente getClientePorUsuario(int dni);
 }

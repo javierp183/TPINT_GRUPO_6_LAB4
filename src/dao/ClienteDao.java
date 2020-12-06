@@ -13,4 +13,5 @@ public interface ClienteDao {
 	Cliente getTipoUsuario(String usuario);
 	List<Cliente> getClientesActivos();
 	Cliente getClientePorDNI(String usuario);
+	Cliente getClientePorUsuario(int dni);
 }

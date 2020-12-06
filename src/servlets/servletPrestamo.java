@@ -50,19 +50,44 @@ public class servletPrestamo extends HttpServlet {
 			cliente = clientedaoimpl.getClientePorDNI(request.getParameter("usuario"));
 			System.out.println(cliente.getDni());
 			ArrayList<Cuenta> cuentaspordni = (ArrayList<Cuenta>) cuentadaoimpl.ListarCuentasPorDNI(cliente.getDni());
-			System.out.println("te muestro las cuentas de Lazaro Baes");
-			System.out.println(cuentaspordni);
 			request.setAttribute("listacuentas", cuentaspordni);
 			request.setAttribute("dnidelcliente", cliente.getDni());
+			request.setAttribute("nombredecliente", cliente.getNombre());
+			request.setAttribute("apellidodecliente", cliente.getApellido());
+			
+		}
+		
+		if(request.getParameter("btnPedirOtroPrestamo")!=null)
+		{
+			
+			System.out.println("Esta pidiendo otro prestamo!!!");
+			// Obtener el DNI
+			Cliente cliente = new Cliente();
+			cliente = clientedaoimpl.getClientePorDNI(request.getParameter("usuario"));
+			System.out.println(cliente.getDni());
+			ArrayList<Cuenta> cuentaspordni = (ArrayList<Cuenta>) cuentadaoimpl.ListarCuentasPorDNI(cliente.getDni());
+			request.setAttribute("listacuentas", cuentaspordni);
+			request.setAttribute("dnidelcliente", cliente.getDni());
+			System.out.println(cliente.getDni());
+			request.setAttribute("usuario",cliente.getUsuario());
+			request.setAttribute("nombre", cliente.getNombre());
+			request.setAttribute("apellido", cliente.getApellido());
 			
 		}
 		
 		if(request.getParameter("btnAsignar")!=null)
 		{
+
 			String Cbu = (String) request.getParameter("inputCbu");
 			int Dni = Integer.parseInt(request.getParameter("inputDni"));
 			float Monto = Float.parseFloat(request.getParameter("inputMonto"));
 			int Cuotas = Integer.parseInt(request.getParameter("inputCuotas"));
+			String Nombre = (String) request.getParameter("inputNombre");
+			String Apellido = (String) request.getParameter("inputApellido");
+			
+			Cliente cliente = new Cliente();
+
+			//cliente = clientedaoimpl.getClientePorUsuario(Dni);
 			
 			prestamo.setCbu(Cbu);
 			prestamo.setDniCliente(Dni);
@@ -71,9 +96,19 @@ public class servletPrestamo extends HttpServlet {
 			prestamo.setNumCuotas(Cuotas);
 			prestamo.setMontoRestante(Monto);
 			prestamo.setPagoxmes(Monto);
+			prestamo.setNombre(Nombre);
+			prestamo.setApellido(Apellido);
 			
 			prestamodaoimpl.insert(prestamo);
-			System.out.println("salio todo oka");
+			System.out.println("DNI despues del coso");
+			System.out.println(Dni);
+			cliente = clientedaoimpl.getClientePorUsuario(Dni);
+			System.out.println(cliente.getDni());
+			request.setAttribute("usuario",cliente.getUsuario());
+			request.setAttribute("nombre", cliente.getNombre());
+			request.setAttribute("apellido", cliente.getApellido());
+			RequestDispatcher rd = request.getRequestDispatcher("Cliente_Pedido_Prestamo_ok.jsp");
+			rd.forward(request, response);
 		}
 		
 		if(request.getParameter("volverPagina")!=null)

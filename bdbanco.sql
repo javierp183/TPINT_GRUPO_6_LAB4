@@ -86,14 +86,26 @@ CREATE TABLE `prestamos` (
   `dnicliente` int(11) NOT NULL,
   `montototal` float DEFAULT NULL,
   `cbu` varchar(45) DEFAULT NULL,
-  `fecha` date DEFAULT NULL,
+  `fecha` varchar(45) DEFAULT NULL,
   `estado` tinyint(4) DEFAULT NULL,
   `pagoxmes` int(11) DEFAULT NULL,
   `montopormes` float DEFAULT NULL,
   `numcuotas` int(11) DEFAULT NULL,
   `montorestante` float DEFAULT NULL,
+  `nombre` varchar(45) DEFAULT NULL,
+  `apellido` varchar(45) DEFAULT NULL,
   PRIMARY KEY (`idprestamo`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+
+create table `movimiento`(
+  `dni` int(11) NOT NULL,
+  `usuario` varchar(45) DEFAULT NULL,
+  `fechanac` varchar(45) DEFAULT NULL,
+  `tipomovimiento` varchar(45) DEFAULT NULL,
+  `descripcion` varchar(255) DEFAULT NULL
+   PRIMARY KEY (`dni`)
+  ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 
 /*!40101 SET character_set_client = @saved_cs_client */;

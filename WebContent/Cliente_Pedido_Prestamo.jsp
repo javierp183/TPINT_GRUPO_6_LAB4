@@ -168,7 +168,7 @@ if(listaCuentas!=null) {
     <small id="emailHelp" class="form-text text-muted">Sin interes</small>
   </div>
  
-  <a onclick="addURL(this)" href="servletPrestamo?btnAsignar=1&inputDni=${dnidelcliente}">Pedir Prestamo</a>
+  <a onclick="addURL(this)" href="servletPrestamo?btnAsignar=1&inputDni=${dnidelcliente}&inputNombre=${nombredecliente}&inputApellido=${apellidodecliente}">Pedir Prestamo</a>
   
 </form>
  </div>

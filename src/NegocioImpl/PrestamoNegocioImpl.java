@@ -42,4 +42,10 @@ public class PrestamoNegocioImpl implements PrestamoDao
 		return pdao.readAll();
 	}
 
+	@Override
+	public List<Prestamo> readAllUnapproved() {
+		// TODO Auto-generated method stub
+		return pdao.readAllUnapproved();
+	}
+
 }

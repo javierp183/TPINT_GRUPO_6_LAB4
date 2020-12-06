@@ -11,4 +11,5 @@ public interface PrestamoDao {
 	boolean insert(Prestamo prestamo);
 	Prestamo getPrestamoPorID(int idprestamo);
 	public List<Prestamo> readAll();
+	public List<Prestamo> readAllUnapproved();
 }

@@ -48,6 +48,9 @@
 </table>
 
 <h1> Menu de Opciones </h1>
+<% String name=request.getParameter("userLogin");
+request.setAttribute("miusuario", name);
+%>
 
 <table class="table">
   <thead class="thead-dark">
@@ -59,6 +62,7 @@
       <th scope="col">Alta Cuenta</th>
       <th scope="col">Modificar Cuenta</th>
       <th scope="col">Baja Cuenta</th>
+      <th scope="col">Aprobacion de Prestamo</th>
     </tr>
   </thead>
   <tbody>
@@ -70,6 +74,7 @@
       <td><a type="button" href="UsuarioBanco_Alta_Cuentas.jsp" class="btn btn-primary">Alta Cuenta</a></td>
       <td><a type="button" href="UsuarioBanco_Modificacion_Cuenta.jsp" class="btn btn-primary">Modificar Cuenta</a></td>
       <td><a type="button" href="UsuarioBanco_Alta_Clientes.jsp" class="btn btn-primary">Baja Cuenta</a></td>
+      <td><a type="button" href="servletAdministrador?btnListarPedidos=1" class="btn btn-primary">Autorizar Prestamo</a></td>
       
     </tr>
   </tbody>
