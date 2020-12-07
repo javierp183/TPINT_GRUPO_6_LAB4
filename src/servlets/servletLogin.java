@@ -56,7 +56,7 @@ public class servletLogin extends HttpServlet {
         {
         	
         	cliente = clientedaoimpl.getTipoUsuario(usuario);
-        	if(cliente.getTipoUsuario() == 0) {
+        	if(cliente.getTipoUsuario() == 0 && cliente.getEstado() == 1) {
         		if(cliente.getPassword().equals(password))
         		{
         			
@@ -71,7 +71,7 @@ public class servletLogin extends HttpServlet {
         	}
         	
         	usuariobanco = usuariodaoimpl.getTipoUsuario(usuario);
-        	if(usuariobanco.getTipoUsuario() == 1) {
+        	if(usuariobanco.getTipoUsuario() == 1 && usuariobanco.getEstado() == 1) {
         		if(usuariobanco.getPassword().equals(password)) 
         		{
         			request.setAttribute("nombre", usuariobanco.getNombre());
@@ -88,7 +88,7 @@ public class servletLogin extends HttpServlet {
         
         
         
-        RequestDispatcher requestDispatcher = request.getRequestDispatcher("/Usuario.jsp");
+        RequestDispatcher requestDispatcher = request.getRequestDispatcher("/Login_incorrecto.jsp");
         requestDispatcher.forward(request, response);
         
 //        Cliente client = negocio.getClientePorMail(mail, pass);
