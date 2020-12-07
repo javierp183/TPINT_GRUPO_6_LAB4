@@ -47,13 +47,18 @@
 <div class="container">
  <div class="row">
  <form>
+ 
   <div>
+  
  	<label for="cars">Elegir Cuenta</label>
 		<select name="cars" id="cars">
   			<option value="volvo">Caja de ahorro: 0000001</option>
   			<option value="saab">Cuenta Corriente: 0000001</option>
 		</select> 
+		
   </div>
+  
+  
    <div>
  	<label for="cars">Pago Cuota</label>
 		<select name="cars" id="cars">

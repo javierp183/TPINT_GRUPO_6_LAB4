@@ -85,7 +85,7 @@ public class MovimientoDaoImpl implements MovimientoDao {
 	}
 	
 	@Override
-	public List<Movimiento> readAllbyDni()
+	public List<Movimiento> getMovimientoPorDnis(int dni)
 	{
 		PreparedStatement statement;
 		ResultSet resultSet; //Guarda el resultado de la query
@@ -94,6 +94,7 @@ public class MovimientoDaoImpl implements MovimientoDao {
 		try 
 		{
 			statement = conexion.getSQLConexion().prepareStatement(readbydni);
+			statement.setInt(1, dni);
 			resultSet = statement.executeQuery();
 			while(resultSet.next())
 			{
@@ -136,5 +137,11 @@ private Movimiento getMovimiento(ResultSet resultSet) throws SQLException
 	String Descripcion = resultSet.getString("descripcion");
 	
 	return new Movimiento(Dni, Usuario, Fecha, TipoMovimiento, Descripcion);
+}
+
+@Override
+public List<Movimiento> readAllbyDni() {
+	// TODO Auto-generated method stub
+	return null;
 }
 }

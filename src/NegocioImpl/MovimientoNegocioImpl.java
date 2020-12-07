@@ -51,4 +51,10 @@ public class MovimientoNegocioImpl implements MovimientoDao {
 		return null;
 	}
 
+	@Override
+	public List<Movimiento> getMovimientoPorDnis(int dni) {
+		// TODO Auto-generated method stub
+		return mdao.getMovimientoPorDnis(dni);
+	}
+
 }
