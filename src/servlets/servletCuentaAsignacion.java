@@ -13,8 +13,11 @@ import javax.servlet.http.HttpServletResponse;
 
 import NegocioImpl.ClienteNegocioImpl;
 import NegocioImpl.CuentaNegocioImpl;
+import NegocioImpl.MovimientoNegocioImpl;
 import dominio.Cliente;
 import dominio.Cuenta;
+import dominio.Movimiento;
+
 import java.time.LocalDate;
 
 /**
@@ -61,6 +64,14 @@ public class servletCuentaAsignacion extends HttpServlet {
 		
 		cuentaaux = cuentadaoimpl.Search(Cbu);
 		cuentaaux.setDni(dnicliente);
+		Movimiento movimiento = new Movimiento();
+		MovimientoNegocioImpl movimientonegocioimpl = new MovimientoNegocioImpl();
+		
+		movimiento.setDni(dnicliente);
+		movimiento.setUsuario("test");
+		movimiento.setTipoMovimiento("ASIGNACION CUENTA");
+		movimiento.setDescripcion("Asignacion de cuenta: 10.000 pesos");
+		movimientonegocioimpl.insert(movimiento);
 		
 		System.out.println("cbu");
 		System.out.println(Cbu);

@@ -9,7 +9,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import NegocioImpl.ClienteNegocioImpl;
+import NegocioImpl.MovimientoNegocioImpl;
 import dominio.Cliente;
+import dominio.Movimiento;
 
 /**
  * Servlet implementation class servletCliente
@@ -96,8 +98,6 @@ public class servletCliente extends HttpServlet {
 			cliente.setCorreoElectronico(inputEmail);
 			cliente.setTelefono(inputTelefono);
 			cliente.setPassword(inputPassword);
-			System.out.println("paso password");
-			System.out.println(inputPassword);
 			ClienteNegocioImpl neg = new ClienteNegocioImpl();
 			
 			if(request.getParameter("inputUpdate")!=null)
@@ -115,10 +115,20 @@ public class servletCliente extends HttpServlet {
 				
 				neg.insert(cliente);
 				estado = true;
+				Movimiento movimiento = new Movimiento();
+				MovimientoNegocioImpl movimientonegocioimpl = new MovimientoNegocioImpl();
+				
+				movimiento.setDni(inputDNI);
+				movimiento.setUsuario(inputUsuario);
+				movimiento.setTipoMovimiento("ALTA");
+				movimiento.setDescripcion("Alta de cuenta");
+				movimientonegocioimpl.insert(movimiento);
+				
+				
+				
 				
 				request.setAttribute("estado", estado);
 				request.setAttribute("usuario", usuario);
-				System.out.println("guardando data");
 			}
 		}
 		
