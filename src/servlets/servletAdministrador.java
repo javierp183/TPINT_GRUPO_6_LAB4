@@ -11,8 +11,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import NegocioImpl.CuentaNegocioImpl;
+import NegocioImpl.MovimientoNegocioImpl;
 import NegocioImpl.PrestamoNegocioImpl;
 import dominio.Cuenta;
+import dominio.Movimiento;
 import dominio.Prestamo;
 
 /**
@@ -37,8 +39,11 @@ public class servletAdministrador extends HttpServlet {
 		// TODO Auto-generated method stub
 		Prestamo prestamo = new Prestamo();
 		Cuenta cuenta = new Cuenta();
+		Movimiento movimiento = new Movimiento();
 		PrestamoNegocioImpl prestamodaoimpl = new PrestamoNegocioImpl();
 		CuentaNegocioImpl cuentanegocioimpl = new CuentaNegocioImpl();
+		MovimientoNegocioImpl movimientonegocioimpl = new MovimientoNegocioImpl();
+		
 		if(request.getParameter("btnListarPedidos")!=null)
 		{
 			System.out.println("te voy a listar los pedidos");
@@ -61,25 +66,24 @@ public class servletAdministrador extends HttpServlet {
 			System.out.println(IdPrestamo);
 			
 			prestamo = prestamodaoimpl.getPrestamoPorID(IdPrestamo);
-			System.out.println(prestamo.getDniCliente());
-			System.out.println(prestamo.getNombre());
-			System.out.println("DNI:");
-			System.out.println(prestamo.getDniCliente());
 			prestamo.setEstado(1);
-			System.out.println(prestamo.getEstado());
 			prestamodaoimpl.modify(prestamo);
 			cuenta = cuentanegocioimpl.Search(prestamo.getCbu());
 			SaldoFinalDeCuenta = cuenta.getSaldo() + prestamo.getMontoTotal();
 			
 			cuenta.setSaldo(SaldoFinalDeCuenta);
 			cuentanegocioimpl.Modify(cuenta);
+			System.out.println("Empieza el resguardo del movimiento");
+			movimiento.setDni(prestamo.getDniCliente());
+			movimiento.setUsuario("test");
+			movimiento.setTipoMovimiento("PRESTAMO");
+			movimiento.setDescripcion("Se aprobo el prestamo");
+			movimientonegocioimpl.insert(movimiento);
+			System.out.println("Termina el resguardo del movimiento");
+			
+			
 			
 			System.out.println("habilitando finalizar prestamo");
-			
-			
-			
-			
-			
 			RequestDispatcher rd = request.getRequestDispatcher("Administrador_Autorizacion_Prestamo.jsp");
 			rd.forward(request, response);
 		}

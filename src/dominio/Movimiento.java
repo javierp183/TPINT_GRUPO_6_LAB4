@@ -13,7 +13,7 @@ public class Movimiento {
 	public Movimiento()
 	{
 		super();
-		Fechanac = Fecha.toString();
+		Fechanac = Fecha.now().toString();
 	}
 	
 	public Movimiento(int dni, String usuario, String fechanac, String tipoMovimiento, String descripcion) {

@@ -259,9 +259,4 @@ public class PrestamoDaoImpl implements PrestamoDao
 		
 		return new Prestamo(IdPrestamo, DniCliente, MontoTotal, Cbu, Fecha, Estado, Pagoxmes, Montopormes, NumCuotas, MontoRestante, Nombre, Apellido);
 	}
-
-
-	
-	
-
 }
