@@ -65,9 +65,8 @@ request.setAttribute("miusuario", name);
       <td><button type="submit" class="btn btn-primary"></button></td>
       <td><a href="servletPagoPrestamo?usuario=${miusuario}">Pago Prestamo</a></td>
       <td><a href="servletClienteHistorial?usuario=${miusuario}">Ver Historial</a></td>
-      <td><button type="submit" class="btn btn-primary">Transferencias</button></td>
+      <td><a href="servletCliente_Transferencia?usuario=${miusuario}">Transferencias</a></td>
       <td><button type="submit" class="btn btn-primary">Ver Informacion</button></td>
-       
     </tr>
     </tr>
   </tbody>

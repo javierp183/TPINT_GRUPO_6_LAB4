@@ -73,6 +73,7 @@ public class servletPagoPrestamo extends HttpServlet {
 			Movimiento movimiento = new Movimiento();
 			MovimientoNegocioImpl movimientonegocioimpl = new MovimientoNegocioImpl();
 			
+			
 			Cuenta cuenta = new Cuenta();
 			CuentaDaoImpl cuentadaoimpl = new CuentaDaoImpl();
 			Prestamo prestamo = new Prestamo();
@@ -92,6 +93,10 @@ public class servletPagoPrestamo extends HttpServlet {
 				movimiento.setTipoMovimiento("PAGO");
 				movimiento.setDescripcion("Pago de prestamo");
 				movimientonegocioimpl.insert(movimiento);
+				
+				RequestDispatcher rd = request.getRequestDispatcher("Cliente_Pago_Prestamo_ok.jsp");
+				rd.forward(request, response);
+				
 			}
 			
 			

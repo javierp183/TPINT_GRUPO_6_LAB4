@@ -1,3 +1,6 @@
+<%@ page import="dominio.Cliente" %>
+<%@ page import="dominio.Cuenta" %>
+<%@ page import="java.util.ArrayList" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -10,6 +13,48 @@
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
  integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
  crossorigin="anonymous">
+ 
+ <script type="text/javascript">
+
+function readselectFunc() {
+
+
+var selectedValue = document.getElementById("inputCBU");
+
+return selectedValue.value;
+}
+
+function readMonto() {
+
+
+	var MontoValue = document.getElementById("inputMonto");
+
+	return MontoValue.value;
+}
+
+function readCuotas() {
+
+
+	var selectedCuotas = document.getElementById("inputCBUexterno");
+
+	return selectedCuotas.value;
+}
+
+
+function addURL(element)
+{
+	
+	var leerCBU = readselectFunc();
+	var leerMonto = readMonto();
+	var leerCuotas = readCuotas();
+    $(element).attr('href', function() {
+        return this.href + '&inputCBU=' + leerCBU + '&inputMonto=' + leerMonto + '&inputCBUexterno=' + leerCuotas;
+    });
+}
+
+</script>
+ 
+ 
 <title>Cliente Banco - Transferencias - Banco Tecnologico</title>
 </head>
 <body>
@@ -48,33 +93,39 @@
 <div class="container">
  <div class="row">
  <form>
-  <div>
- 	<label for="cars">Elegir Cuenta</label>
-		<select name="cars" id="cars">
-  			<option value="volvo">Caja de ahorro</option>
-  			<option value="saab">Cuenta Corriente</option>
-		</select> 
-  </div>
+<div>
+<label for="cars">Seleccionar Cuenta</label>
+<select name="inputCBU" id="inputCBU">
+  
+ <%
+ArrayList<Cuenta> listaCuentas = null;
+
+if(request.getAttribute("listacuentas")!=null)
+{
+	listaCuentas = (ArrayList<Cuenta>) request.getAttribute("listacuentas");
+	for(Cuenta cuenta : listaCuentas)
+	{
+%>
+
+	<option value=<%=cuenta.getCbu() %>><%=cuenta.getCbu() %> - Tipo Cuenta: <%=cuenta.getTipoCuenta() %> - Saldo: <%=cuenta.getSaldo() %></option>
+
+<%
+	}}
+%>
+
+</select>
+</div>
    <div>
- 	<label for="cars">Elegir Cliente</label>
-		<select name="cars" id="cars">
-  			<option value="volvo">Usuario A</option>
-  			<option value="saab">Usuario B</option>
-		</select> 
-  </div>
-     <div>
- 	<label for="cars">Elegir Cuenta de Cliente</label>
-		<select name="cars" id="cars">
-  			<option value="volvo">Cuenta A</option>
-  			<option value="saab">Cuenta B</option>
-		</select> 
+	 <input type="text" class="form-control" id="inputCBUexterno" aria-describedby="cbuNumber">
+	 <small id=""cbuNumber"" class="form-text text-muted">Ingrese CBU del otro cliente</small>
   </div>
    <div class="form-group">
     <label for="exampleInputEmail1">Monto a Transferir</label>
-    <input type="input" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
-    <small id="emailHelp" class="form-text text-muted">Monto Disponible de transferencia: 10.000</small>
+    <input type="text" class="form-control" name="inputMonto" id="inputMonto" aria-describedby="emailHelp">
   </div>
-  <button type="submit" class="btn btn-primary">Aceptar</button>
+  
+  <button type="submit" class="btn btn-primary">Transferir</button>
+  <a onclick="addURL(this)" href="servletCliente_Transferencia?btnTransferir=1">Click para Transferir</a>
 </form>
  </div>
 </div>
