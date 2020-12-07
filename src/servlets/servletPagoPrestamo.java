@@ -10,11 +10,15 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import NegocioImpl.CuentaNegocioImpl;
+import NegocioImpl.MovimientoNegocioImpl;
+import NegocioImpl.PrestamoNegocioImpl;
 import daoImpl.ClienteDaoImpl;
 import daoImpl.CuentaDaoImpl;
 import daoImpl.PrestamoDaoImpl;
 import dominio.Cliente;
 import dominio.Cuenta;
+import dominio.Movimiento;
 import dominio.Prestamo;
 
 /**
@@ -58,8 +62,44 @@ public class servletPagoPrestamo extends HttpServlet {
 			rd.forward(request, response);
 			
 			
+		}
+		
+		if(request.getParameter("btnPagoPrestamo")!=null)
+		{
+			float Montodepago = Float.parseFloat(request.getParameter("inputMonto"));
+			String Cbu = request.getParameter("inputCBU");
+			int IdCuenta = Integer.parseInt(request.getParameter("inputPrestamo"));
+			float CalculoDePago = 0;
+			Movimiento movimiento = new Movimiento();
+			MovimientoNegocioImpl movimientonegocioimpl = new MovimientoNegocioImpl();
+			
+			Cuenta cuenta = new Cuenta();
+			CuentaDaoImpl cuentadaoimpl = new CuentaDaoImpl();
+			Prestamo prestamo = new Prestamo();
+			PrestamoDaoImpl prestamodaoimpl = new PrestamoDaoImpl();
+			
+			cuenta = cuentadaoimpl.Search(Cbu);
+			prestamo = prestamodaoimpl.getPrestamoID(IdCuenta);
+			
+			if(Montodepago < cuenta.getSaldo())
+			{
+				CalculoDePago = prestamo.getMontoRestante() - Montodepago;
+				prestamo.setMontoRestante(CalculoDePago);
+				prestamodaoimpl.modify(prestamo);
+				
+				movimiento.setDni(prestamo.getDniCliente());
+				movimiento.setUsuario("test");
+				movimiento.setTipoMovimiento("PAGO");
+				movimiento.setDescripcion("Pago de prestamo");
+				movimientonegocioimpl.insert(movimiento);
+			}
 			
 			
+			
+			
+			
+			RequestDispatcher rd = request.getRequestDispatcher("Cliente_Pago_Prestamo.jsp");
+			rd.forward(request, response);
 		}
 		response.getWriter().append("Served at: ").append(request.getContextPath());
 	}

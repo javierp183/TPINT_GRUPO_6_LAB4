@@ -13,6 +13,48 @@
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
  integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
  crossorigin="anonymous">
+
+<script type="text/javascript">
+
+function readselectFunc() {
+
+
+var selectedValue = document.getElementById("inputCBU");
+
+return selectedValue.value;
+}
+
+function readMonto() {
+
+
+	var MontoValue = document.getElementById("inputMonto");
+
+	return MontoValue.value;
+}
+
+function readCuotas() {
+
+
+	var selectedCuotas = document.getElementById("inputPrestamo");
+
+	return selectedCuotas.value;
+}
+
+
+function addURL(element)
+{
+	
+	var leerCBU = readselectFunc();
+	var leerMonto = readMonto();
+	var leerCuotas = readCuotas();
+    $(element).attr('href', function() {
+        return this.href + '&inputCbu=' + leerCBU + '&inputMonto=' + leerMonto + '&inputPrestamo=' + leerCuotas;
+    });
+}
+
+</script>
+ 
+ 
 <title>Cliente Banco - Pago de Prestamo - Banco Tecnologico</title>
 </head>
 <body>
@@ -76,6 +118,7 @@ if(request.getAttribute("listacuentas")!=null)
 
 </select>
 </div>
+<div>
 <label for="cars">Seleccionar Prestamo a Pagar</label>
 <select name="inputPrestamo" id="inputPrestamo">
   
@@ -94,11 +137,13 @@ if(request.getAttribute("listaprestamos")!=null)
 <%
 	}}
 %>
-
 </select>
-
-
-  <button type="submit" class="btn btn-primary">Pagar</button>
+</div>
+  <div class="form-group">
+    <label for="exampleInputPassword1">Monto a Pagar</label>
+    <input type="text" class="form-control" name="inputMonto" id="inputMonto">
+  </div>
+  <a onclick="addURL(this)" href="servletPagoPrestamo?btnPagoPrestamo=1">Realizar Pago</a>
 </form>
  </div>
 </div>
