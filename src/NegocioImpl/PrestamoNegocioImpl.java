@@ -54,4 +54,10 @@ public class PrestamoNegocioImpl implements PrestamoDao
 		return pdao.getPrestamoID(idprestamo);
 	}
 
+	@Override
+	public List<Prestamo> readAllbyDNI(int dni) {
+		// TODO Auto-generated method stub
+		return pdao.readAllbyDNI(dni);
+	}
+
 }

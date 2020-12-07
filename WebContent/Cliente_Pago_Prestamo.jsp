@@ -1,3 +1,7 @@
+<%@ page import="dominio.Cliente" %>
+<%@ page import="dominio.Prestamo" %>
+<%@ page import="dominio.Cuenta" %>
+<%@ page import="java.util.ArrayList" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -44,29 +48,57 @@
 
 <h1>Pago de prestamo</h1>
 
+
+
 <div class="container">
  <div class="row">
  <form>
  
-  <div>
+<div>
+<label for="cars">Seleccionar Cuenta</label>
+<select name="inputCBU" id="inputCBU">
   
- 	<label for="cars">Elegir Cuenta</label>
-		<select name="cars" id="cars">
-  			<option value="volvo">Caja de ahorro: 0000001</option>
-  			<option value="saab">Cuenta Corriente: 0000001</option>
-		</select> 
-		
-  </div>
+ <%
+ArrayList<Cuenta> listaCuentas = null;
+
+if(request.getAttribute("listacuentas")!=null)
+{
+	listaCuentas = (ArrayList<Cuenta>) request.getAttribute("listacuentas");
+	for(Cuenta cuenta : listaCuentas)
+	{
+%>
+
+	<option value=<%=cuenta.getCbu() %>><%=cuenta.getCbu() %> - Tipo Cuenta: <%=cuenta.getTipoCuenta() %> - Saldo: <%=cuenta.getSaldo() %></option>
+
+<%
+	}}
+%>
+
+</select>
+</div>
+<label for="cars">Seleccionar Prestamo a Pagar</label>
+<select name="inputPrestamo" id="inputPrestamo">
   
-  
-   <div>
- 	<label for="cars">Pago Cuota</label>
-		<select name="cars" id="cars">
-  			<option value="volvo">12</option>
-  			<option value="saab">18</option>
-		</select> 
-  </div>
-  <button type="submit" class="btn btn-primary">Aceptar</button>
+ <%
+ArrayList<Prestamo> listaPrestamos = null;
+
+if(request.getAttribute("listaprestamos")!=null)
+{
+	listaPrestamos = (ArrayList<Prestamo>) request.getAttribute("listaprestamos");
+	for(Prestamo prestamo : listaPrestamos)
+	{
+%>
+
+	<option value=<%=prestamo.getIdPrestamo() %>>Prestamos #<%=prestamo.getIdPrestamo() %> - Monto Total: <%=prestamo.getMontoTotal() %> - Monto Restante: <%=prestamo.getMontoRestante() %></option>
+
+<%
+	}}
+%>
+
+</select>
+
+
+  <button type="submit" class="btn btn-primary">Pagar</button>
 </form>
  </div>
 </div>

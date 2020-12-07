@@ -21,6 +21,7 @@ public class PrestamoDaoImpl implements PrestamoDao
 	private static final String insert = "INSERT INTO prestamos(idprestamo, dnicliente, montototal, cbu, fecha, estado, pagoxmes, montopormes, numcuotas, montorestante, nombre, apellido) VALUES(?,?,?,?,?,?,?,?,?,?,?,?)";
 	private static final String delete = "UPDATE clientes SET estado = ? where Dni = ?";
 	private static final String readall = "SELECT * FROM clientes";
+	private static final String readallbyDni = "SELECT * FROM prestamos where dnicliente = ? and estado = 1";
 	private static final String readallunaproved = "SELECT * FROM prestamos where estado = 0";
 	private static final String readByMail = "Select * from clientes where correo = ? and password = ?";
 	private static final String update = "UPDATE prestamos SET idprestamo = ?, dnicliente = ?, montototal = ?, cbu = ?, fecha = ?, estado = ?, pagoxmes = ?, montopormes = ?, numcuotas = ?, montorestante = ?, nombre = ?, apellido = ? where idprestamo = ?";
@@ -218,6 +219,30 @@ public class PrestamoDaoImpl implements PrestamoDao
 		return clientes;
 	}
 
+	@Override
+	public List<Prestamo> readAllbyDNI(int dni)
+	{
+		PreparedStatement statement;
+		ResultSet resultSet; //Guarda el resultado de la query
+		ArrayList<Prestamo> clientes = new ArrayList<Prestamo>();
+		Conexion conexion = Conexion.getConexion();
+		try 
+		{
+			statement = conexion.getSQLConexion().prepareStatement(readallbyDni);
+			statement.setInt(1, dni);
+			resultSet = statement.executeQuery();
+			while(resultSet.next())
+			{
+				clientes.add(getPrestamo(resultSet));
+			}
+		} 
+		catch (SQLException e) 
+		{
+			e.printStackTrace();
+		}
+		return clientes;
+	}
+	
 	@Override
 	public List<Prestamo> readAllUnapproved()
 	{

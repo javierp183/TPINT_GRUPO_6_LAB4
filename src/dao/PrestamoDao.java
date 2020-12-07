@@ -13,4 +13,5 @@ public interface PrestamoDao {
 	public List<Prestamo> readAll();
 	public List<Prestamo> readAllUnapproved();
 	Prestamo getPrestamoID(int idprestamo);
+	List<Prestamo> readAllbyDNI(int dni);
 }
