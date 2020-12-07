@@ -123,8 +123,6 @@ if(request.getAttribute("listacuentas")!=null)
     <label for="exampleInputEmail1">Monto a Transferir</label>
     <input type="text" class="form-control" name="inputMonto" id="inputMonto" aria-describedby="emailHelp">
   </div>
-  
-  <button type="submit" class="btn btn-primary">Transferir</button>
   <a onclick="addURL(this)" href="servletCliente_Transferencia?btnTransferir=1">Click para Transferir</a>
 </form>
  </div>

@@ -90,14 +90,11 @@ public class servletCliente_Transferencia extends HttpServlet {
 			movimientonegocioimpl.insert(movimientodst);
 			
 			cuenta.setSaldo(cuenta.getSaldo() - Monto);
-			cuentaaux.setSaldo(cuenta.getSaldo() + Monto);
-			cuentadaoimpl.Modify(cuentaaux);
+			cuentaaux.setSaldo(cuentaaux.getSaldo() + Monto);
 			cuentadaoimpl.Modify(cuenta);
+			cuentadaoimpl.Modify(cuentaaux);
 			
-			System.out.println(Cbu);
-			System.out.println(Cbuexterno);
-			System.out.println(cuenta.getDni());
-			System.out.println(cuentaaux.getDni());
+			System.out.println(cuentaaux.getSaldo());
 			
 			System.out.println("vamos a ver que pasa!");
 			

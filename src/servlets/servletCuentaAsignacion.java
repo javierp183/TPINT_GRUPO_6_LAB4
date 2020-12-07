@@ -72,11 +72,6 @@ public class servletCuentaAsignacion extends HttpServlet {
 		movimiento.setTipoMovimiento("ASIGNACION CUENTA");
 		movimiento.setDescripcion("Asignacion de cuenta: 10.000 pesos");
 		movimientonegocioimpl.insert(movimiento);
-		
-		System.out.println("cbu");
-		System.out.println(Cbu);
-		System.out.println("Dni");
-		System.out.println(dnicliente);
 	
 		
 			if(cuentadaoimpl.Modify(cuentaaux) == true)
@@ -88,7 +83,8 @@ public class servletCuentaAsignacion extends HttpServlet {
 		}
 		
 		if(request.getParameter("volverPagina")!=null) {
-			System.out.println("quiere volver, con la frente marchita");
+			
+			
 			RequestDispatcher rd = request.getRequestDispatcher("Usuario.jsp");
 			rd.forward(request, response);
 		}
