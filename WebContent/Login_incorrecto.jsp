@@ -10,5 +10,7 @@
 
 Usuario, Clave o usuario desactivado
 
+<a href="Login.jsp">Volver atras</a>
+
 </body>
 </html>
