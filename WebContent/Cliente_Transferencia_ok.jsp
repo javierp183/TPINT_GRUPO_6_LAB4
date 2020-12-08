@@ -4,9 +4,15 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Insert title here</title>
+<title>Cliente Banco - Pedido de Prestamo - Banco Tecnologico</title>
 </head>
 <body>
+
+<h1>Transferencia exitosa!</h1>
+
+<a href="servletPrestamo?btnPedirOtroPrestamo=1&usuario=${usuario}">Hacer otra transferencia</a>
+
+<a href="servletPrestamo?usuario=${usuario}">Volver Menu Principal</a>
 
 </body>
 </html>

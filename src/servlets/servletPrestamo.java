@@ -107,12 +107,19 @@ public class servletPrestamo extends HttpServlet {
 			request.setAttribute("usuario",cliente.getUsuario());
 			request.setAttribute("nombre", cliente.getNombre());
 			request.setAttribute("apellido", cliente.getApellido());
+			
 			RequestDispatcher rd = request.getRequestDispatcher("Cliente_Pedido_Prestamo_ok.jsp");
 			rd.forward(request, response);
 		}
 		
-		if(request.getParameter("volverPagina")!=null)
+		if(request.getParameter("btnvolverPagina")!=null)
 		{
+			Cliente cliente = new Cliente();
+			cliente = clientedaoimpl.getClientePorUsuario(Integer.parseInt(request.getParameter("btnvolverPagina")));
+			request.setAttribute("usuario",cliente.getUsuario());
+			request.setAttribute("nombre", cliente.getNombre());
+			request.setAttribute("apellido", cliente.getApellido());
+			
 			RequestDispatcher rd = request.getRequestDispatcher("Cliente.jsp");
 			rd.forward(request, response);
 		}

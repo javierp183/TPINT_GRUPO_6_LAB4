@@ -35,13 +35,14 @@ public class servletClienteHistorial extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
+		ClienteNegocioImpl clientenegocioimpl = new ClienteNegocioImpl();
 		System.out.println("Mostrando historial del usuario");
 		if(request.getParameter("usuario")!=null)
 		{
 			Cliente cliente = new Cliente();
 			Movimiento movimiento = new Movimiento();
 			MovimientoNegocioImpl movimientonegocioimpl = new MovimientoNegocioImpl();
-			ClienteNegocioImpl clientenegocioimpl = new ClienteNegocioImpl();
+			
 			
 			
 			cliente = clientenegocioimpl.getClientePorDNI(request.getParameter("usuario"));
@@ -49,6 +50,12 @@ public class servletClienteHistorial extends HttpServlet {
 			ArrayList<Movimiento> listademovimientospordni =  (ArrayList<Movimiento>) movimientonegocioimpl.getMovimientoPorDnis(cliente.getDni());
 			System.out.println(listademovimientospordni);
 			request.setAttribute("listamovimientos", listademovimientospordni);
+			request.setAttribute("usuario",cliente.getUsuario());
+			request.setAttribute("nombre", cliente.getNombre());
+			request.setAttribute("apellido", cliente.getApellido());
+			
+			
+			
 			RequestDispatcher rd = request.getRequestDispatcher("Cliente_Historial.jsp");
 			rd.forward(request, response);
 			
@@ -56,6 +63,21 @@ public class servletClienteHistorial extends HttpServlet {
 			
 			System.out.println("es por aca");
 		}
+		
+		if(request.getParameter("btnvolverPagina")!=null)
+		{
+			Cliente cliente = new Cliente();
+			
+			cliente = clientenegocioimpl.getClientePorDNI(request.getParameter("btnvolverPagina"));
+			request.setAttribute("usuario",cliente.getUsuario());
+			request.setAttribute("nombre", cliente.getNombre());
+			request.setAttribute("apellido", cliente.getApellido());
+			
+			RequestDispatcher rd = request.getRequestDispatcher("Cliente.jsp");
+			rd.forward(request, response);
+		}
+		
+		
 		response.getWriter().append("Served at: ").append(request.getContextPath());
 	}
 

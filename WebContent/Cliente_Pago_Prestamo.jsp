@@ -69,17 +69,17 @@ function addURL(element)
         Usuario 
       </th>
       <th>
-        Operador
+        Cliente
       </th>
     </tr>
     </thead>
     <tbody>
       <tr>
         <td>
-           Javier Pereyra
+           ${nombre} ${apellido}
         </td>
         <td>
-           Admin123
+           ${usuario}
         </td>
         <td>
             <img src="/static/img/{{ context.6.operator.userid }}.jpg"  height="60" width="60">
@@ -131,11 +131,13 @@ if(request.getAttribute("listaprestamos")!=null)
 	for(Prestamo prestamo : listaPrestamos)
 	{
 %>
-
 	<option value=<%=prestamo.getIdPrestamo() %>>Prestamos #<%=prestamo.getIdPrestamo() %> - Monto Total: <%=prestamo.getMontoTotal() %> - Monto Restante: <%=prestamo.getMontoRestante() %></option>
 
 <%
-	}}
+	}
+	%>
+<% 
+}
 %>
 </select>
 </div>
@@ -148,7 +150,7 @@ if(request.getAttribute("listaprestamos")!=null)
  </div>
 </div>
 
-<button type="submit" class="btn btn-primary">Volver a Pagina Principal</button>
+<a href="servletPagoPrestamo?btnvolverPagina=${usuario}">Volver Menu Principal</a>
 
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>

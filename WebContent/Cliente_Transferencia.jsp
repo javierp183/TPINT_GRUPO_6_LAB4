@@ -69,17 +69,17 @@ function addURL(element)
         Usuario 
       </th>
       <th>
-        Operador
+        Cliente
       </th>
     </tr>
     </thead>
     <tbody>
       <tr>
         <td>
-           Javier Pereyra
+           ${nombre} ${apellido}
         </td>
         <td>
-           Admin123
+           ${usuario}
         </td>
         <td>
             <img src="/static/img/{{ context.6.operator.userid }}.jpg"  height="60" width="60">
@@ -128,7 +128,7 @@ if(request.getAttribute("listacuentas")!=null)
  </div>
 </div>
 
-<button type="submit" class="btn btn-primary">Volver a Pagina Principal</button>
+<a href="servletCliente_Transferencia?btnvolverPagina=${usuario}">Volver Menu Principal</a>
 
 
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>

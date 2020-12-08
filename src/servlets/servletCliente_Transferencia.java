@@ -59,8 +59,26 @@ public class servletCliente_Transferencia extends HttpServlet {
 			ArrayList<Cuenta> listacuentas = (ArrayList<Cuenta>) cuentadaoimpl.ListarCuentasPorDNI(cliente.getDni());
 			
 			request.setAttribute("listacuentas", listacuentas);
+			request.setAttribute("usuario",cliente.getUsuario());
+			request.setAttribute("nombre", cliente.getNombre());
+			request.setAttribute("apellido", cliente.getApellido());
 			
 			RequestDispatcher rd = request.getRequestDispatcher("Cliente_Transferencia.jsp");
+			rd.forward(request, response);
+		}
+		
+		if(request.getParameter("btnvolverPagina")!=null)
+		{
+			
+			cliente = clientedaoimpl.getClientePorDNI(request.getParameter("btnvolverPagina"));
+			System.out.println("volviendo!!!");
+			System.out.println(request.getParameter("btnvolverPagina"));
+			request.setAttribute("usuario",cliente.getUsuario());
+			request.setAttribute("nombre", cliente.getNombre());
+			request.setAttribute("apellido", cliente.getApellido());
+			
+			
+			RequestDispatcher rd = request.getRequestDispatcher("Cliente.jsp");
 			rd.forward(request, response);
 		}
 		

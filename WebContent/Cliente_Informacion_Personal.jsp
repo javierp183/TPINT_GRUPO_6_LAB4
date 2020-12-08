@@ -28,11 +28,11 @@
                 </div>
                 <div class="info">
                     <div class="title">
-                        <a target="_blank" href="https://scripteden.com/">Elina User</a>
+                        <a target="_blank" href="https://scripteden.com/">${nombre} ${apellido}</a>
                     </div>
-                    <div class="desc">Email: elina.user@gmail.com</div>
-                    <div class="desc">DNI: 11111</div>
-                    <div class="desc">Usuario: elina123</div>
+                    <div class="desc">Email: ${email}</div>
+                    <div class="desc">DNI: ${dni}</div>
+                    <div class="desc">Usuario: ${usuario}</div>
                 </div>
                 <div class="bottom">
                     <a class="btn btn-primary btn-twitter btn-sm" href="https://twitter.com/webmaniac">
@@ -57,7 +57,7 @@
 	</div>
 </div>
 
-<button type="submit" class="btn btn-primary">Volver a Pagina Principal</button>
+<a href="servletCliente_Transferencia?btnvolverPagina=${usuario}">Volver Menu Principal</a>
 
 </body>
 </html>

@@ -41,10 +41,12 @@ public class servletPagoPrestamo extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
+		ClienteDaoImpl clientedaoimpl = new ClienteDaoImpl();
+		
 		if(request.getParameter("usuario") != null)
 		{
 			Cliente cliente = new Cliente();
-			ClienteDaoImpl clientedaoimpl = new ClienteDaoImpl();
+			
 			Prestamo prestamo = new Prestamo();
 			PrestamoDaoImpl prestamodaoimpl = new PrestamoDaoImpl();
 			
@@ -57,11 +59,27 @@ public class servletPagoPrestamo extends HttpServlet {
 			
 			request.setAttribute("listacuentas", listacuentas);
 			request.setAttribute("listaprestamos", listaprestamos);
+			request.setAttribute("usuario", cliente.getUsuario());
+			request.setAttribute("nombre", cliente.getNombre());
+			request.setAttribute("apellido", cliente.getApellido());
 			
 			RequestDispatcher rd = request.getRequestDispatcher("Cliente_Pago_Prestamo.jsp");
 			rd.forward(request, response);
 			
 			
+		}
+		
+		if(request.getParameter("btnvolverPagina")!=null)
+		{
+			Cliente cliente = new Cliente();
+			
+			cliente = clientedaoimpl.getClientePorDNI(request.getParameter("btnvolverPagina"));
+			request.setAttribute("usuario",cliente.getUsuario());
+			request.setAttribute("nombre", cliente.getNombre());
+			request.setAttribute("apellido", cliente.getApellido());
+			
+			RequestDispatcher rd = request.getRequestDispatcher("Cliente.jsp");
+			rd.forward(request, response);
 		}
 		
 		if(request.getParameter("btnPagoPrestamo")!=null)

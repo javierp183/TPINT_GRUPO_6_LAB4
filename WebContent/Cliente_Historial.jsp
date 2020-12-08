@@ -27,17 +27,17 @@
         Usuario 
       </th>
       <th>
-        Operador
+        Cliente
       </th>
     </tr>
     </thead>
     <tbody>
       <tr>
         <td>
-           Javier Pereyra
+           ${nombre} ${apellido}
         </td>
         <td>
-           Admin123
+           ${usuario}
         </td>
         <td>
             <img src="/static/img/{{ context.6.operator.userid }}.jpg"  height="60" width="60">
@@ -45,6 +45,7 @@
       </tr>
     </tbody>
 </table>
+
 
 <table class="table">
   <thead class="thead-dark">
@@ -56,7 +57,8 @@
   </thead>
   <tbody>
     <tr>
- <%
+ 
+  <%
 ArrayList<Movimiento> listaMovimientos = null;
 if(request.getAttribute("listamovimientos")!=null)
 {
@@ -64,17 +66,17 @@ if(request.getAttribute("listamovimientos")!=null)
 	for(Movimiento movimiento : listaMovimientos)
 	{
 %>
+
       <td scope="col"><%=movimiento.getFechanac() %> </td>
       <td scope="col"><%=movimiento.getTipoMovimiento() %></td>
       <td scope="col"><%=movimiento.getDescripcion() %></td>
 <%
-}}
+} }
 %>
     </tr>
   </tbody>
 </table>
-
- <button type="submit" class="btn btn-primary">Volver a Pagina Principal</button>
+<a href="servletPagoPrestamo?btnvolverPagina=${usuario}">Volver Menu Principal</a>
 
 
 </body>

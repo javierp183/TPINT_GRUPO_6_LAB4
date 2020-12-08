@@ -49,6 +49,8 @@
 request.setAttribute("miusuario", name);
 %>
 
+
+
 <table class="table">
   <thead class="thead-dark">
     <tr>
@@ -61,11 +63,11 @@ request.setAttribute("miusuario", name);
   </thead>
   <tbody>
     <tr>
-    <td><a href="servletPrestamo?usuario=${miusuario}">Pedir Prestamo</a></td>
-      <td><a href="servletPagoPrestamo?usuario=${miusuario}">Pago Prestamo</a></td>
-      <td><a href="servletClienteHistorial?usuario=${miusuario}">Ver Historial</a></td>
-      <td><a href="servletCliente_Transferencia?usuario=${miusuario}">Transferencias</a></td>
-      <td><button type="submit" class="btn btn-primary">Ver Informacion</button></td>
+    <td><a href="servletPrestamo?usuario=${usuario}">Pedir Prestamo</a></td>
+      <td><a href="servletPagoPrestamo?usuario=${usuario}">Pago Prestamo</a></td>
+      <td><a href="servletClienteHistorial?usuario=${usuario}">Ver Historial</a></td>
+      <td><a href="servletCliente_Transferencia?usuario=${usuario}">Transferencias</a></td>
+      <td><a href="servletCliente_VerInformacion?usuario=${usuario}">Ver Informacion / Perfil </button></td>
     </tr>
     </tr>
   </tbody>
