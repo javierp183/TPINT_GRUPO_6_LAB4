@@ -1,3 +1,6 @@
+<%@ page import="dominio.Cliente" %>
+<%@ page import="dominio.Cuenta" %>
+<%@ page import="java.util.ArrayList" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -56,6 +59,44 @@
 
 	</div>
 </div>
+
+
+<table id="table_id" class="display">
+<thead>
+	<tr>
+		<th>Cuentas ( Numero de CBU )</th>
+	</tr>
+</thead>
+<tbody>
+
+<%
+ArrayList<Cuenta> listaCuentas = null;
+
+if(request.getAttribute("listacuentas")!=null)
+{
+	listaCuentas = (ArrayList<Cuenta>) request.getAttribute("listacuentas");
+%>
+
+
+<tr>
+<%
+for(Cuenta cuenta: listaCuentas)
+		{
+	%>
+	 
+<td><%=cuenta.getCbu() %></td>
+
+<%
+		}}
+%>
+
+</tr>
+
+
+</tbody>
+</table>
+
+
 
 <a href="servletCliente_Transferencia?btnvolverPagina=${usuario}">Volver Menu Principal</a>
 

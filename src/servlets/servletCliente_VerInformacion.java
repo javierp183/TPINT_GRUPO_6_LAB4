@@ -50,10 +50,8 @@ public class servletCliente_VerInformacion extends HttpServlet {
 			Cuenta cuenta = new Cuenta();
 			CuentaDaoImpl cuentadaoimpl = new CuentaDaoImpl();
 			ArrayList<Cuenta> listacuentas = (ArrayList<Cuenta>) cuentadaoimpl.ListarCuentasPorDNI(cliente.getDni());
-			ArrayList<Prestamo> listaprestamos = (ArrayList<Prestamo>) prestamodaoimpl.readAllbyDNI(cliente.getDni());
 			
 			request.setAttribute("listacuentas", listacuentas);
-			request.setAttribute("listaprestamos", listaprestamos);
 			request.setAttribute("usuario", cliente.getUsuario());
 			request.setAttribute("nombre", cliente.getNombre());
 			request.setAttribute("apellido", cliente.getApellido());
