@@ -56,7 +56,7 @@
     </tr>
   </thead>
   <tbody>
-    <tr>
+   
  
   <%
 ArrayList<Movimiento> listaMovimientos = null;
@@ -66,14 +66,15 @@ if(request.getAttribute("listamovimientos")!=null)
 	for(Movimiento movimiento : listaMovimientos)
 	{
 %>
-
+ <tr>
       <td scope="col"><%=movimiento.getFechanac() %> </td>
       <td scope="col"><%=movimiento.getTipoMovimiento() %></td>
       <td scope="col"><%=movimiento.getDescripcion() %></td>
+          </tr>
 <%
 } }
 %>
-    </tr>
+
   </tbody>
 </table>
 <a href="servletPagoPrestamo?btnvolverPagina=${usuario}">Volver Menu Principal</a>

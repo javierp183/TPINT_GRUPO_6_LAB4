@@ -62,8 +62,6 @@ public class servletAdministrador extends HttpServlet {
 			float SaldoFinalDeCuenta = 0;
 			System.out.println("habilitando prestamo");
 			int IdPrestamo = Integer.parseInt(request.getParameter("txtPrestamoID"));
-			System.out.println("ID de prestamo");
-			System.out.println(IdPrestamo);
 			
 			prestamo = prestamodaoimpl.getPrestamoPorID(IdPrestamo);
 			prestamo.setEstado(1);
@@ -77,7 +75,7 @@ public class servletAdministrador extends HttpServlet {
 			movimiento.setDni(prestamo.getDniCliente());
 			movimiento.setUsuario("test");
 			movimiento.setTipoMovimiento("PRESTAMO");
-			movimiento.setDescripcion("Se aprobo el prestamo");
+			movimiento.setDescripcion("Se aprobo el prestamo de: " + prestamo.getMontoTotal() );
 			movimientonegocioimpl.insert(movimiento);
 			System.out.println("Termina el resguardo del movimiento");
 			

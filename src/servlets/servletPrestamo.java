@@ -100,10 +100,7 @@ public class servletPrestamo extends HttpServlet {
 			prestamo.setApellido(Apellido);
 			
 			prestamodaoimpl.insert(prestamo);
-			System.out.println("DNI despues del coso");
-			System.out.println(Dni);
 			cliente = clientedaoimpl.getClientePorUsuario(Dni);
-			System.out.println(cliente.getDni());
 			request.setAttribute("usuario",cliente.getUsuario());
 			request.setAttribute("nombre", cliente.getNombre());
 			request.setAttribute("apellido", cliente.getApellido());

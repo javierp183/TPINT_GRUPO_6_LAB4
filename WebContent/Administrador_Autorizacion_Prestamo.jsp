@@ -75,7 +75,7 @@
     </tr>
   </thead>
   <tbody>
-   <tr>
+   
  <%
 ArrayList<Prestamo> listaPrestamos = null;
 if(request.getAttribute("prestamossinaprobar")!=null)
@@ -84,19 +84,21 @@ if(request.getAttribute("prestamossinaprobar")!=null)
 	for(Prestamo prestamo : listaPrestamos)
 	{
 %>
+	<tr>
       <td><%=prestamo.getNombre() %> </td>
       <td><%=prestamo.getApellido() %></td>
       <td><%=prestamo.getMontoTotal() %></td>
       <td><%=prestamo.getNumCuotas() %></td>
       <td><%=prestamo.getMontopormes() %></td>
-      <td><input type="submit" onclick="window.location.href='servletAdministrador?btnHabilitarPrestamo=1&txtPrestamoID=<%=prestamo.getIdPrestamo()%>">
+     
        <a  href="servletAdministrador?btnHabilitarPrestamo=1&txtPrestamoID=<%=prestamo.getIdPrestamo()%>">Aprobar Prestamo</a>
       </td>
+      </tr>
 
 <%
 }}
 %>
-    </tr>
+    
   </tbody>
 </table>
 
