@@ -11,6 +11,12 @@
  integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
  crossorigin="anonymous">
  
+  <script>
+function myFunction() {
+confirm("Desea modificar el usuario?");
+alert("test");
+</script>
+ 
  <title>Alta de Cliente - Banco Tecnologico</title>
 
 
@@ -48,6 +54,11 @@
 
 <h1>Modificando Cliente</h1>
 
+
+${estado}
+
+
+
  <form action="servletClienteModificacion" method="get">
  	<label for="exampleInputEmail1">DNI</label>
 	<input type="input" class="form-control" name="inputDNI" aria-describedby="emailHelp">
@@ -55,23 +66,12 @@
 	<small id="emailHelp" class="form-text text-muted">Por favor ingresar DNI.</small>
 </form>
 
- <% 
-if(request.getAttribute("estado")!=null)
-{
-	
-%>
 
-Cliente Modificada!
 
-<%
-
-}
-%>
 
 <div class="container">
  <div class="row">
  <form action="servletClienteModificacion" method="post">
- 
   <div class="form-group">
     <label for="exampleInputEmail1">DNI</label>
     <input type="input" class="form-control" name="inputDNI" aria-describedby="emailHelp" value=${dni}>
@@ -151,7 +151,8 @@ Cliente Modificada!
     <input type="hidden" value=1 class="form-control" name="inputUpdate" value=1>
   </div>
     </div>
-  <button type="submit" class="btn btn-primary">Modificar Cliente</button>
+
+  <button type="submit" onclick="myFunction()" class="btn btn-primary">Modificar Cliente</button>
 </form>
  </div>
 </div>

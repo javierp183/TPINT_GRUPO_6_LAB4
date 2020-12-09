@@ -32,6 +32,7 @@ public class servletClienteModificacion extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
+		boolean estado = false;
 		Cliente cliente = new Cliente();
 		ClienteNegocioImpl clientenegocioimpl = new ClienteNegocioImpl();
 		
@@ -63,6 +64,8 @@ public class servletClienteModificacion extends HttpServlet {
 		if(request.getParameter("inputUpdate")!=null)
 		{
 			System.out.println("hay que modificar el usuario");
+			estado = true;
+			
 			int inputDNI = Integer.parseInt(request.getParameter("inputDNI"));
 			String inputUsuario = request.getParameter("inputUsuario");
 			String inputCuil = request.getParameter("inputCuil");
@@ -78,7 +81,6 @@ public class servletClienteModificacion extends HttpServlet {
 			String inputTelefono = request.getParameter("inputTelefono");
 			String inputPassword = request.getParameter("inputPassword");
 			String inputPassword2 = request.getParameter("inputPassword2");
-			boolean estado = false;
 			String usuario = request.getParameter("inputUsuario");
 			
 			cliente.setDni(inputDNI);
@@ -99,7 +101,10 @@ public class servletClienteModificacion extends HttpServlet {
 			ClienteNegocioImpl neg = new ClienteNegocioImpl();
 			
 			neg.modify(cliente);
-			request.setAttribute("estado", 1);
+			
+			
+			RequestDispatcher rd = request.getRequestDispatcher("UsuarioBanco_Modificacion_Cliente_ok.jsp");
+			rd.forward(request, response);
 		}
 		
 		if(request.getParameter("volverPagina")!=null)
@@ -107,6 +112,9 @@ public class servletClienteModificacion extends HttpServlet {
 			RequestDispatcher rd = request.getRequestDispatcher("Usuario.jsp");
 			rd.forward(request, response);
 		}
+		request.setAttribute("estado", estado);
+		RequestDispatcher rd = request.getRequestDispatcher("UsuarioBanco_Modificacion_Cliente.jsp");
+		rd.forward(request, response);
 	}
 
 	/**

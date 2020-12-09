@@ -105,13 +105,22 @@ if(request.getAttribute("listacuentas")!=null)
 	listaCuentas = (ArrayList<Cuenta>) request.getAttribute("listacuentas");
 	for(Cuenta cuenta : listaCuentas)
 	{
+		if(cuenta.getTipoCuenta() == 0)
+		{
+			String cajadeahorro = "Caja de Ahorro";
+		
 %>
 
-	<option value=<%=cuenta.getCbu() %>><%=cuenta.getCbu() %> - Tipo Cuenta: <%=cuenta.getTipoCuenta() %> - Saldo: <%=cuenta.getSaldo() %></option>
+	<option value=<%=cuenta.getCbu() %>><%=cuenta.getCbu() %> - Tipo Cuenta: <%=cajadeahorro %> - Saldo: <%=cuenta.getSaldo() %></option>
 
 <%
-	}}
+	}else {
+		String cuentacorriente = "Cuenta Corriente";
 %>
+
+	<option value=<%=cuenta.getCbu() %>><%=cuenta.getCbu() %> - Tipo Cuenta: <%=cuentacorriente %> - Saldo: <%=cuenta.getSaldo() %></option>
+
+<%}}} %>
 
 </select>
 </div>

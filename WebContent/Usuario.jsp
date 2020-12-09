@@ -11,6 +11,9 @@
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
  integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
  crossorigin="anonymous">
+ 
+
+ 
 
 <title>Usuario - Menu de Opciones</title>
 </head>
@@ -70,7 +73,7 @@ request.setAttribute("miusuario", name);
       <td><a type="button" href="UsuarioBanco_Alta_Cuentas_Asignacion.jsp" class="btn btn-primary">Asignar cuenta</a></td>
       <td><a href="servletCliente?usuario=${usuario}">Alta Cliente</a></td>
       <td><a href="servletCliente?bntBaja=1&usuariobajacliente=${usuario}">Baja Cliente</a></td>
-      <td><a type="button" href="UsuarioBanco_Modificacion_Cliente.jsp" class="btn btn-primary">Modificacion Cliente</a></td>
+      <td><a type="button" onclick="myFunction()" href="UsuarioBanco_Modificacion_Cliente.jsp" class="btn btn-primary">Modificacion Cliente</a></td>
       <td><a type="button" href="UsuarioBanco_Alta_Cuentas.jsp" class="btn btn-primary">Alta Cuenta</a></td>
       <td><a type="button" href="UsuarioBanco_Modificacion_Cuenta.jsp" class="btn btn-primary">Modificar Cuenta</a></td>
       <td><a type="button" href="UsuarioBanco_Baja_Cuenta.jsp" class="btn btn-primary">Baja Cuenta</a></td>
