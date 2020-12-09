@@ -34,10 +34,10 @@
     <tbody>
       <tr>
         <td>
-           Javier Pereyra
+           ${nombre} ${apellido}
         </td>
         <td>
-           Admin123
+           ${usuario}
         </td>
         <td>
             <img src="/static/img/{{ context.6.operator.userid }}.jpg"  height="60" width="60">

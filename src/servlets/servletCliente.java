@@ -1,6 +1,8 @@
 package servlets;
 
 import java.io.IOException;
+import java.util.ArrayList;
+
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -10,8 +12,11 @@ import javax.servlet.http.HttpServletResponse;
 
 import NegocioImpl.ClienteNegocioImpl;
 import NegocioImpl.MovimientoNegocioImpl;
+import NegocioImpl.UsuarioNegocioImpl;
 import dominio.Cliente;
+import dominio.Cuenta;
 import dominio.Movimiento;
+import dominio.Usuario;
 
 /**
  * Servlet implementation class servletCliente
@@ -33,6 +38,34 @@ public class servletCliente extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
+		if(request.getParameter("usuario")!=null)
+		{
+			// Obtener Datos Operador
+
+			
+
+			RequestDispatcher rd = request.getRequestDispatcher("UsuarioBanco_Alta_Clientes.jsp");
+			rd.forward(request, response);
+			
+		}
+		
+		if(request.getParameter("bntBaja")!=null)
+		{
+			Usuario usuario = new Usuario();
+			UsuarioNegocioImpl usuarionegocioimpl = new UsuarioNegocioImpl();
+			
+			
+			usuario = usuarionegocioimpl.getTipoUsuario(request.getParameter("usuariobajacliente"));
+			System.out.println(usuario.getUsuario());
+			request.setAttribute("nombre", usuario.getNombre());
+			request.setAttribute("apellido", usuario.getApellido());
+			request.setAttribute("usuario", usuario.getUsuario());
+			
+			System.out.println(request.getParameter("usuariobajacliente"));
+			RequestDispatcher rd = request.getRequestDispatcher("UsuarioBanco_Baja_Cliente.jsp");
+			rd.forward(request, response);
+		}
+		
 		if(request.getParameter("volverPagina")!=null) {
 			System.out.println("quiere volver, con la frente marchita");
 			RequestDispatcher rd = request.getRequestDispatcher("Usuario.jsp");
@@ -40,14 +73,25 @@ public class servletCliente extends HttpServlet {
 		}
 		
 		Cliente cliente = new Cliente();
+		try {
 		int inputDNIbaja = Integer.parseInt(request.getParameter("inputDNIbaja"));
 		cliente.setDni(inputDNIbaja);
+		}
+		
+		catch(Exception e)
+		{
+			System.out.println("fallo todo!!!");
+		}
+		
 		ClienteNegocioImpl clientedaoimpl = new ClienteNegocioImpl();
 		
 		if(request.getParameter("inputDNIbaja")!=null)
 		{
 			System.out.println("baja papi");
-			clientedaoimpl.delete(cliente);
+			if(clientedaoimpl.delete(cliente) == true) {
+				request.setAttribute("estado", 1);
+			}
+			
 			
 			RequestDispatcher rd = request.getRequestDispatcher("UsuarioBanco_Baja_Cliente.jsp");
 			rd.forward(request, response);

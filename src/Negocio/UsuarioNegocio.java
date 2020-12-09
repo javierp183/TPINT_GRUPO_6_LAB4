@@ -9,4 +9,5 @@ public interface UsuarioNegocio {
 	public boolean delete(Usuario usuario_a_eliminar);
 	public boolean modify(Usuario u);
 	public List<Usuario> readAll();
+	public Usuario search(Usuario usuario);
 }
