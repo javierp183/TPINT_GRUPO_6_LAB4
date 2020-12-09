@@ -62,9 +62,18 @@ public class servletCuenta extends HttpServlet {
 		CuentaNegocioImpl neg = new CuentaNegocioImpl();
 		int estado = 0;
 		int TipoCuenta = Integer.parseInt(request.getParameter("inputTipoCuenta"));
+		
+		try {
 		float saldo = Float.parseFloat(request.getParameter("inputSaldo"));
 		cuenta.setTipoCuenta(TipoCuenta);
 		cuenta.setSaldo(saldo);
+		}
+		catch(Exception e)
+		{
+		float saldo = 10000;
+		cuenta.setTipoCuenta(TipoCuenta);
+		cuenta.setSaldo(saldo);
+		}
 		
 		if(neg.Insert(cuenta) == true) {
 			estado = 1;

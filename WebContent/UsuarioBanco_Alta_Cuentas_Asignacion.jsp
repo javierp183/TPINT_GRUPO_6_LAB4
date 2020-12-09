@@ -151,14 +151,14 @@ Cuenta Asignada!
 			
 			%>
 			
-			<option value=<%=cuenta.getCbu()%>><%= cuenta.getCbu()%> - <%=cajadeahorro %></option>
+			<option value=<%=cuenta.getCbu()%>><%= cuenta.getCbu()%> - <%=cajadeahorro %> - saldo: <%=cuenta.getSaldo() %></option>
 			
 	<%	} else {
 		
 		String cuentacorriente = "cuenta corriente";
 		%>
 		
-		<option value=<%=cuenta.getCbu()%>><%= cuenta.getCbu()%> - <%=cuentacorriente %></option>
+		<option value=<%=cuenta.getCbu()%>><%= cuenta.getCbu()%> - <%=cuentacorriente %> - saldo: <%=cuenta.getSaldo() %></option>
 		
 	<%
 	}

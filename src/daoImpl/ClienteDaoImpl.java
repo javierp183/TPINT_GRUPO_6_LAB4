@@ -23,7 +23,7 @@ public class ClienteDaoImpl implements ClienteDao
 	private static final String update = "UPDATE clientes SET dni = ?, cuil = ?, nombre = ?, apellido = ?, sexo = ?, nacionalidad = ?, fechanac = ?, direccion = ?, localidad = ?, provincia = ?, correo = ?, telefono = ?, usuario = ?, password = ?, tipousuario = ?, estado = ? where Dni = ?";
 	private static final String Provincia = null;
 	private static final String TipoUsuarioCliente = "SELECT * from clientes where usuario = ?";
-	private static final String UsuariosClienteActivo = "SELECT * from clientes where estado = 1";
+	private static final String UsuariosClienteActivo = "SELECT * from clientes where estado = 1 and tipousuario = 0";
 	private static final String obtenerDni = "SELECT * from clientes where usuario = ?";
 	private static final String obtenerUsuario = "SELECT * from clientes where dni = ?";
 	

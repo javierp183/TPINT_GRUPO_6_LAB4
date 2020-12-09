@@ -69,12 +69,11 @@ request.setAttribute("miusuario", name);
     <tr>
       <td><a type="button" href="UsuarioBanco_Alta_Cuentas_Asignacion.jsp" class="btn btn-primary">Asignar cuenta</a></td>
       <td><a href="servletCliente?usuario=${usuario}">Alta Cliente</a></td>
-      <td><a type="button" href="UsuarioBanco_Baja_Cliente.jsp" class="btn btn-primary">Baja Cliente</a></td>
       <td><a href="servletCliente?bntBaja=1&usuariobajacliente=${usuario}">Baja Cliente</a></td>
       <td><a type="button" href="UsuarioBanco_Modificacion_Cliente.jsp" class="btn btn-primary">Modificacion Cliente</a></td>
       <td><a type="button" href="UsuarioBanco_Alta_Cuentas.jsp" class="btn btn-primary">Alta Cuenta</a></td>
       <td><a type="button" href="UsuarioBanco_Modificacion_Cuenta.jsp" class="btn btn-primary">Modificar Cuenta</a></td>
-      <td><a type="button" href="UsuarioBanco_Alta_Clientes.jsp" class="btn btn-primary">Baja Cuenta</a></td>
+      <td><a type="button" href="UsuarioBanco_Baja_Cuenta.jsp" class="btn btn-primary">Baja Cuenta</a></td>
       <td><a type="button" href="servletAdministrador?btnListarPedidos=1" class="btn btn-primary">Autorizar Prestamo</a></td>
       
     </tr>
