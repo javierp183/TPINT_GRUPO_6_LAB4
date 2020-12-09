@@ -90,8 +90,7 @@ if(request.getAttribute("prestamossinaprobar")!=null)
       <td><%=prestamo.getMontoTotal() %></td>
       <td><%=prestamo.getNumCuotas() %></td>
       <td><%=prestamo.getMontopormes() %></td>
-     
-       <a  href="servletAdministrador?btnHabilitarPrestamo=1&txtPrestamoID=<%=prestamo.getIdPrestamo()%>">Aprobar Prestamo</a>
+       <td> <a  href="servletAdministrador?btnHabilitarPrestamo=1&txtPrestamoID=<%=prestamo.getIdPrestamo()%>">Aprobar Prestamo</a>
       </td>
       </tr>
 
