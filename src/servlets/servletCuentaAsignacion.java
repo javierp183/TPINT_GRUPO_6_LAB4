@@ -80,10 +80,11 @@ public class servletCuentaAsignacion extends HttpServlet {
 				movimiento.setDescripcion("Asignacion de cuenta: 10.000 pesos");
 				movimientonegocioimpl.insert(movimiento);
 				estado = 1;
-				request.setAttribute("estado", estado );
+				request.setAttribute("estado", "true" );
 			}
 		} else { 
 			System.out.println("este chabon tiene mas de 3 cuentas, esta loco!");
+			request.setAttribute("estado", "false" );
 		}
 		
 		}

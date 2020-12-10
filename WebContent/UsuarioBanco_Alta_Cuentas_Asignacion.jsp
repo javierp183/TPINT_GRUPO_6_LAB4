@@ -93,6 +93,32 @@ function addURL(element)
 	
 </form>
 
+ <% 
+if(request.getAttribute("estado")=="true")
+		{
+	
+%>
+
+Cuenta Asignada!
+
+<%
+
+}
+%>
+
+ <% 
+if(request.getAttribute("estado")=="false")
+		{
+	
+%>
+
+Este Cliente ya tiene el maximo de 3 cuentas asignas!
+
+<%
+
+}
+%>
+
 	
 	<table id="table_id" class="display">
 		<thead>
@@ -118,18 +144,7 @@ if(request.getAttribute("listaclientes")!=null)
 	{
 %>
 
- <% 
-if(request.getAttribute("estado")!=null)
-		{
-	
-%>
 
-Cuenta Asignada!
-
-<%
-
-}
-%>
 
 <tr>
 <td><%=cliente.getDni() %></td>
