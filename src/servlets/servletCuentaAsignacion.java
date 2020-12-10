@@ -53,32 +53,38 @@ public class servletCuentaAsignacion extends HttpServlet {
 		ArrayList<Cliente> listaclientes = (ArrayList<Cliente>) clientedaoimpl.readAll();
 		
 		ArrayList<Cliente> listaclientesactivos = (ArrayList<Cliente>) clientedaoimpl.getClientesActivos();
-		System.out.println(listaclientesactivos);
 		request.setAttribute("listaclientes", listaclientesactivos);
 		String Cbu = request.getParameter("inputCbu");
 		
 		if(request.getParameter("btnAsignar")!=null)
 		{
 		int dnicliente = Integer.parseInt(request.getParameter("inputDni"));
+		System.out.println(cuentadaoimpl.contarCuenta(dnicliente));
 
 		
 		cuentaaux = cuentadaoimpl.Search(Cbu);
 		cuentaaux.setDni(dnicliente);
-		Movimiento movimiento = new Movimiento();
-		MovimientoNegocioImpl movimientonegocioimpl = new MovimientoNegocioImpl();
-		
-		movimiento.setDni(dnicliente);
-		movimiento.setUsuario("test");
-		movimiento.setTipoMovimiento("ASIGNACION CUENTA");
-		movimiento.setDescripcion("Asignacion de cuenta: 10.000 pesos");
-		movimientonegocioimpl.insert(movimiento);
+
 	
-		
+		if(cuentadaoimpl.contarCuenta(dnicliente) < 4)
+		{
 			if(cuentadaoimpl.Modify(cuentaaux) == true)
 				{
-					estado = 1;
-					request.setAttribute("estado", estado );
+				System.out.println("Este tipo tiene menos de 3 cuentas, sta bien, pasale una");
+				Movimiento movimiento = new Movimiento();
+				MovimientoNegocioImpl movimientonegocioimpl = new MovimientoNegocioImpl();
+				
+				movimiento.setDni(dnicliente);
+				movimiento.setUsuario("test");
+				movimiento.setTipoMovimiento("ASIGNACION CUENTA");
+				movimiento.setDescripcion("Asignacion de cuenta: 10.000 pesos");
+				movimientonegocioimpl.insert(movimiento);
+				estado = 1;
+				request.setAttribute("estado", estado );
 			}
+		} else { 
+			System.out.println("este chabon tiene mas de 3 cuentas, esta loco!");
+		}
 		
 		}
 		

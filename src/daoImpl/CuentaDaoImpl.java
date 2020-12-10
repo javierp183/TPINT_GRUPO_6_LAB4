@@ -19,7 +19,7 @@ public class CuentaDaoImpl implements CuentaDao
 	private static final String delete = "UPDATE cuentas SET estado = ? WHERE cbu = ?";
 	private static final String readall = "SELECT * FROM cuentas";
 	private static final String update = "UPDATE cuentas SET idcuenta = ?, saldo = ?, fecha = ?, cbu = ?, estado = ?, tipocuenta = ?, dnicliente = ? where cbu = ?";
-	private static final String contar = "SELECT COUNT(*) AS contar  FROM cuentas WHERE dnicliente = ?";
+	private static final String contar = "SELECT COUNT(*) AS contar FROM cuentas WHERE dnicliente = ?";
 	private static final String search = "SELECT * FROM cuentas WHERE cbu = ?";
 	private static final String readallunassigned = "SELECT * from cuentas WHERE dnicliente = 0";
 	private static final String listbyDNI = "SELECT * from cuentas WHERE dnicliente = ?";
