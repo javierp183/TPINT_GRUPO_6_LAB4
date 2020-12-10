@@ -47,7 +47,7 @@
 </table>
 
  <% 
-if(request.getAttribute("estado")!=null)
+if(request.getAttribute("estado")=="true")
 	if(request.getAttribute("usuario")!=null)
 {
 		{
@@ -57,11 +57,21 @@ if(request.getAttribute("estado")!=null)
 Cliente creado!
 
 <%
+}}
+%>
 
+<%
+if(request.getAttribute("estado")=="false")
+{
+%>
+	
+Hubo un error, por favor recuerde ingresar la misma clave
+también recuerde respetar el minimo de caracteres.
 
-}
+<%
 }
 %>
+
 
 <h1>Alta de Cliente</h1>
 
@@ -126,7 +136,7 @@ Cliente creado!
   </div>
   <div class="form-group">
     <label for="exampleInputEmail1">Correo Electronico</label>
-    <input type="input" class="form-control" name="inputEmail" aria-describedby="emailHelp">
+    <input type="email" class="form-control" name="inputEmail" aria-describedby="emailHelp">
     <small id="emailHelp" class="form-text text-muted">Ingrese Correo Electronico</small>
   </div>
        <div class="form-group">
@@ -136,11 +146,13 @@ Cliente creado!
   </div>
   <div class="form-group">
     <label for="exampleInputPassword1">Clave de acceso</label>
-    <input type="password" class="form-control" name="inputPassword">
+    <input type="password" class="form-control" name="inputPassword" aria-describedby="emailHelp">
+    <small id="emailHelp" class="form-text text-muted">Minimo clave de 8 digitos</small>
   </div>
     <div class="form-group">
     <label for="exampleInputPassword1">Confirmar clave de acceso</label>
-    <input type="password" class="form-control" name="inputPassword2">
+    <input type="password" class="form-control" name="inputPassword2" aria-describedby="emailHelp">
+    <small id="emailHelp" class="form-text text-muted">Minimo clave de 8 digitos</small>
   </div>
     </div>
   <button type="submit" class="btn btn-primary">Aceptar</button>

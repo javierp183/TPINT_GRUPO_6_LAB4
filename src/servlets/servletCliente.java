@@ -127,37 +127,29 @@ public class servletCliente extends HttpServlet {
 			boolean estado = false;
 			String usuario = request.getParameter("inputUsuario");
 			
-			Cliente cliente = new Cliente();
-			cliente.setDni(inputDNI);
-			cliente.setUsuario(inputUsuario);
-			cliente.setCuil(inputCuil);
-			cliente.setNombre(inputNombre);
-			cliente.setApellido(inputApellido);
-			cliente.setSexo(inputSexo);
-			cliente.setNacionalidad(inputNacionalidad);
-			cliente.setFechaNac(inputFechaNac);
-			cliente.setDireccion(inputDireccion);
-			cliente.setLocalidad(inputLocalidad);
-			cliente.setProvincia(inputProvincia);
-			cliente.setCorreoElectronico(inputEmail);
-			cliente.setTelefono(inputTelefono);
-			cliente.setPassword(inputPassword);
-			cliente.setTipoUsuario(0);
-			ClienteNegocioImpl neg = new ClienteNegocioImpl();
-			
-			if(request.getParameter("inputUpdate")!=null)
-				{
-					
-					System.out.println("modificando data");
-					neg.modify(cliente);
-					estado = true;
-					request.setAttribute("estado", estado);
-					RequestDispatcher rd = request.getRequestDispatcher("UsuarioBanco_Modificacion_Cliente.jsp");
-					rd.forward(request, response);
-				}
-			else
+			if(inputPassword.equals(inputPassword2))
 			{
+				if(inputPassword.length() == 8)
+				{
+				System.out.println("misma clave");
 				
+				Cliente cliente = new Cliente();
+				cliente.setDni(inputDNI);
+				cliente.setUsuario(inputUsuario);
+				cliente.setCuil(inputCuil);
+				cliente.setNombre(inputNombre);
+				cliente.setApellido(inputApellido);
+				cliente.setSexo(inputSexo);
+				cliente.setNacionalidad(inputNacionalidad);
+				cliente.setFechaNac(inputFechaNac);
+				cliente.setDireccion(inputDireccion);
+				cliente.setLocalidad(inputLocalidad);
+				cliente.setProvincia(inputProvincia);
+				cliente.setCorreoElectronico(inputEmail);
+				cliente.setTelefono(inputTelefono);
+				cliente.setPassword(inputPassword);
+				cliente.setTipoUsuario(0);
+				ClienteNegocioImpl neg = new ClienteNegocioImpl();
 				neg.insert(cliente);
 				estado = true;
 				Movimiento movimiento = new Movimiento();
@@ -172,9 +164,21 @@ public class servletCliente extends HttpServlet {
 				
 				
 				
-				request.setAttribute("estado", estado);
+				request.setAttribute("estado", "true");
 				request.setAttribute("usuario", usuario);
+				RequestDispatcher rd = request.getRequestDispatcher("UsuarioBanco_Alta_Clientes.jsp");
+				rd.forward(request, response);
+				} else {
+					System.out.println("no es la misma clave capo!!");
+					estado = false;
+					request.setAttribute("estado", "false");
+					request.setAttribute("usuario", usuario);
+					RequestDispatcher rd = request.getRequestDispatcher("UsuarioBanco_Alta_Clientes.jsp");
+					rd.forward(request, response);
+					
+				}
 			}
+
 		}
 		
 

@@ -44,7 +44,8 @@ CREATE TABLE `clientes` (
   `password` varchar(45) DEFAULT NULL,
   `tipousuario` int(11) NOT NULL,
   `estado` int(11) NOT NULL,
-  PRIMARY KEY (`dni`)
+  PRIMARY KEY (`dni`),
+  CHECK (password >= 8)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
