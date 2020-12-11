@@ -55,4 +55,10 @@ public class CuentaNegocioImpl implements CuentaDao
 		return cdao.ListarCuentasPorDNI(dni);
 	}
 
+	@Override
+	public Cuenta SearchCuentaNoAsignada(String Cbu) {
+		// TODO Auto-generated method stub
+		return cdao.SearchCuentaNoAsignada(Cbu);
+	}
+
 }

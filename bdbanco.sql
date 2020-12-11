@@ -70,7 +70,7 @@ DROP TABLE IF EXISTS `cuentas`;
 CREATE TABLE `cuentas` (
   `idcuenta` int(11) NOT NULL AUTO_INCREMENT,
   `saldo` float DEFAULT NULL,
-  `fecha` date DEFAULT NULL,
+  `fecha` varchar(45) DEFAULT NULL,
   `cbu` varchar(45) DEFAULT NULL,
   `estado` tinyint(4) DEFAULT NULL,
   `tipocuenta` int(11) DEFAULT NULL,

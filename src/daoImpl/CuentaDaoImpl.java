@@ -21,6 +21,7 @@ public class CuentaDaoImpl implements CuentaDao
 	private static final String update = "UPDATE cuentas SET idcuenta = ?, saldo = ?, fecha = ?, cbu = ?, estado = ?, tipocuenta = ?, dnicliente = ? where cbu = ?";
 	private static final String contar = "SELECT COUNT(*) AS contar FROM cuentas WHERE dnicliente = ?";
 	private static final String search = "SELECT * FROM cuentas WHERE cbu = ?";
+	private static final String searchcuentaInactiva = "SELECT * FROM cuentas WHERE cbu = ? and dnicliente = 0";
 	private static final String readallunassigned = "SELECT * from cuentas WHERE dnicliente = 0";
 	private static final String listbyDNI = "SELECT * from cuentas WHERE dnicliente = ?";
 	
@@ -34,12 +35,12 @@ public class CuentaDaoImpl implements CuentaDao
 		boolean isInsertExitoso = false;
 		try
 		{
-			FechaInsert = FechaInsert.valueOf(cuenta.getFecha().toLocalDate());
+			//FechaInsert = FechaInsert.valueOf(cuenta.getFecha().toLocalDate());
 			
 			statement = conexion.prepareStatement(insert);
 			statement.setInt(1, cuenta.getIdcuenta());
 			statement.setFloat(2, cuenta.getSaldo());
-			statement.setDate(3, FechaInsert);
+			statement.setString(3, cuenta.getFecha());
 			statement.setString(4, cuenta.getCbu());
 			statement.setInt(5, cuenta.getEstado());
 			statement.setInt(6, cuenta.getTipoCuenta());
@@ -75,11 +76,11 @@ public class CuentaDaoImpl implements CuentaDao
 		boolean isInsertExitoso = false;
 		try
 		{
-			FechaInsert = FechaInsert.valueOf(cuenta.getFecha().toLocalDate());
+			//FechaInsert = FechaInsert.valueOf(cuenta.getFecha().toLocalDate());
 			statement = conexion.prepareStatement(update);
 			statement.setFloat(1, cuenta.getIdcuenta());
 			statement.setFloat(2, cuenta.getSaldo());
-			statement.setDate(3, FechaInsert);
+			statement.setString(3, cuenta.getFecha());
 			statement.setString(4, cuenta.getCbu());
 			statement.setInt(5, cuenta.getEstado());
 			statement.setInt(6, cuenta.getTipoCuenta());
@@ -198,24 +199,7 @@ public class CuentaDaoImpl implements CuentaDao
 	}
 
 
-	/**
-	 * @param Objeto resulSet que obtiene de la query.
-	 *
-	 * @return Retorna una nueva instancia de cuenta.
-	 */
-	private Cuenta getCuenta(ResultSet resultSet) throws SQLException
-	{	
-		Cuenta c = new Cuenta();
-		c.setIdcuenta(resultSet.getInt("idcuenta"));
-		c.setSaldo(resultSet.getFloat("saldo"));
-		//c.setFecha(resultSet.getDate("fecha"));
-		c.setCbu(resultSet.getString("cbu"));
-		c.setEstado(resultSet.getInt("estado"));
-		c.setTipoCuenta(resultSet.getInt("tipocuenta"));
-		c.setDni(resultSet.getInt("dnicliente"));
-		
-		return c;
-	}
+
 	
 	
 	@Override
@@ -229,6 +213,31 @@ public class CuentaDaoImpl implements CuentaDao
 		try 
 		{
 			statement = conexion.getSQLConexion().prepareStatement(search);
+			statement.setString(1, Cbu);
+			resultSet = statement.executeQuery();
+			while(resultSet.next())
+			{
+				cuenta = getCuenta(resultSet);
+			}
+		} 
+		catch (SQLException e) 
+		{
+			e.printStackTrace();
+		}
+		return cuenta;
+	}
+	
+	@Override
+	public Cuenta SearchCuentaNoAsignada(String Cbu)
+	{	
+		
+		PreparedStatement statement;
+		Cuenta cuenta = new Cuenta();
+		ResultSet resultSet; //Guarda el resultado de la query
+		Conexion conexion = Conexion.getConexion();
+		try 
+		{
+			statement = conexion.getSQLConexion().prepareStatement(searchcuentaInactiva);
 			statement.setString(1, Cbu);
 			resultSet = statement.executeQuery();
 			while(resultSet.next())
@@ -265,6 +274,25 @@ public class CuentaDaoImpl implements CuentaDao
 			e.printStackTrace();
 		}
 		return -1;
+	}
+	
+	/**
+	 * @param Objeto resulSet que obtiene de la query.
+	 *
+	 * @return Retorna una nueva instancia de cuenta.
+	 */
+	private Cuenta getCuenta(ResultSet resultSet) throws SQLException
+	{	
+		Cuenta c = new Cuenta();
+		c.setIdcuenta(resultSet.getInt("idcuenta"));
+		c.setSaldo(resultSet.getFloat("saldo"));
+		c.setFecha(resultSet.getString("fecha"));
+		c.setCbu(resultSet.getString("cbu"));
+		c.setEstado(resultSet.getInt("estado"));
+		c.setTipoCuenta(resultSet.getInt("tipocuenta"));
+		c.setDni(resultSet.getInt("dnicliente"));
+		
+		return c;
 	}
 	
 	

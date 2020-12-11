@@ -14,7 +14,8 @@ public class Cuenta {
 	private int Dni;
 	private String Usuario;
 	private String uuid = UUID.randomUUID().toString();
-	LocalDateTime Fecha;
+	LocalDateTime Fechahoy;
+	private String Fecha;
 	
 	public Cuenta()
 	{
@@ -23,7 +24,7 @@ public class Cuenta {
 		estado = 1;
 		//UUID asignado auto magicamente de CBU
 		Cbu = uuid;
-		Fecha = Fecha.now();
+		Fecha = LocalDateTime.now().toString();
 	}
 
 	public Cuenta(float saldo, String cbu, int estado, int tipoCuenta, int dni,
@@ -92,20 +93,31 @@ public class Cuenta {
 		this.uuid = uuid;
 	}
 
-	public LocalDateTime getFecha() {
+
+
+	public String getFecha() {
 		return Fecha;
 	}
 
-	public void setFecha(LocalDateTime fecha) {
+	public void setFecha(String fecha) {
 		Fecha = fecha;
 	}
 
 	@Override
 	public String toString() {
 		return "Cuenta [Idcuenta=" + Idcuenta + ", Saldo=" + Saldo + ", Cbu=" + Cbu + ", estado=" + estado
-				+ ", TipoCuenta=" + TipoCuenta + ", Dni=" + Dni + ", Usuario=" + Usuario + ", uuid=" + uuid + ", Fecha="
-				+ Fecha + "]";
-	}	
+				+ ", TipoCuenta=" + TipoCuenta + ", Dni=" + Dni + ", Usuario=" + Usuario + ", uuid=" + uuid
+				+ ", Fechahoy=" + Fechahoy + ", Fecha=" + Fecha + "]";
+	}
+
+	
+
+//	@Override
+//	public String toString() {
+//		return "Cuenta [Idcuenta=" + Idcuenta + ", Saldo=" + Saldo + ", Cbu=" + Cbu + ", estado=" + estado
+//				+ ", TipoCuenta=" + TipoCuenta + ", Dni=" + Dni + ", Usuario=" + Usuario + ", uuid=" + uuid + ", Fecha="
+//				+ Fecha + "]";
+//	}	
 
 	
 

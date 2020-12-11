@@ -10,7 +10,10 @@
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
  integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
  crossorigin="anonymous">
-<title>Usuario Banco - Modificacion de Cuenta - Banco Tecnologico</title>
+ 
+ <title>Modificacion de Cuenta - Banco Tecnologico</title>
+
+
 </head>
 <body>
 
@@ -43,32 +46,59 @@
     </tbody>
 </table>
 
-<h1>Modificacion de Cuenta</h1>
+<h1>Modificando Cliente</h1>
+
+
+${estado}
+
+
+
+ <form action="servletCuenta_Modificacion" method="get">
+ 	<label for="exampleInputEmail1">CBU</label>
+	<input type="input" class="form-control" name="inputCBU" aria-describedby="emailHelp">
+	<button type="submit" class="btn btn-primary">Ingrese CBU a editar</button>
+	<small id="emailHelp" class="form-text text-muted">Por favor Ingrese el CBU a editar</small>
+</form>
+
+
+
 
 <div class="container">
  <div class="row">
- <form>
- 	<label for="cars">Elegir Cuenta</label>
-		<select name="cars" id="cars">
-  			<option value="volvo">Cuenta A</option>
-  			<option value="saab">Cuenta B</option>
-		</select>
-	 	<label for="cars">Elegir Usuario</label>
-		<select name="cars" id="cars">
-  			<option value="volvo">Usuario A</option>
-  			<option value="saab">Usuario B</option>
-		</select>  
+ <form action="servletCuenta_Modificacion" method="post">
+   <div class="form-group">
+    <label for="exampleInputEmail1">Cbu a Modificar</label>
+    <input type="input" class="form-control" name="inputCbuModificar" aria-describedby="emailHelp" value="${CBU}" readonly>
+    <small id="emailHelp" class="form-text text-muted">CBU a Modificar.</small>
+  </div>
+  <div class="form-group">
+    <label for="exampleInputEmail1">Saldo</label>
+    <input type="input" class="form-control" name="inputSaldo" aria-describedby="emailHelp" value=${saldo}>
+    <small id="emailHelp" class="form-text text-muted">Por favor ingresar nuevo Saldo.</small>
+  </div>
+    <div class="form-group">
+    <label for="exampleInputEmail1">Tipo de Cuenta</label>
+	<input type="input" class="form-control" name="inputTipoCuenta" aria-describedby="emailHelp" value="${tipocuenta}">
+    <small id="emailHelp" class="form-text text-muted">Caja de Ahorro|Cuenta Corriente ( escriba el nuevo tipo de cuenta )</small>
+  </div>
+ </div>
 
-  <button type="submit" class="btn btn-primary">Aceptar</button>
-</form>
-
- <form action="servletCliente" method="get">
-
-	<button type="submit" class="btn btn-primary" name="volverPagina" value="1">Volver a Pagina Principal</button>
-	
+  <button type="submit" onclick="myFunction()" class="btn btn-primary">Modificar Cuenta</button>
 </form>
  </div>
 </div>
 
+
+
+ <form action="servletClienteModificacion" method="get">
+
+	<button type="submit" class="btn btn-primary" name="volverPagina" value="1">Volver a Pagina Principal</button>
+	
+</form>
+
+
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
 </body>
 </html>
