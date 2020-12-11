@@ -58,10 +58,11 @@ request.setAttribute("miusuario", name);
 <table class="table">
   <thead class="thead-dark">
     <tr>
-      <th scope="col">Asignar cuenta</th>
       <th scope="col">Alta Cliente</th>
       <th scope="col">Baja Cliente</th>
       <th scope="col">Modificacion Cliente</th>
+      <th scope="col">Listar Clientes</th>
+      <th scope="col">Asignar cuenta</th>
       <th scope="col">Alta Cuenta</th>
       <th scope="col">Modificar Cuenta</th>
       <th scope="col">Baja Cuenta</th>
@@ -70,10 +71,11 @@ request.setAttribute("miusuario", name);
   </thead>
   <tbody>
     <tr>
-      <td><a type="button" href="UsuarioBanco_Alta_Cuentas_Asignacion.jsp" class="btn btn-primary">Asignar cuenta</a></td>
       <td><a href="servletCliente?usuario=${usuario}">Alta Cliente</a></td>
       <td><a href="servletCliente?bntBaja=1&usuariobajacliente=${usuario}">Baja Cliente</a></td>
       <td><a type="button" onclick="myFunction()" href="UsuarioBanco_Modificacion_Cliente.jsp" class="btn btn-primary">Modificacion Cliente</a></td>
+      <td><a href="servletListarClientes?usuario=${usuario}">Listar clientes</a></td>
+      <td><a type="button" href="UsuarioBanco_Alta_Cuentas_Asignacion.jsp" class="btn btn-primary">Asignar cuenta</a></td>
       <td><a type="button" href="UsuarioBanco_Alta_Cuentas.jsp" class="btn btn-primary">Alta Cuenta</a></td>
       <td><a type="button" href="UsuarioBanco_Modificacion_Cuenta.jsp" class="btn btn-primary">Modificar Cuenta</a></td>
       <td><a type="button" href="UsuarioBanco_Baja_Cuenta.jsp" class="btn btn-primary">Baja Cuenta</a></td>
