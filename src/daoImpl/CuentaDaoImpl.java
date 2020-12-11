@@ -27,7 +27,6 @@ public class CuentaDaoImpl implements CuentaDao
 	
 	private static Date FechaInsert = null;
 	
-	
 	@Override
 	public Boolean Insert(Cuenta cuenta) {
 		PreparedStatement statement;

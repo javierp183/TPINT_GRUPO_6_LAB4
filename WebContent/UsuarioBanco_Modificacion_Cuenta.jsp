@@ -46,11 +46,35 @@
     </tbody>
 </table>
 
-<h1>Modificando Cliente</h1>
+<h1>Modificando Cuenta</h1>
 
 
-${estado}
+ <% 
+if(request.getAttribute("estado")=="true")
+		{
+	
+%>
 
+Cuenta Modificada!
+
+<%
+
+}
+%>
+
+ <% 
+if(request.getAttribute("estado")=="false")
+		{
+	
+%>
+
+No se a podido modificar la cuenta, revise por favor el CBU y tambien 
+el tipo de cuenta. Muchas gracias
+
+<%
+
+}
+%>
 
 
  <form action="servletCuenta_Modificacion" method="get">
@@ -59,7 +83,6 @@ ${estado}
 	<button type="submit" class="btn btn-primary">Ingrese CBU a editar</button>
 	<small id="emailHelp" class="form-text text-muted">Por favor Ingrese el CBU a editar</small>
 </form>
-
 
 
 
@@ -73,7 +96,7 @@ ${estado}
   </div>
   <div class="form-group">
     <label for="exampleInputEmail1">Saldo</label>
-    <input type="input" class="form-control" name="inputSaldo" aria-describedby="emailHelp" value=${saldo}>
+    <input type="input" class="form-control" name="inputSaldo" aria-describedby="emailHelp" value="${saldo}">
     <small id="emailHelp" class="form-text text-muted">Por favor ingresar nuevo Saldo.</small>
   </div>
     <div class="form-group">

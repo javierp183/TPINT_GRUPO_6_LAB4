@@ -60,6 +60,11 @@ public class servletCuenta_Modificacion extends HttpServlet {
 				request.setAttribute("tipocuenta", "Cuenta corriente");
 			}
 			
+			if(request.getParameter("inputCbuModificar")!=null)
+			{
+				System.out.println("modificando cuenta");
+			}
+			
 			
 			RequestDispatcher rd = request.getRequestDispatcher("UsuarioBanco_Modificacion_Cuenta.jsp");
 			rd.forward(request, response);
@@ -73,6 +78,37 @@ public class servletCuenta_Modificacion extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
+		Cuenta cuenta = new Cuenta();
+		CuentaNegocioImpl cuentanegocioimpl = new CuentaNegocioImpl();
+		
+		if(request.getParameter("inputCbuModificar")!=null)
+		{
+			cuenta = cuentanegocioimpl.Search(request.getParameter("inputCbuModificar"));
+			cuenta.setSaldo(Float.parseFloat(request.getParameter("inputSaldo")));
+			
+			if(request.getParameter("inputTipoCuenta") == "Caja de Ahorro")
+			{
+				cuenta.setTipoCuenta(0);
+			}
+			
+			if(request.getParameter("inputTipoCuenta") == "Cuenta Corriente")
+			{
+				cuenta.setTipoCuenta(1);
+			}
+			
+			cuentanegocioimpl.Modify(cuenta);
+			
+			System.out.println("modificando cuenta");
+			System.out.println(request.getParameter("inputCbuModificar"));
+			System.out.println(request.getParameter("inputSaldo"));
+			System.out.println(request.getParameter("inputTipoCuenta"));
+			
+			request.setAttribute("estado", "true");
+			
+			RequestDispatcher rd = request.getRequestDispatcher("UsuarioBanco_Modificacion_Cuenta.jsp");
+			rd.forward(request, response);
+		}
+		
 		doGet(request, response);
 	}
 
