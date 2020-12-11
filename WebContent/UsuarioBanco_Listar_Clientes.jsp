@@ -17,16 +17,44 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
 <script src="//cdn.datatables.net/1.10.12/js/jquery.dataTables.min.js"></script>
-</head>
-<body>
-
-
 
 <script type="text/javascript">
 	$(document).ready(function() {
 		$('#table_id').DataTable();
 	});
 </script>
+
+</head>
+<body>
+
+<table class="table table-dark">
+  <thead>
+    <tr>
+      <th>
+        Nombre y Apellido del Usuario
+      </th>
+      <th>
+        Usuario 
+      </th>
+      <th>
+        Operador
+      </th>
+    </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>
+           Javier Pereyra
+        </td>
+        <td>
+           Admin123
+        </td>
+        <td>
+            <img src="/static/img/{{ context.6.operator.userid }}.jpg"  height="60" width="60">
+        </td>
+      </tr>
+    </tbody>
+</table>
 
 	<table id="table_id" class="display">
 		<thead>
@@ -36,6 +64,9 @@
 				<th>Apellido</th>
 				<th>E-mail</th>
 				<th>Telefono</th>
+	 		</tr>
+	 	</thead>
+	 	<tbody>
 				
 			
 <%
@@ -56,8 +87,7 @@ if(request.getAttribute("listaclientes")!=null)
 				</tr>
 
 <%}} %>
-		</thead>
-		<tbody>
+		
 		</tbody>
 	</table>
 	
