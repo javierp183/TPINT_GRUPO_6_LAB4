@@ -11,8 +11,10 @@ import javax.servlet.http.HttpServletResponse;
 
 import NegocioImpl.ClienteNegocioImpl;
 import NegocioImpl.CuentaNegocioImpl;
+import NegocioImpl.MovimientoNegocioImpl;
 import dominio.Cliente;
 import dominio.Cuenta;
+import dominio.Movimiento;
 
 /**
  * Servlet implementation class servletCuenta
@@ -76,6 +78,15 @@ public class servletCuenta extends HttpServlet {
 		}
 		
 		if(neg.Insert(cuenta) == true) {
+			Movimiento movimiento = new Movimiento();
+			MovimientoNegocioImpl movimientonegocioimpl = new MovimientoNegocioImpl();
+			
+			movimiento = movimientonegocioimpl.getMovimientoPorCuenta(cuenta.getCbu());
+			movimiento.setCbu(cuenta.getCbu());
+			movimiento.setTipoMovimiento("ALTA");
+			movimiento.setDescripcion("Alta de cuenta con 10 mil pesos AR");
+			movimientonegocioimpl.insert(movimiento);
+			
 			estado = 1;
 			request.setAttribute("estado", estado );
 		}

@@ -106,6 +106,7 @@ public class servletPagoPrestamo extends HttpServlet {
 				prestamo.setMontoRestante(CalculoDePago);
 				prestamodaoimpl.modify(prestamo);
 				
+				movimiento.setCbu(prestamo.getCbu());
 				movimiento.setDni(prestamo.getDniCliente());
 				movimiento.setUsuario("test");
 				movimiento.setTipoMovimiento("PAGO");

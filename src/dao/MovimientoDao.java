@@ -13,5 +13,7 @@ public interface MovimientoDao {
 	public List<Movimiento> readAllbyDni();
 	Movimiento getMovimientoPorDni(int dni);
 	List<Movimiento> getMovimientoPorDnis(int dni);
+	List<Movimiento> getMovimientoPorCuentas(String cbu);
+	Movimiento getMovimientoPorCuenta(String cbu);
 
 }

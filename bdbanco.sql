@@ -98,14 +98,17 @@ CREATE TABLE `prestamos` (
   PRIMARY KEY (`idprestamo`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
-
+DROP TABLE IF EXISTS `movimiento`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
 create table `movimiento`(
+  `cbu` varchar(45) DEFAULT NULL,
   `dni` int(11) NOT NULL,
   `usuario` varchar(45) DEFAULT NULL,
   `fechanac` varchar(45) DEFAULT NULL,
   `tipomovimiento` varchar(45) DEFAULT NULL,
-  `descripcion` varchar(255) DEFAULT NULL
-   PRIMARY KEY (`dni`)
+  `descripcion` varchar(255) DEFAULT NULL,
+   PRIMARY KEY (`cbu`)
   ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 

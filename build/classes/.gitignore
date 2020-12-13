@@ -1,5 +1,5 @@
-/servlets/
+/dominio/
 /daoImpl/
 /NegocioImpl/
 /dao/
-/dominio/
+/servlets/

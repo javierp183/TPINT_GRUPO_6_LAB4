@@ -1,5 +1,6 @@
 package servlets;
 import dominio.Cuenta;
+import dominio.Movimiento;
 
 import java.io.IOException;
 
@@ -11,6 +12,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import NegocioImpl.CuentaNegocioImpl;
+import NegocioImpl.MovimientoNegocioImpl;
 import daoImpl.CuentaDaoImpl;
 
 /**
@@ -97,12 +99,18 @@ public class servletCuenta_Modificacion extends HttpServlet {
 			}
 			
 			cuentanegocioimpl.Modify(cuenta);
+			Movimiento movimiento = new Movimiento();
+			MovimientoNegocioImpl movimientonegocioimpl = new MovimientoNegocioImpl();
+			movimiento.setCbu(request.getParameter("inputCbuModificar"));
+			movimiento.setTipoMovimiento("MODIFICACION DE CUENTA");
+			movimiento.setDescripcion("CAMBIO DE SALDO O TIPO DE CUENTA");
+			movimientonegocioimpl.insert(movimiento);
+			
 			
 			System.out.println("modificando cuenta");
 			System.out.println(request.getParameter("inputCbuModificar"));
 			System.out.println(request.getParameter("inputSaldo"));
 			System.out.println(request.getParameter("inputTipoCuenta"));
-			
 			request.setAttribute("estado", "true");
 			
 			RequestDispatcher rd = request.getRequestDispatcher("UsuarioBanco_Modificacion_Cuenta.jsp");

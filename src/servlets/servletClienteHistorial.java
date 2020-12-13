@@ -11,8 +11,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import NegocioImpl.ClienteNegocioImpl;
+import NegocioImpl.CuentaNegocioImpl;
 import NegocioImpl.MovimientoNegocioImpl;
 import dominio.Cliente;
+import dominio.Cuenta;
 import dominio.Movimiento;
 
 /**
@@ -36,7 +38,9 @@ public class servletClienteHistorial extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		ClienteNegocioImpl clientenegocioimpl = new ClienteNegocioImpl();
-		System.out.println("Mostrando historial del usuario");
+		Cuenta cuenta = new Cuenta();
+		CuentaNegocioImpl cuentanegocioimpl = new CuentaNegocioImpl();
+		
 		if(request.getParameter("usuario")!=null)
 		{
 			Cliente cliente = new Cliente();
@@ -45,14 +49,20 @@ public class servletClienteHistorial extends HttpServlet {
 			
 			
 			
-			cliente = clientenegocioimpl.getClientePorDNI(request.getParameter("usuario"));
 			
-			ArrayList<Movimiento> listademovimientospordni =  (ArrayList<Movimiento>) movimientonegocioimpl.getMovimientoPorDnis(cliente.getDni());
-			System.out.println(listademovimientospordni);
-			request.setAttribute("listamovimientos", listademovimientospordni);
+			cliente = clientenegocioimpl.getClientePorDNI(request.getParameter("usuario"));
+			System.out.println("este es el cliente");
+			System.out.println(cliente);
+			ArrayList<Cuenta> listadecuentas = (ArrayList<Cuenta>) cuentanegocioimpl.ListarCuentasPorDNI(cliente.getDni());
+			
+			
+			//ArrayList<Movimiento> listademovimientospordni =  (ArrayList<Movimiento>) movimientonegocioimpl.getMovimientoPorDnis(cliente.getDni());
+			//System.out.println(listademovimientospordni);
+			//request.setAttribute("listamovimientos", listademovimientospordni);
 			request.setAttribute("usuario",cliente.getUsuario());
 			request.setAttribute("nombre", cliente.getNombre());
 			request.setAttribute("apellido", cliente.getApellido());
+			request.setAttribute("listadecuentas", listadecuentas);
 			
 			
 			
@@ -63,6 +73,31 @@ public class servletClienteHistorial extends HttpServlet {
 			
 			System.out.println("es por aca");
 		}
+		
+		if(request.getParameter("usuariopost")!=null) {
+		if(request.getParameter("inputCbu")!=null)
+		{
+			System.out.println("es hora de mostrar los movimientos de esta cuenta");
+			MovimientoNegocioImpl movimientonegocioimpl = new MovimientoNegocioImpl();
+			ArrayList<Movimiento> movimientos = (ArrayList<Movimiento>) movimientonegocioimpl.getMovimientoPorCuentas(request.getParameter("inputCbu"));
+			System.out.println(movimientos);
+			
+			request.setAttribute("movimientos", movimientos);
+			
+			Cliente cliente = new Cliente();
+			Movimiento movimiento = new Movimiento();
+			cliente = clientenegocioimpl.getClientePorDNI(request.getParameter("usuariopost"));
+			System.out.println("tambien muestro el cliente");
+			System.out.println(cliente.getNombre());
+			
+			request.setAttribute("usuario",cliente.getUsuario());
+			request.setAttribute("nombre", cliente.getNombre());
+			request.setAttribute("apellido", cliente.getApellido());
+			
+			RequestDispatcher rd = request.getRequestDispatcher("Cliente_Historial.jsp");
+			rd.forward(request, response);
+		}}
+			
 		
 		if(request.getParameter("btnvolverPagina")!=null)
 		{
@@ -76,6 +111,10 @@ public class servletClienteHistorial extends HttpServlet {
 			RequestDispatcher rd = request.getRequestDispatcher("Cliente.jsp");
 			rd.forward(request, response);
 		}
+		
+		
+		
+		
 		
 		
 		response.getWriter().append("Served at: ").append(request.getContextPath());

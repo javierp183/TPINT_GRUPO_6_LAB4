@@ -14,8 +14,9 @@ import dominio.Movimiento;
 import dominio.Prestamo;
 
 public class MovimientoDaoImpl implements MovimientoDao {
-	private static final String insert = "INSERT INTO movimiento(dni, usuario, fechanac, tipomovimiento, descripcion) VALUES(?,?,?,?,?)";
+	private static final String insert = "INSERT INTO movimiento(cbu, dni, usuario, fechanac, tipomovimiento, descripcion) VALUES(?,?,?,?,?,?)";
 	private static final String readbydni = "SELECT * from movimiento where dni = ?";
+	private static final String readbycuenta = "SELECT * from movimiento where cbu = ?";
 	private static Date FechaInsert = null;
 	private static String Fechastring = null;
 	private Date fecha1;
@@ -33,11 +34,12 @@ public class MovimientoDaoImpl implements MovimientoDao {
 		{
 			System.out.println("seteo de variable al objeto de la base");
 			statement = conexion.prepareStatement(insert);
-			statement.setInt(1, movimiento.getDni());
-			statement.setString(2, movimiento.getUsuario());
-			statement.setString(3, movimiento.getFechanac());
-			statement.setString(4, movimiento.getTipoMovimiento());
-			statement.setString(5, movimiento.getDescripcion());
+			statement.setString(1, movimiento.getCbu());
+			statement.setInt(2, movimiento.getDni());
+			statement.setString(3, movimiento.getUsuario());
+			statement.setString(4, movimiento.getFechanac());
+			statement.setString(5, movimiento.getTipoMovimiento());
+			statement.setString(6, movimiento.getDescripcion());
 			
 			if(statement.executeUpdate() > 0)
 			{
@@ -107,7 +109,57 @@ public class MovimientoDaoImpl implements MovimientoDao {
 		}
 		return movimientos;
 	}
+	
+	@Override
+	public List<Movimiento> getMovimientoPorCuentas(String cbu)
+	{
+		PreparedStatement statement;
+		ResultSet resultSet; //Guarda el resultado de la query
+		ArrayList<Movimiento> movimientos = new ArrayList<Movimiento>();
+		Conexion conexion = Conexion.getConexion();
+		try 
+		{
+			statement = conexion.getSQLConexion().prepareStatement(readbycuenta);
+			statement.setString(1, cbu);
+			resultSet = statement.executeQuery();
+			while(resultSet.next())
+			{
+				movimientos.add(getMovimiento(resultSet));
+			}
+		} 
+		catch (SQLException e) 
+		{
+			e.printStackTrace();
+		}
+		return movimientos;
+	}
+	
+	@Override
+	public Movimiento getMovimientoPorCuenta(String cbu)
+	{		
+		PreparedStatement statement;
+		Conexion conexion = Conexion.getConexion();
+		ResultSet resultSet; //Guarda el resultado de la query
+		try {
+			// Esta variable la inicialize para que no tire error, pero hay que ver.
+			//String readByMail = null;
+			
+			statement = conexion.getSQLConexion().prepareStatement(readbycuenta);
+			statement.setString(1, cbu);
+			resultSet = statement.executeQuery();
+			if(resultSet.next()) {
 
+				return getMovimiento(resultSet);
+			}
+			
+		} catch (Exception e) {
+			return new Movimiento();
+		}
+		
+		return new Movimiento();
+	}
+
+	
 
 @Override
 public Boolean modify(Movimiento movimiento) {
@@ -129,14 +181,15 @@ public List<Movimiento> readAll() {
 
 private Movimiento getMovimiento(ResultSet resultSet) throws SQLException
 {
-	
+	int Id = Integer.parseInt(resultSet.getString("id"));
+	String Cbu = resultSet.getString("cbu");
 	int Dni = Integer.parseInt(resultSet.getString("dni"));
 	String Usuario = resultSet.getString("usuario");
 	String Fecha = resultSet.getString("fechanac");
 	String TipoMovimiento = resultSet.getString("tipomovimiento");
 	String Descripcion = resultSet.getString("descripcion");
 	
-	return new Movimiento(Dni, Usuario, Fecha, TipoMovimiento, Descripcion);
+	return new Movimiento(Id, Cbu, Dni, Usuario, Fecha, TipoMovimiento, Descripcion);
 }
 
 @Override

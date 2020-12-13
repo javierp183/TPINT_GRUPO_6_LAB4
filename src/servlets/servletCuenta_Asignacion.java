@@ -45,7 +45,8 @@ public class servletCuenta_Asignacion extends HttpServlet {
 		ClienteNegocioImpl clientedaoimpl = new ClienteNegocioImpl();
 		ArrayList<Cliente> listaclientes = (ArrayList<Cliente>) clientedaoimpl.readAll();
 		request.setAttribute("listaclientes", listaclientes);
-		System.out.println(listaclientes);
+		
+		
 		RequestDispatcher rd = request.getRequestDispatcher("UsuarioBanco_Alta_Cuentas_Asignacion.jsp");
 		rd.forward(request, response);
 		

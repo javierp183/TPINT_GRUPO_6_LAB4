@@ -71,14 +71,21 @@ public class servletCuentaAsignacion extends HttpServlet {
 			if(cuentadaoimpl.Modify(cuentaaux) == true)
 				{
 				System.out.println("Este tipo tiene menos de 3 cuentas, sta bien, pasale una");
+				System.out.println(cuenta.getCbu());
+				System.out.println(cuentaaux.getCbu());
 				Movimiento movimiento = new Movimiento();
 				MovimientoNegocioImpl movimientonegocioimpl = new MovimientoNegocioImpl();
 				
+				movimiento = movimientonegocioimpl.getMovimientoPorCuenta(cuenta.getCbu());
+				movimiento.setCbu(cuentaaux.getCbu());
 				movimiento.setDni(dnicliente);
-				movimiento.setUsuario("test");
-				movimiento.setTipoMovimiento("ASIGNACION CUENTA");
-				movimiento.setDescripcion("Asignacion de cuenta: 10.000 pesos");
+				movimiento.setUsuario(cuentaaux.getUsuario());
+				movimiento.setFechanac(cuentaaux.getFecha());
+				movimiento.setTipoMovimiento("ASIGNACION DE CUENTA");
+				movimiento.setDescripcion("Asignado a usuario");
 				movimientonegocioimpl.insert(movimiento);
+				
+				
 				estado = 1;
 				request.setAttribute("estado", "true" );
 			}

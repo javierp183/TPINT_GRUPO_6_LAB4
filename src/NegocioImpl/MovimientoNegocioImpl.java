@@ -57,4 +57,16 @@ public class MovimientoNegocioImpl implements MovimientoDao {
 		return mdao.getMovimientoPorDnis(dni);
 	}
 
+	@Override
+	public Movimiento getMovimientoPorCuenta(String cbu) {
+		// TODO Auto-generated method stub
+		return mdao.getMovimientoPorCuenta(cbu);
+	}
+
+	@Override
+	public List<Movimiento> getMovimientoPorCuentas(String cbu) {
+		// TODO Auto-generated method stub
+		return mdao.getMovimientoPorCuentas(cbu);
+	}
+
 }
