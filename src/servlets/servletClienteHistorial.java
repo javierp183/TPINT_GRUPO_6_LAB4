@@ -74,19 +74,22 @@ public class servletClienteHistorial extends HttpServlet {
 			System.out.println("es por aca");
 		}
 		
-		if(request.getParameter("usuariopost")!=null) {
+		if(request.getParameter("usuariopost")!=null)
 		if(request.getParameter("inputCbu")!=null)
 		{
 			System.out.println("es hora de mostrar los movimientos de esta cuenta");
 			MovimientoNegocioImpl movimientonegocioimpl = new MovimientoNegocioImpl();
 			ArrayList<Movimiento> movimientos = (ArrayList<Movimiento>) movimientonegocioimpl.getMovimientoPorCuentas(request.getParameter("inputCbu"));
 			System.out.println(movimientos);
+			//cliente = clientenegocioimpl.getClientePorDNI(request.getParameter("usuario"));
 			
 			request.setAttribute("movimientos", movimientos);
 			
 			Cliente cliente = new Cliente();
 			Movimiento movimiento = new Movimiento();
 			cliente = clientenegocioimpl.getClientePorDNI(request.getParameter("usuariopost"));
+			//ArrayList<Cuenta> listadecuentas = (ArrayList<Cuenta>) cuentanegocioimpl.ListarCuentasPorDNI(cliente.getDni());
+			//request.setAttribute("listadecuentas", listadecuentas);
 			System.out.println("tambien muestro el cliente");
 			System.out.println(cliente.getNombre());
 			
@@ -96,7 +99,7 @@ public class servletClienteHistorial extends HttpServlet {
 			
 			RequestDispatcher rd = request.getRequestDispatcher("Cliente_Historial.jsp");
 			rd.forward(request, response);
-		}}
+		}
 			
 		
 		if(request.getParameter("btnvolverPagina")!=null)

@@ -72,6 +72,7 @@ public class servletAdministrador extends HttpServlet {
 			cuenta.setSaldo(SaldoFinalDeCuenta);
 			cuentanegocioimpl.Modify(cuenta);
 			System.out.println("Empieza el resguardo del movimiento");
+			movimiento.setCbu(prestamo.getCbu());
 			movimiento.setDni(prestamo.getDniCliente());
 			movimiento.setUsuario("test");
 			movimiento.setTipoMovimiento("PRESTAMO");
@@ -85,6 +86,37 @@ public class servletAdministrador extends HttpServlet {
 			RequestDispatcher rd = request.getRequestDispatcher("Administrador_Autorizacion_Prestamo.jsp");
 			rd.forward(request, response);
 		}
+		
+		if(request.getParameter("btnDenegarPrestamo")!=null)
+		{
+			float SaldoFinalDeCuenta = 0;
+			System.out.println("negando prestamo");
+			int IdPrestamo = Integer.parseInt(request.getParameter("txtPrestamoID"));
+			
+			prestamo = prestamodaoimpl.getPrestamoPorID(IdPrestamo);
+			//prestamo.setEstado(1);
+			//prestamodaoimpl.modify(prestamo);
+			//cuenta = cuentanegocioimpl.Search(prestamo.getCbu());
+			//SaldoFinalDeCuenta = cuenta.getSaldo() + prestamo.getMontoTotal();
+			
+			//cuenta.setSaldo(SaldoFinalDeCuenta);
+			//cuentanegocioimpl.Modify(cuenta);
+			System.out.println("Empieza el resguardo del movimiento");
+			movimiento.setCbu(prestamo.getCbu());
+			movimiento.setDni(prestamo.getDniCliente());
+			movimiento.setUsuario("test");
+			movimiento.setTipoMovimiento("PRESTAMO");
+			movimiento.setDescripcion("Se desaprobo el prestamo de: " + prestamo.getMontoTotal() );
+			movimientonegocioimpl.insert(movimiento);
+			System.out.println("Termina el resguardo del movimiento");
+			
+			
+			
+			System.out.println("habilitando finalizar prestamo");
+			RequestDispatcher rd = request.getRequestDispatcher("Administrador_Autorizacion_Prestamo.jsp");
+			rd.forward(request, response);
+		}
+		
 		response.getWriter().append("Served at: ").append(request.getContextPath());
 	}
 

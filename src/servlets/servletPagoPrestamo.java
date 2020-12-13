@@ -110,8 +110,15 @@ public class servletPagoPrestamo extends HttpServlet {
 				movimiento.setDni(prestamo.getDniCliente());
 				movimiento.setUsuario("test");
 				movimiento.setTipoMovimiento("PAGO");
-				movimiento.setDescripcion("Pago de prestamo");
+				movimiento.setDescripcion("Pago de prestamo - Codigo de Prestamo: " + prestamo.getIdPrestamo());
 				movimientonegocioimpl.insert(movimiento);
+				
+				Cliente cliente = new Cliente();
+				cliente = clientedaoimpl.getClientePorUsuario(prestamo.getDniCliente());
+				request.setAttribute("usuario",cliente.getUsuario());
+				request.setAttribute("nombre", cliente.getNombre());
+				request.setAttribute("apellido", cliente.getApellido());
+				
 				
 				RequestDispatcher rd = request.getRequestDispatcher("Cliente_Pago_Prestamo_ok.jsp");
 				rd.forward(request, response);

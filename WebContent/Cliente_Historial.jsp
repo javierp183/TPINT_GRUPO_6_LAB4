@@ -148,13 +148,14 @@ if(request.getAttribute("movimientos")!=null)
 <tr>
 <td><%=movimiento.getFechanac() %></td>
 <td><%=movimiento.getTipoMovimiento() %>
-<td><%=movimiento.getDescripcion() %>
+<td><%=movimiento.getDescripcion() %></td>
 </tr>
 
-  </tbody>
-</table>
+
 
 <%}} %>
+  </tbody>
+</table>
 <a href="servletPagoPrestamo?btnvolverPagina=${usuario}">Volver Menu Principal</a>
 
 

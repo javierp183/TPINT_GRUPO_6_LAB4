@@ -12,9 +12,9 @@
 
 <h1>Su Deuga ahora es de, ${deuda}</h1>
 
-<a href="servletPrestamo?btnPedirOtroPrestamo=1&usuario=${usuario}">Pagar otra vez</a>
+<a href="servletPagoPrestamo?usuario=${usuario}">Pagar otra vez</a>
 
-<a href="servletPrestamo?usuario=${usuario}">Volver Menu Principal</a>
+<a href="servletPagoPrestamo?usuario=${usuario}">Volver Menu Principal</a>
 
 
 </body>

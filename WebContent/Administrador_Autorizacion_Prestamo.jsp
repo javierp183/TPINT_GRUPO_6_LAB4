@@ -72,6 +72,7 @@
       <th scope="col">Plan de pago ( En cuotas )</th>
       <th scope="col">Valor de la cuota</th>
       <th scope="col">Autorizacion ( Estado )</th>
+      <th scope="col">Desaprobar Autorizacion ( Estado )</th>
     </tr>
   </thead>
   <tbody>
@@ -90,8 +91,8 @@ if(request.getAttribute("prestamossinaprobar")!=null)
       <td><%=prestamo.getMontoTotal() %></td>
       <td><%=prestamo.getNumCuotas() %></td>
       <td><%=prestamo.getMontopormes() %></td>
-       <td> <a  href="servletAdministrador?btnHabilitarPrestamo=1&txtPrestamoID=<%=prestamo.getIdPrestamo()%>">Aprobar Prestamo</a>
-      </td>
+       <td> <a  href="servletAdministrador?btnHabilitarPrestamo=1&txtPrestamoID=<%=prestamo.getIdPrestamo()%>">Aprobar Prestamo</a></td>
+       <td> <a  href="servletAdministrador?btnDenegarPrestamo=1&txtPrestamoID=<%=prestamo.getIdPrestamo()%>">Desaprobar Prestamo</a></td>
       </tr>
 
 <%
