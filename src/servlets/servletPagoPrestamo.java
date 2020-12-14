@@ -85,7 +85,9 @@ public class servletPagoPrestamo extends HttpServlet {
 		if(request.getParameter("btnPagoPrestamo")!=null)
 		{
 			float Montodepago = Float.parseFloat(request.getParameter("inputMonto"));
-			String Cbu = request.getParameter("inputCBU");
+			String Cbu = request.getParameter("inputCbu");
+			System.out.println("este es el cbu que ingresa");
+			System.out.println(Cbu);
 			int IdCuenta = Integer.parseInt(request.getParameter("inputPrestamo"));
 			float CalculoDePago = 0;
 			Movimiento movimiento = new Movimiento();
@@ -105,6 +107,14 @@ public class servletPagoPrestamo extends HttpServlet {
 				CalculoDePago = prestamo.getMontoRestante() - Montodepago;
 				prestamo.setMontoRestante(CalculoDePago);
 				prestamodaoimpl.modify(prestamo);
+				
+				System.out.println("este es el saldo de la cuenta que le sacamos la pasta");
+				System.out.println(cuenta.getCbu());
+				float tempcuentasaldo = cuenta.getSaldo();
+				cuenta.setSaldo(tempcuentasaldo - Montodepago);
+				cuentadaoimpl.Modify(cuenta);
+				System.out.println(cuenta.getSaldo());
+				
 				
 				movimiento.setCbu(prestamo.getCbu());
 				movimiento.setDni(prestamo.getDniCliente());
