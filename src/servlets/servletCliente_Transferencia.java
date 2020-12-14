@@ -98,13 +98,15 @@ public class servletCliente_Transferencia extends HttpServlet {
 			cuentaaux = cuentadaoimpl.Search(Cbuexterno);
 			
 			movimientosrc.setDni(cuenta.getDni());
+			movimientosrc.setCbu(cuenta.getCbu());
 			movimientosrc.setTipoMovimiento("TRANSFERENCIA ->");
-			movimientosrc.setDescripcion("Transferencia a otra cuenta");
+			movimientosrc.setDescripcion("Transferencia a otra cuenta, importe: " + Monto);
 			movimientonegocioimpl.insert(movimientosrc);
 			
 			movimientodst.setDni(cuentaaux.getDni());
+			movimientodst.setCbu(cuentaaux.getCbu());
 			movimientodst.setTipoMovimiento("TRANSFERENCIA <-");
-			movimientodst.setDescripcion("Recive Transferencia desde otra cuenta");
+			movimientodst.setDescripcion("Recive Transferencia desde otra cuenta, importe: " + Monto);
 			movimientonegocioimpl.insert(movimientodst);
 			
 			cuenta.setSaldo(cuenta.getSaldo() - Monto);
@@ -115,6 +117,20 @@ public class servletCliente_Transferencia extends HttpServlet {
 			System.out.println(cuentaaux.getSaldo());
 			
 			System.out.println("vamos a ver que pasa!");
+			
+			
+			cliente = clientedaoimpl.getClientePorUsuario(cuenta.getDni());
+			ArrayList<Cuenta> listacuentas = (ArrayList<Cuenta>) cuentadaoimpl.ListarCuentasPorDNI(cliente.getDni());
+			request.setAttribute("listacuentas", listacuentas);
+			request.setAttribute("usuario",cliente.getUsuario());
+			request.setAttribute("nombre", cliente.getNombre());
+			request.setAttribute("apellido", cliente.getApellido());
+			
+			System.out.println("El apellido del cliente");
+			System.out.println(cliente.getApellido());
+			
+			RequestDispatcher rd = request.getRequestDispatcher("Cliente_Transferencia.jsp");
+			rd.forward(request, response);
 			
 			
 		}

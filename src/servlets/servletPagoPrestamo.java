@@ -84,56 +84,88 @@ public class servletPagoPrestamo extends HttpServlet {
 		
 		if(request.getParameter("btnPagoPrestamo")!=null)
 		{
-			float Montodepago = Float.parseFloat(request.getParameter("inputMonto"));
-			String Cbu = request.getParameter("inputCbu");
-			System.out.println("este es el cbu que ingresa");
-			System.out.println(Cbu);
-			int IdCuenta = Integer.parseInt(request.getParameter("inputPrestamo"));
-			float CalculoDePago = 0;
-			Movimiento movimiento = new Movimiento();
-			MovimientoNegocioImpl movimientonegocioimpl = new MovimientoNegocioImpl();
-			
-			
-			Cuenta cuenta = new Cuenta();
-			CuentaDaoImpl cuentadaoimpl = new CuentaDaoImpl();
-			Prestamo prestamo = new Prestamo();
-			PrestamoDaoImpl prestamodaoimpl = new PrestamoDaoImpl();
-			
-			cuenta = cuentadaoimpl.Search(Cbu);
-			prestamo = prestamodaoimpl.getPrestamoID(IdCuenta);
-			
-			if(Montodepago < cuenta.getSaldo())
+			try {
+				float Montodepago = Float.parseFloat(request.getParameter("inputMonto"));
+				String Cbu = request.getParameter("inputCbu");
+				System.out.println("este es el cbu que ingresa");
+				System.out.println(Cbu);
+				int IdCuenta = Integer.parseInt(request.getParameter("inputPrestamo"));
+				float CalculoDePago = 0;
+				Movimiento movimiento = new Movimiento();
+				MovimientoNegocioImpl movimientonegocioimpl = new MovimientoNegocioImpl();
+				
+				
+				Cuenta cuenta = new Cuenta();
+				CuentaDaoImpl cuentadaoimpl = new CuentaDaoImpl();
+				Prestamo prestamo = new Prestamo();
+				PrestamoDaoImpl prestamodaoimpl = new PrestamoDaoImpl();
+				
+				cuenta = cuentadaoimpl.Search(Cbu);
+				prestamo = prestamodaoimpl.getPrestamoID(IdCuenta);
+				
+				if(Montodepago < cuenta.getSaldo())
+				{
+					CalculoDePago = prestamo.getMontoRestante() - Montodepago;
+					prestamo.setMontoRestante(CalculoDePago);
+					prestamodaoimpl.modify(prestamo);
+					
+					System.out.println("este es el saldo de la cuenta que le sacamos la pasta");
+					System.out.println(cuenta.getCbu());
+					float tempcuentasaldo = (int) cuenta.getSaldo();
+					cuenta.setSaldo(tempcuentasaldo - Montodepago);
+					cuentadaoimpl.Modify(cuenta);
+					System.out.println(cuenta.getSaldo());
+					
+					
+					movimiento.setCbu(prestamo.getCbu());
+					movimiento.setDni(prestamo.getDniCliente());
+					movimiento.setUsuario("test");
+					movimiento.setTipoMovimiento("PAGO");
+					movimiento.setDescripcion("Pago de prestamo - Codigo de Prestamo: " + prestamo.getIdPrestamo());
+					movimientonegocioimpl.insert(movimiento);
+					
+					Cliente cliente = new Cliente();
+					cliente = clientedaoimpl.getClientePorUsuario(prestamo.getDniCliente());
+					request.setAttribute("usuario",cliente.getUsuario());
+					request.setAttribute("nombre", cliente.getNombre());
+					request.setAttribute("apellido", cliente.getApellido());
+					
+					
+					RequestDispatcher rd = request.getRequestDispatcher("Cliente_Pago_Prestamo_ok.jsp");
+					rd.forward(request, response);
+					
+				}
+				
+			}
+			catch(Exception e)
 			{
-				CalculoDePago = prestamo.getMontoRestante() - Montodepago;
-				prestamo.setMontoRestante(CalculoDePago);
-				prestamodaoimpl.modify(prestamo);
-				
-				System.out.println("este es el saldo de la cuenta que le sacamos la pasta");
-				System.out.println(cuenta.getCbu());
-				float tempcuentasaldo = cuenta.getSaldo();
-				cuenta.setSaldo(tempcuentasaldo - Montodepago);
-				cuentadaoimpl.Modify(cuenta);
-				System.out.println(cuenta.getSaldo());
-				
-				
-				movimiento.setCbu(prestamo.getCbu());
-				movimiento.setDni(prestamo.getDniCliente());
-				movimiento.setUsuario("test");
-				movimiento.setTipoMovimiento("PAGO");
-				movimiento.setDescripcion("Pago de prestamo - Codigo de Prestamo: " + prestamo.getIdPrestamo());
-				movimientonegocioimpl.insert(movimiento);
-				
 				Cliente cliente = new Cliente();
-				cliente = clientedaoimpl.getClientePorUsuario(prestamo.getDniCliente());
-				request.setAttribute("usuario",cliente.getUsuario());
+				
+				
+				Prestamo prestamo = new Prestamo();
+				PrestamoDaoImpl prestamodaoimpl = new PrestamoDaoImpl();
+				
+				cliente = clientedaoimpl.getClientePorDNI(request.getParameter("usuario"));
+				System.out.println("este es el usuario que exploto todo!");
+				System.out.println(request.getParameter("usuario"));
+				System.out.println();
+				
+				Cuenta cuenta = new Cuenta();
+				CuentaDaoImpl cuentadaoimpl = new CuentaDaoImpl();
+				ArrayList<Cuenta> listacuentas = (ArrayList<Cuenta>) cuentadaoimpl.ListarCuentasPorDNI(cliente.getDni());
+				ArrayList<Prestamo> listaprestamos = (ArrayList<Prestamo>) prestamodaoimpl.readAllbyDNI(cliente.getDni());
+				
+				request.setAttribute("listacuentas", listacuentas);
+				request.setAttribute("listaprestamos", listaprestamos);
+				request.setAttribute("usuario", cliente.getUsuario());
 				request.setAttribute("nombre", cliente.getNombre());
 				request.setAttribute("apellido", cliente.getApellido());
 				
-				
-				RequestDispatcher rd = request.getRequestDispatcher("Cliente_Pago_Prestamo_ok.jsp");
+				RequestDispatcher rd = request.getRequestDispatcher("Cliente_Pago_Prestamo.jsp");
 				rd.forward(request, response);
-				
+				System.out.println("fallo todo!!!");
 			}
+
 			
 			
 			

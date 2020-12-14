@@ -65,6 +65,8 @@
 <thead>
 	<tr>
 		<th>Cuentas ( Numero de CBU )</th>
+		<th>Tipo</th>
+		<th>Disponible</th>
 	</tr>
 </thead>
 <tbody>
@@ -78,19 +80,22 @@ if(request.getAttribute("listacuentas")!=null)
 %>
 
 
-<tr>
+
 <%
 for(Cuenta cuenta: listaCuentas)
 		{
 	%>
-	 
+<tr>
 <td><%=cuenta.getCbu() %></td>
+<td> <%=cuenta.getTipoCuenta() %></td>
+<td><%=cuenta.getSaldo() %></td>
+</tr>
 
 <%
 		}}
 %>
 
-</tr>
+
 
 
 </tbody>
