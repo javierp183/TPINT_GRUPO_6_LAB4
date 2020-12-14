@@ -66,7 +66,7 @@ public class servletCuentaAsignacion extends HttpServlet {
 		cuentaaux.setDni(dnicliente);
 
 	
-		if(cuentadaoimpl.contarCuenta(dnicliente) < 4)
+		if(cuentadaoimpl.contarCuenta(dnicliente) < 3)
 		{
 			if(cuentadaoimpl.Modify(cuentaaux) == true)
 				{
